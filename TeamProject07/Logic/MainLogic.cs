@@ -40,6 +40,7 @@ namespace TeamProject07.Logic
         
         public void Start()
         {
+            GameTitle();
             Console.WriteLine("게임 시작부 입니다.");
             Console.WriteLine("1. 타이틀 화면을 출력합니다.");
             Console.WriteLine("2. 여기서 이름, 클래스를 입력받습니다.");
@@ -76,7 +77,7 @@ namespace TeamProject07.Logic
                         gameEndTrigger = true;
                         break;
                     case (int)MainGamePhase.Status:
-                        mainGamePhase = status.test();
+                        mainGamePhase = status.test(dummy);
                         break;
                     case (int)MainGamePhase.Inventory:
                         mainGamePhase = inventory.test();
@@ -123,6 +124,22 @@ namespace TeamProject07.Logic
 
                 Console.WriteLine("잘못된 입력입니다.");
             }
+        }
+
+        public void GameTitle()
+        {
+            Console.WriteLine("                       __      __       .__                                ___________          ");
+            Console.WriteLine("                      /  \\    /  \\ ____ |  |   ____  ____   _____   ____   \\__    ___/___   ");
+            Console.WriteLine("                      \\   \\/\\/   // __ \\|  | _/ ___\\/  _ \\ /     \\_/ __ \\    |    | /  _ \\");
+            Console.WriteLine("                       \\        /\\  ___/|  |_\\  \\__(  <_> )  Y Y  \\  ___/    |    |(  <_> )");
+            Console.WriteLine("                        \\__/\\  /  \\___  >____/\\___  >____/|__|_|  /\\___  >   |____| \\____/");
+            Console.WriteLine("                             \\/       \\/          \\/            \\/     \\/");
+            Console.WriteLine("  _________                    __           ________   ");
+            Console.WriteLine(" /   _____/__________ ________/  |______    \\______ \\  __ __  ____    ____   ____  ____   ____  ");
+            Console.WriteLine(" \\_____  \\\\____ \\__  \\\\_  __ \\   __\\__  \\    |    |  \\|  |  \\/    \\  / ___\\_/ __ \\/  _ \\ /    \\");
+            Console.WriteLine(" /        \\  |_> > __ \\|  | \\/|  |  / __ \\_  |    `   \\  |  /   |  \\/ /_/  >  ___(  <_> )   |  \\");
+            Console.WriteLine("/_______  /   __(____  /__|   |__| (____  / /_______  /____/|___|  /\\___  / \\___  >____/|___|  /");
+            Console.WriteLine("        \\/|__|       \\/                 \\/          \\/           \\//_____/      \\/           \\/");
         }
     }
 }

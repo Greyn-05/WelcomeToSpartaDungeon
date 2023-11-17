@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamProject07.Characters;
 using TeamProject07.Utils;
 
 namespace TeamProject07.Status
 {
     internal class StatusMain
     {
-        public Define.MainGamePhase test()
+        public Define.MainGamePhase test(Player player)
         {
             
             Define.MainGamePhase choicePhase;
             Console.Clear();
             Console.WriteLine("플레이어의 정보를 표시합니다");
             Console.WriteLine("\n");
-            Console.WriteLine($"LEVEL {Player.Level} \t {Player.Class}");
-            Console.WriteLine($"공격력 : {Player.Attack}");
-            Console.WriteLine($"방어력 : {Player.Defence}");
-            Console.WriteLine($"치명타 확률 : {Player.CritRate}%");
-            Console.WriteLine($"회피 확률 : {Player.MissRate}%");
-            Console.WriteLine($"체  력 : {Player.HP}");
-            Console.WriteLine($"골  드 : {Player.Gold}G");
+            Console.WriteLine($"LEVEL {player.Level} \t {player.Class}");
+            Console.WriteLine($"공격력 : {player.Attack}");
+            Console.WriteLine($"방어력 : {player.Defence}");
+            Console.WriteLine($"치명타 확률 : {player.CritRate}%");
+            Console.WriteLine($"회피 확률 : {player.MissRate}%");
+            Console.WriteLine($"체  력 : {player.Hp}");
+            Console.WriteLine($"골  드 : {player.Gold}G");
             Console.WriteLine("\n");
             Console.WriteLine("\n");
             Console.WriteLine("0. 메인화면");
