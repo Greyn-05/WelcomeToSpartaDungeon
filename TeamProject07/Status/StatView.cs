@@ -13,7 +13,6 @@ namespace TeamProject07.View
 {
 
 
-
     internal class StatView
     {
         public void View(Player player, Equipment equip)
