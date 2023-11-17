@@ -12,5 +12,7 @@ namespace TeamProject07.Items
         public string Name { get; set; }
         public string Info { get; set; }
         public int ItemPrice { get; set; }
+
+        public bool IsEquipped { get; set; } = false
     }
 }
