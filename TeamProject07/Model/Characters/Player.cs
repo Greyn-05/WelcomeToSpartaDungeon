@@ -10,8 +10,7 @@ namespace TeamProject07.Characters
 {
     internal class Player : Character
     {
-        public List<ConsumableItem> Inven { get; set; }
-        public List<Equipment> Equipment { get; set; }
+        public List<Item> Inven { get; set; }
         public string Class { get; set; }
         public int LevelUpExp { get; set; }
         public List<Skill> Skills { get; set; }
@@ -27,6 +26,9 @@ namespace TeamProject07.Characters
             Gold = gold;
             CritRate = critRate;
             MissRate = missRate;
+
+            Inven = new List<Item>();
+
         }
         public void ObtainItem(Item item)
         {

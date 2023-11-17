@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamProject07.Utils;
+using System.Xml.Linq;
+using text_rpg.Utils;
 
-namespace TeamProject07.Items
+namespace text_rpg.Items
 {
     internal class Item
     {
@@ -15,8 +17,8 @@ namespace TeamProject07.Items
         public string Name { get; set; }
         public string Info { get; set; }
         public int ItemPrice { get; set; }
-
         public bool IsEquipped { get; set; } = false;
+
 
         public void Setting(string myId, string myName, string myComment, string myPrice)
         {
@@ -27,6 +29,7 @@ namespace TeamProject07.Items
 
             ItemPrice = int.Parse(myPrice);
         }
+
 
     }
 }

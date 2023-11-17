@@ -26,7 +26,9 @@ namespace TeamProject07.Logic
         InvenMain inventory = new InvenMain();
         Define define = new Define();
         Skill skill = new Skill();
-        Player dummy = new Player("KIm", 1, 5, 5, 10, 10000, 50, 50);
+       
+       static public Player dummy = new Player("KIm", 1, 5, 5, 10, 10000, 50, 50);
+        
         MainGamePhase mainGamePhase = MainGamePhase.Main;
 
         //프로그램 종료 트리거

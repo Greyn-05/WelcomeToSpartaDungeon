@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamProject07.Characters;
+using text_rpg.Characters;
 
-namespace TeamProject07.Items
+namespace text_rpg.Items
 {
     internal class ConsumableItem : Item
     {
@@ -13,6 +13,11 @@ namespace TeamProject07.Items
         public int BuffAttack { get; set; }
         public int BuffDefence { get; set; }
         public int Stock { get; set; }
+
+        public void Used(Player player)
+        {
+            // TODO
+        }
 
 
         public int point; // 회복수치

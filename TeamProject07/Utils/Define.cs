@@ -29,8 +29,10 @@ namespace TeamProject07.Utils
 
         public enum Parts
         {
-            LeftHand,
-            RightHand,
+            Weapon,
+            Head,
+            Body,
+            Shoes
         }
 
         public enum SkillTypes
@@ -38,7 +40,29 @@ namespace TeamProject07.Utils
             Buff,
             DeBuff,
         }
+		
+        public enum Buff
+        {
+            atk,
+            def,
+            cri,
+            miss,
+            hp
+        }
 
+        public enum SetEquip
+        {
+            세트효과없음,
+            종이세트,
+            나무세트,
+            철세트,
+            아다만세트
+        }
+		public enum ItemType
+        {
+            Consum,
+            Equip
+        }
         public static string ItemPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\CSV\\ItemData.csv";
         public static string MonsterPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\CSV\\MonsterData.csv";
         public static string ShopPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\CSV\\ShopDialogue.csv";
