@@ -11,6 +11,7 @@ using static TeamProject07.Utils.Define;
 using TeamProject07.Dungeon;
 using TeamProject07.Inventroy;
 using TeamProject07.Skills;
+using TeamProject07.Characters;
 
 namespace TeamProject07.Logic
 {
@@ -25,6 +26,7 @@ namespace TeamProject07.Logic
         InvenMain inventory = new InvenMain();
         Define define = new Define();
         Skill skill = new Skill();
+        Player dummy = new Player("KIm", 1, 5, 5, 10, 10000, 50, 50);
         MainGamePhase mainGamePhase = MainGamePhase.Main;
 
         //프로그램 종료 트리거
@@ -42,6 +44,7 @@ namespace TeamProject07.Logic
             Console.WriteLine("3. 게임에 필요할 데이터를 로드 합니다. (Monster, Item)");
             Console.WriteLine("4. 아무 키나 입력 받아서 메인화면으로 넘어가도록 합니다.");
 
+            
             Console.ReadLine();
             skill.LoadSkills(); //스킬정보 로드
         }
