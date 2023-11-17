@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TeamProject07.Utils;
-using text_rpg.Items;
-using TextRPGGame;
-using static TextRPGGame.Shop;
-
-namespace TeamProject07.Utils
+﻿namespace TeamProject07.Utils
 {
     internal class ShopData
     {
@@ -39,10 +29,10 @@ namespace TeamProject07.Utils
                         switch (data[0])
                         {
                             case "장비":
-                                shopDialogue.Add(Shop.Name.장비상점.ToString(), dic);
+                                shopDialogue.Add(Shop.Shop.Name.장비상점.ToString(), dic);
                                 break;
                             case "소모품":
-                                shopDialogue.Add(Shop.Name.소모품상점.ToString(), dic);
+                                shopDialogue.Add(Shop.Shop.Name.소모품상점.ToString(), dic);
                                 break;
                         }
 

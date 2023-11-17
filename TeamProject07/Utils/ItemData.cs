@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.IO;
-using System.ComponentModel.Design;
-using System.Drawing;
-using TeamProject07.Utils;
-using TeamProject07.Items;
+﻿using TeamProject07.Items;
 
 namespace TeamProject07.Utils
 {

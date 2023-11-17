@@ -1,8 +1,4 @@
-﻿using System;
-using System.Numerics;
-using TeamProject07.Characters;
-using TeamProject07.Items;
-using TeamProject07.Logic;
+﻿using TeamProject07.Logic;
 using TeamProject07.Utils;
 
 namespace TeamProject07.Shop

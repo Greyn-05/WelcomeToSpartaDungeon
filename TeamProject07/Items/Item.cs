@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Utils;
 
-namespace TeamProject07.Items
+namespace TeamProject07
 {
     internal class Item
     {
