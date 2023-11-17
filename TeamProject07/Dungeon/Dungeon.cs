@@ -9,12 +9,14 @@ using TeamProject07.Characters;
 
 namespace TeamProject07.Controller
 {
+    enum Select
+    {
+        exit = 1,
+        EnterDungeon,
+        UseItem = 3
+    }
     internal class BattleController
     {
-
-        private BattleView _battleView = new BattleView();
-
-        Player player = new Player("버스타조","전사",10,5,100,1500,5,5,1);
         public List<Monster> CreateMonsters { get; set; }
 
 
@@ -118,7 +120,7 @@ namespace TeamProject07.Controller
             Console.WriteLine("키 입력으로  던전 입구로 돌아가기");
         }
 
-        public void dungeonEnter()
+        public void dungeonEnter(Player player)
         {
             //종욱님 그림
             DungeonSelectView();
@@ -130,7 +132,7 @@ namespace TeamProject07.Controller
             switch (enumValue)
             {
                 case Select.EnterDungeon:
-                    battleView();
+                    battleView(player);
                     // 던전입장
                     break;
 
@@ -144,7 +146,7 @@ namespace TeamProject07.Controller
 
             }
         }
-        private void battleView()
+        private void battleView(Player player)
 
         {
             int input = CheckValidInput(1, 3);

@@ -10,9 +10,9 @@ using System.IO;
 using System.Numerics;
 using System.Diagnostics;
 
-namespace TeamProject07.Controller
+namespace TeamProject07.Defer
 {
-    internal class LoginController
+    /*internal class LoginController
     {
         public string _id = "bus";
         private string _password = "123";
@@ -70,5 +70,5 @@ namespace TeamProject07.Controller
 
             _loginView.View(_id, PlayerData);
         }
-    }
+    }*/
 }

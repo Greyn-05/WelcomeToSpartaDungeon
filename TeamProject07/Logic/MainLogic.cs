@@ -80,7 +80,7 @@ namespace TeamProject07.Logic
                         mainGamePhase = status.test(dummy);
                         break;
                     case (int)MainGamePhase.Inventory:
-                        mainGamePhase = inventory.test();
+                        mainGamePhase = inventory.test(dummy);
                         break;
                     case (int)MainGamePhase.Shop:
                         mainGamePhase = shop.test();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamProject07.Characters;
 using TeamProject07.Utils;
 
 namespace TeamProject07.Inventroy
@@ -12,7 +13,7 @@ namespace TeamProject07.Inventroy
 
         // 인벤토리 전체 수정중
 
-        public Define.MainGamePhase test()
+        public Define.MainGamePhase test(Player player)
         {
             Define.MainGamePhase choicePhase;
             Console.Clear();
@@ -22,26 +23,26 @@ namespace TeamProject07.Inventroy
             Console.WriteLine("\n");
             Console.WriteLine("[장비 아이템]");
 
-            foreach (Item item in player.inven) // 장비 아이템 리스트
+            foreach (Item item in player.Inven) // 장비 아이템 리스트
             {
                 int i = 0;
                 i++;
 
                 string equippedSign = item.IsEquipped ? "[E]" : "";
-                string input = $"[{i}] {item.myName} {equippedSign}";
-                string output = InsertLineBreakEveryTwentyCharacters(input); // 20글자마다 줄바꿈 호출
+                string input_str = $"[{i}] {item.Name} {equippedSign}";
+                string output = InsertLineBreakEveryTwentyCharacters(input_str); // 20글자마다 줄바꿈 호출
                 Console.WriteLine(output);
             }
 
             Console.WriteLine("[소모 아이템]");
 
-            foreach (Item item in player.inven) // 소모 아이템 리스트
+            foreach (Item item in player.Inven) // 소모 아이템 리스트
             {
                 int i = 0;
                 i++;
 
-                string input = $"[{i}] {item.myName}";
-                string output = InsertLineBreakEveryTwentyCharacters(input); // 20글자마다 줄바꿈
+                string input_str = $"[{i}] {item.Name}";
+                string output = InsertLineBreakEveryTwentyCharacters(input_str); // 20글자마다 줄바꿈
                 Console.WriteLine(output);
             }
 
@@ -70,7 +71,7 @@ namespace TeamProject07.Inventroy
             return Define.MainGamePhase.Main;
         }
 
-        Console.WriteLine("[설명]");
+        /*Console.WriteLine("[설명]");
 
         for (int i = 0; i<player.inven.Count; i++)
         {
@@ -86,7 +87,7 @@ namespace TeamProject07.Inventroy
 
             string output = InsertLineBreakEveryTwentyCharacters(input);
         Console.WriteLine(output);
-        }
+        }*/
 
     private int CheckValidInput(int min, int max)
         {
