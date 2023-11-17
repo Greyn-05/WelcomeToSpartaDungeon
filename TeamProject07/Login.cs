@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using text_rpg.Utils;
-using text_rpg.View;
-using text_rpg.Characters;
+using TeamProject07.Utils;
+using TeamProject07.View;
+using TeamProject07.Characters;
 using System.IO;
 using System.Numerics;
 using System.Diagnostics;
 
-namespace text_rpg.Controller
+namespace TeamProject07.Controller
 {
     internal class LoginController
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using text_rpg.Utils;
+using TeamProject07.Utils;
 
-namespace text_rpg.Items
+namespace TeamProject07.Items
 {
     internal class Equipment : Item
     {

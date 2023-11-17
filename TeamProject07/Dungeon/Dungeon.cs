@@ -5,10 +5,9 @@ using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using text_rpg.Characters;
-using text_rpg.View;
+using TeamProject07.Characters;
 
-namespace text_rpg.Controller
+namespace TeamProject07.Controller
 {
     internal class BattleController
     {

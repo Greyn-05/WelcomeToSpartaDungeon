@@ -6,10 +6,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using text_rpg.Characters;
-using text_rpg.Items;
+using TeamProject07.Characters;
+using TeamProject07.Items;
 
-namespace text_rpg.View
+namespace TeamProject07.View
 {
 
 
