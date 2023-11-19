@@ -57,12 +57,7 @@
             Equip,
             Consum
         }
-        public enum ShopName
-        {
-            장비상점,
-            소모품상점,
-            고물상
-        }
+    
 
         public static string ItemPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\CSV\\ItemData.csv";
         public static string MonsterPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\CSV\\MonsterData.csv";

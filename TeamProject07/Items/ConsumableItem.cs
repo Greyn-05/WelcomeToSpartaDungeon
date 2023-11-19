@@ -14,8 +14,6 @@ namespace TeamProject07.Items
         public int BuffDefence { get; set; }
         public int Stock { get; set; }
 
-
-        public int point; // 회복수치
         
     }
 }

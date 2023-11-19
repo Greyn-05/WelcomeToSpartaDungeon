@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Logic;
+using TeamProject07.Shop;
 using TeamProject07.Utils;
 
 namespace TeamProject07
@@ -12,11 +13,7 @@ namespace TeamProject07
     {
         static void Main(string[] args)
         {
-            ItemData.Init();
-            ShopData.Init();
-            Shop.Shop.Init();
-            Shop.Reseller.Init();
-
+            Shop_Init();
 
             MainLogic mainLogic = new MainLogic();
 
@@ -26,5 +23,18 @@ namespace TeamProject07
 
             mainLogic.End();
         }
+
+
+        static void Shop_Init()
+        {
+            ItemData.Init(); 
+            ShopData.Init();
+            Shop_Normal.Init();
+            Shop_Reseller.Init();
+        }
+    
     }
+
+    
+
 }

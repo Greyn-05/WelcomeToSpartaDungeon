@@ -23,13 +23,13 @@ namespace TeamProject07.Shop
             int input = CheckValidInput(0, 3);
             switch (input)
             { case 1:
-                    Shop.Visit(Define.ShopName.장비상점);
+                    Shop_Normal.Visit(ShopData.ShopName.장비상점);
                     break;
                 case 2:
-                    Shop.Visit(Define.ShopName.소모품상점);
+                    Shop_Normal.Visit(ShopData.ShopName.소모품상점);
                     break;
                 case 3:
-                    Shop.Visit(Define.ShopName.고물상);
+                    Shop_Reseller.Visit(ShopData.ShopName.고물상);
                     break;
                 case 0:
                     choicePhase = Define.MainGamePhase.Main;

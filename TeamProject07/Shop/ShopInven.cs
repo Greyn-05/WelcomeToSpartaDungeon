@@ -1,5 +1,4 @@
-﻿using TeamProject07.Utils;
-using static TeamProject07.Utils.Define;
+﻿using static TeamProject07.Utils.ShopData;
 
 namespace TeamProject07
 {
@@ -12,7 +11,7 @@ namespace TeamProject07
 
         public string name = "";
 
-        public ShopInven(ShopName ne) //생성자
+        public ShopInven(ShopName ne) 
         {
             slots = new ShopInvenSlot[maxSlot];
 
@@ -27,7 +26,7 @@ namespace TeamProject07
         }
 
 
-        public bool Add(Item item) // 소지품에 추가, 소모품은 겹쳐짐
+        public bool Add(Item item) 
         {
             if (slotCount < maxSlot)
             {
@@ -59,7 +58,7 @@ namespace TeamProject07
             }
         }
 
-        public bool Delete(Item item) // 인벤에서 같은 id템 삭제
+        public bool Delete(Item item) 
         {
             for (int i = 0; i < slots.Length; i++)
             {

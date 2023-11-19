@@ -9,8 +9,6 @@ namespace TeamProject07
 {
     internal class Item
     {
-        public Define.ItemType Type;
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }
@@ -18,10 +16,12 @@ namespace TeamProject07
 
         public bool IsEquipped { get; set; } = false;
 
+
+
+
         public void Setting(string myId, string myName, string myComment, string myPrice)
         {
             Id = int.Parse(myId);
-
 
             Name = myName;
             Info = myComment;
@@ -29,8 +29,10 @@ namespace TeamProject07
             ItemPrice = int.Parse(myPrice);
         }
 
-
-        // id 	타입	 파츠	이름	  설명 	가격 	올려지는능력 올려지는수치	세트이름
+        public Define.ItemType Type;
+        public Define.Parts Part;
+        public Define.Buff buff;
+        public int point;
 
     }
 }
