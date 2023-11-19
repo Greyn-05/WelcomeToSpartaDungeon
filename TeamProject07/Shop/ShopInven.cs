@@ -1,37 +1,42 @@
-﻿namespace TeamProject07
+﻿using TeamProject07.Utils;
+using static TeamProject07.Utils.Define;
+
+namespace TeamProject07
 {
-    internal class ShopInventory
+    internal class ShopInven
     {
-        public ShopInventorySlot[] slots;
+        public ShopInvenSlot[] slots;
 
         public int slotCount = 0;
-        public int maxSlot = 10; //  최대 크기
+        public int maxSlot = 8; //  최대 크기
 
-        public ShopInventory() //생성자
+        public string name = "";
+
+        public ShopInven(ShopName ne) //생성자
         {
-            slots = new ShopInventorySlot[maxSlot];
+            slots = new ShopInvenSlot[maxSlot];
 
             for (int i = 0; i < slots.Length; i++)
             {
-                ShopInventorySlot inventorySlot = new ShopInventorySlot();
+                ShopInvenSlot inventorySlot = new ShopInvenSlot();
                 slots[i] = inventorySlot;
             }
+
+            name = ne.ToString();
+
         }
-    
+
 
         public bool Add(Item item) // 소지품에 추가, 소모품은 겹쳐짐
         {
             if (slotCount < maxSlot)
             {
-                if (item.Type == Utils.Define.ItemType.Consum)
+                for (int i = 0; i < slots.Length; i++)
                 {
-                    for (int i = 0; i < slots.Length; i++)
+                    if (slots[i].item != null && slots[i].item.Id == item.Id)
                     {
-                        if (slots[i].item != null && slots[i].item.Id == item.Id)
-                        {
-                            slots[i].count++;
-                            return true;
-                        }
+                        slots[i].count++;
+                        return true;
                     }
                 }
 

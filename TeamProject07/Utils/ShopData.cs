@@ -23,7 +23,7 @@
 
 
                         Dictionary<string, string> dic = new Dictionary<string, string>
-                               {{ "주인이름", data[1] }, { "방문인사", data[2] }, { "물건볼때", data[3]}, { "구매했을때", data[4] },{ "안살때", data[5] },{ "작별인사", data[6]}};
+                               {{ "주인이름", data[1] }, { "방문인사", data[2] }, { "물건볼때", data[3]}, { "구매했을때", data[4] },{ "안살때", data[5] },{ "작별인사", data[6]},{"물건골랐을때", data[7] } };
 
                         switch (data[0])
                         {

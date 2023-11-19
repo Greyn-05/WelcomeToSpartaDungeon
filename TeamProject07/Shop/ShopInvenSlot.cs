@@ -1,6 +1,6 @@
 ﻿namespace TeamProject07
 {
-    internal class ShopInventorySlot
+    internal class ShopInvenSlot
     {
         public Item item = null;
         public int count = 0; 

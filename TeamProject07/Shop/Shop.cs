@@ -1,87 +1,72 @@
 ﻿using TeamProject07.Logic;
-using TeamProject07.Utils;
+using static TeamProject07.Utils.Define;
+using static TeamProject07.Utils.ShopData;
+using static TeamProject07.Utils.ItemData;
 
 namespace TeamProject07.Shop
 {
     internal class Shop
     {
- 
+        public enum State
+        {
+            방문인사,
+            물건볼때,
+            물건골랐을때,
+            구매했을때,
+            안살때,
+            작별인사
+        }
+
         static private Random random = new Random();
-        static private string shopName;
-        static private ShopInventorySlot[] catalog;
-        static private bool isBuy = false;
+        static private bool isBuyMode;
 
-        static public Define.ShopName name;
+        static private ShopInven catalog;
 
-        static public ShopInventorySlot[] equipSale; // 장비상점 판매목록
-        static public ShopInventorySlot[] consumSale; // 소모품상점 판매목록
+        static public ShopInven equipSale; // 장비상점 판매목록
+        static public ShopInven consumSale; // 소모품상점 판매목록
+
 
         public static void Init()
         {
-            equipSale = new ShopInventorySlot[6]; //판매창 목록 갯수
-            consumSale = new ShopInventorySlot[6];
+            equipSale = new ShopInven(ShopName.장비상점);
+            consumSale = new ShopInven(ShopName.고물상);
 
-            for (int i = 0; i < equipSale.Length; i++)
-            {
-                ShopInventorySlot inventorySlot = new ShopInventorySlot();
-                equipSale[i] = inventorySlot;
-            }
-
-            for (int i = 0; i < consumSale.Length; i++)
-            {
-                ShopInventorySlot inventorySlot = new ShopInventorySlot();
-                consumSale[i] = inventorySlot;
-            }
-
-            ReLoad(); // 상점 재고채우기
+          ReLoad(); // 상점 재고채우기
         }
 
         public static void ReLoad() // 상점에 물건 채우기. 재고추가할거면 실행 여러번
         {
-
-            for (int i = 0; i < equipSale.Length; i++)
+            for (int i = 0; i < 20; i++)
             {
-                equipSale[i].item = ItemData.items[random.Next(0, 12)];
-                equipSale[i].count = random.Next(1, 3);
+                equipSale.Add(items[random.Next(0, 12)]);
             }
-
-            for (int i = 0; i < consumSale.Length; i++)
+            for (int i = 0; i < 100; i++)
             {
-
-                consumSale[i].item = ItemData.items[random.Next(12, 18)];
-                consumSale[i].count = random.Next(10, 20);
+                consumSale.Add(items[random.Next(12, 18)]);
             }
         }
 
-        static public void Visit(Define.ShopName nam)
-        {
-            name = nam;
 
-            switch (name)
+
+        static public void Visit(ShopName nam)
+        {
+            switch (nam)
             {
-                case Define.ShopName.장비상점:
+                case ShopName.장비상점:
                     catalog = equipSale;
                     break;
-                case Define.ShopName.소모품상점:
+                case ShopName.소모품상점:
                     catalog = consumSale;
                     break;
             }
-            shopName = nam.ToString();
 
             Open();
         }
 
- 
         static void Open()
         {
-            isBuy = false;
+            BuyScreen(State.방문인사);
 
-            Console.Clear();
-            Console.WriteLine($"-------------{shopName}-------------");
-            Console.WriteLine();
-            Console.WriteLine($"{ShopData.shopDialogue[shopName]["주인이름"]} : {ShopData.shopDialogue[shopName]["방문인사"]}");
-
-            BuyScreen();
             Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
             Console.WriteLine();
 
@@ -106,14 +91,8 @@ namespace TeamProject07.Shop
 
         static void TakeMyMoney() // 템구매
         {
-            isBuy = true;
+            BuyScreen(State.물건볼때);
 
-            Console.Clear();
-            Console.WriteLine($"-------------{shopName}-------------");
-            Console.WriteLine();
-            Console.WriteLine($"{ShopData.shopDialogue[shopName]["주인이름"]} : {ShopData.shopDialogue[shopName]["물건볼때"]}");
-
-            BuyScreen();
             Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
             Console.WriteLine();
 
@@ -134,59 +113,79 @@ namespace TeamProject07.Shop
                         break;
                     }
 
-                    if (num < catalog.Length)
+                    if (num < catalog.slots.Length)
                     {
 
-                        if (catalog[num].item != null)
+                        if (catalog.slots[num].item != null)
                         {
-                            if ((MainLogic.dummy.Gold - catalog[num].item.ItemPrice) >= 0) // 돈이 안모자를때
+                            if ((MainLogic.dummy.Gold - catalog.slots[num].item.ItemPrice) >= 0) // 돈이 안모자를때
                             {
-                                MainLogic.dummy.Gold -= catalog[num].item.ItemPrice;
-                                MainLogic.dummy.Inven.Add(catalog[num].item);
 
-                                int i = catalog[num].item.Id;
+                                // 정말 구매하시겠습니까?
 
-                                if (--catalog[num].count <= 0)
-                                    catalog[num].item = null;
-
-
-                                Console.Clear();
-                                Console.WriteLine($"-------------{shopName}-------------");
-                                Console.WriteLine();
-                                Console.WriteLine($"{ShopData.shopDialogue[shopName]["주인이름"]} : {ShopData.shopDialogue[shopName]["구매했을때"]}");
-                                BuyScreen();
-                                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ( -{ItemData.items[i].ItemPrice}원 )");
-                                Console.WriteLine();
-
-                                Console.WriteLine($"※ {ItemData.items[i].Name}이 인벤토리에 추가되었습니다.");
-
-                                isBuy = false;
-                                Console.WriteLine();
-
-
-                                Console.WriteLine("1. 더 둘러보기");
-                                Console.WriteLine("0. 나가기");
-                                Console.WriteLine();
-                                Console.Write(">> ");
-
-                                switch (CheckValidInput(0, 1))
+                                if (LastChoice(num))
                                 {
-                                    case 1:
-                                        TakeMyMoney();
-                                        break;
-                                    case 0:
-                                        Open();
-                                        break;
+                                    MainLogic.dummy.Gold -= catalog.slots[num].item.ItemPrice;
+                                    MainLogic.dummy.Inven.Add(catalog.slots[num].item);
+
+                                    int i = catalog.slots[num].item.Id;
+
+                                    if (--catalog.slots[num].count <= 0)
+                                        catalog.slots[num].item = null;
+
+
+                                    BuyScreen(State.구매했을때);
+                                    Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
+                                    Console.WriteLine();
+                                    Console.WriteLine($"※ {items[i].Name}이 인벤토리에 추가되었습니다.");
+                                    Console.WriteLine();
+
+
+                                    Console.WriteLine("1. 더 둘러보기");
+                                    Console.WriteLine("0. 나가기");
+                                    Console.WriteLine();
+                                    Console.Write(">> ");
+
+                                    switch (CheckValidInput(0, 1))
+                                    {
+                                        case 1:
+                                            TakeMyMoney();
+                                            break;
+                                        case 0:
+                                            Open();
+                                            break;
+                                    }
+
+                                }
+                                else
+                                {
+                                    
+                                    BuyScreen(State.안살때);
+
+                                    Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
+                                    Console.WriteLine();
+
+                                    Console.WriteLine("1. 더 둘러보기");
+                                    Console.WriteLine("0. 나가기");
+                                    Console.WriteLine();
+                                    Console.Write(">> ");
+
+                                    switch (CheckValidInput(0, 1))
+                                    {
+                                        case 1:
+                                            TakeMyMoney();
+                                            break;
+                                        case 0:
+                                            Open();
+                                            break;
+                                    }
+
                                 }
                             }
                             else // 소지금 부족
                             {
-                                Console.Clear();
-                                Console.WriteLine($"-------------{shopName}-------------");
-                                Console.WriteLine();
-                                Console.WriteLine($"{ShopData.shopDialogue[shopName]["주인이름"]} : {ShopData.shopDialogue[shopName]["안살때"]}");
-                                isBuy = false;
-                                BuyScreen();
+                                BuyScreen(State.안살때);
+
                                 Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
                                 Console.WriteLine();
 
@@ -226,29 +225,76 @@ namespace TeamProject07.Shop
             }
         }
 
-        static void BuyScreen() // 구매화면
+        static bool LastChoice(int num)
         {
+            BuyScreen(State.물건골랐을때);
+
+
+            // 장비 골랐을때 올라간 능력치 떠야함. 장비상점에서만,.
+            // 산 장비를 착용하시겠습니까?
+            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ( -{catalog.slots[num].item.ItemPrice}원 )");
+            Console.WriteLine();
+            Console.WriteLine($"{catalog.slots[num].item.Name}을 구매하시겠습니까?");
+            Console.WriteLine();
+            Console.WriteLine("1. 사겠습니다.");
+            Console.WriteLine("0. 안살래요");
+            Console.WriteLine();
+            Console.Write(">> ");
+
+            switch (CheckValidInput(0, 1))
+            {
+                case 1:
+                    return true;
+                case 0:
+                    return false;
+            }
+
+            return false;
+        }
+
+        static void BuyScreen(State state) // 구매화면
+        {
+            switch (state)
+            {
+                case State.물건볼때:
+                case State.물건골랐을때:
+                case State.구매했을때:
+                case State.안살때:
+                    isBuyMode = true;
+                    break;
+
+                case State.방문인사:
+                case State.작별인사:
+                default:
+                    isBuyMode = false;
+                    break;
+            }
+
+
+            Console.Clear();
+            Console.WriteLine($"-------------{catalog.name}-------------");
+            Console.WriteLine();
+            Console.WriteLine($"{shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][state.ToString()]}");
 
             Console.WriteLine();
 
             Console.WriteLine("[           판매목록           ]");
             Console.WriteLine();
 
-            for (int i = 0; i < catalog.Length; i++)
+            for (int i = 0; i < catalog.slots.Length; i++)
             {
-                if (catalog[i].item != null)
-                    Console.WriteLine((isBuy ? $"{i + 1}." : "") + ($"{catalog[i].item.Name} | {catalog[i].item.Info} | {catalog[i].item.ItemPrice}원") + (isBuy && (catalog[i].count > 0) ? ($" | {catalog[i].count}개") : ""));
+                if (catalog.slots[i].item != null)
+                    Console.WriteLine((isBuyMode ? $"{i + 1}." : "") + ($"{catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {catalog.slots[i].item.ItemPrice}원") + (isBuyMode && (catalog.slots[i].count > 1) ? ($" | {catalog.slots[i].count}개") : ""));
                 else
-                    Console.WriteLine((isBuy ? $"{i + 1}." : "") + "-----------------------------  품절  -----------------------------");
+                    Console.WriteLine((isBuyMode ? $"{i + 1}." : "") + "-----------------------------  품절  -----------------------------");
             }
-
-
 
             Console.WriteLine();
         }
 
 
-        //■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+
         static int CheckValidInput(int min, int max)
         {
             while (true)
