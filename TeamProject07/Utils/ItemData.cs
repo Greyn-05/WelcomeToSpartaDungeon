@@ -24,12 +24,14 @@ namespace TeamProject07.Utils
                         string line = sr.ReadLine();
                         string[] data = line.Split(',');
 
+                       
 
-                        if (data[1] == "장비")
+                        if (Define.ItemType.Equip == (Define.ItemType)(int.Parse(data[1])))
                         {
                             Equipment item = new Equipment();
-                            item.Setting(data[0], data[2], data[3], data[4]); // Item클래스안에 들어있는 변수만 초기화 
-                            item.Type = Define.ItemType.Equip;
+                            item.Setting(data[0], data[3], data[4], data[5]); // Item클래스안에 들어있는 변수만 초기화 
+                            item.Type = (Define.ItemType)(int.Parse(data[1]));
+
                             item.Part = (Define.Parts)(int.Parse(data[5]));
                             item.buffName = (Define.Buff)(int.Parse(data[6]));
                             item.point = int.Parse(data[7]);
@@ -41,8 +43,8 @@ namespace TeamProject07.Utils
                         else
                         {
                             ConsumableItem item = new ConsumableItem();
-                            item.Setting(data[0], data[2], data[3], data[4]); // Item클래스안에 들어있는 변수만 초기화 
-                            item.Type = Define.ItemType.Consum;
+                            item.Setting(data[0], data[3], data[4], data[5]);  // Item클래스안에 들어있는 변수만 초기화 
+                            item.Type = (Define.ItemType)(int.Parse(data[1]));
                             item.point = int.Parse(data[7]);
 
                             items.Add(item.Id, item);

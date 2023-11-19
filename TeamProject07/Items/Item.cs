@@ -22,11 +22,15 @@ namespace TeamProject07
         {
             Id = int.Parse(myId);
 
+
             Name = myName;
             Info = myComment;
 
             ItemPrice = int.Parse(myPrice);
         }
+
+
+        // id 	타입	 파츠	이름	  설명 	가격 	올려지는능력 올려지는수치	세트이름
 
     }
 }

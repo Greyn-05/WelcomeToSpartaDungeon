@@ -16,6 +16,6 @@ namespace TeamProject07.Items
 
 
         public int point; // 회복수치
-
+        
     }
 }

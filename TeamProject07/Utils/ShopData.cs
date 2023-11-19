@@ -10,7 +10,6 @@
 
             shopDialogue = new Dictionary<string, Dictionary<string, string>>(); // 상점이름 / 언제대사인지 / 대사
 
-
             if (File.Exists(path))
             {
                 using (StreamReader sr = new StreamReader(new FileStream(path, FileMode.Open)))
@@ -29,18 +28,20 @@
                         switch (data[0])
                         {
                             case "장비":
-                                shopDialogue.Add(Shop.Shop.Name.장비상점.ToString(), dic);
+                                shopDialogue.Add(Define.ShopName.장비상점.ToString(), dic);
                                 break;
                             case "소모품":
-                                shopDialogue.Add(Shop.Shop.Name.소모품상점.ToString(), dic);
+                                shopDialogue.Add(Define.ShopName.소모품상점.ToString(), dic);
+                                break;
+                            case "고물상":
+                                shopDialogue.Add(Define.ShopName.고물상.ToString(), dic);
+                                break;
+                            default:
+                                Console.WriteLine("상점데이터에 문제가 생겼습니다");
                                 break;
                         }
-
-                        
-
                     }
                 }
-
             }
             else
             {
