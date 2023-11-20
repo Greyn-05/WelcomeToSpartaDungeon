@@ -41,7 +41,6 @@ namespace TeamProject07.Shop
             }
 
             Open();
-            //
         }
     }
 }

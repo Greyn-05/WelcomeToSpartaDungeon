@@ -77,165 +77,186 @@ namespace TeamProject07.Shop
         public static void Buy_Open()
         {
             nego = (catalog.name == ShopName.고물상.ToString()) ? 2f : 1;
+            bool Buy_Open_kill = false;
 
-            Buy_Screen(LinePick.방문인사);
-
-            Console.WriteLine("1.구매하기");
-            Console.WriteLine("0.나가기");
-            Console.WriteLine();
-            Console.Write(">> ");
-
-            switch (CheckValidInput(0, 1))
+            while(true)
             {
-                case 1:
-                    Buy();
-                    break;
-                case 0:
-                    Open();
-                    break;
-            }
+                Buy_Screen(LinePick.방문인사);
 
+                Console.WriteLine("1.구매하기");
+                Console.WriteLine("0.나가기");
+                Console.WriteLine();
+                Console.Write(">> ");
+
+                switch (CheckValidInput(0, 1))
+                {
+                    case 1:
+                        Buy();
+                        break;
+                    case 0:
+                        Buy_Open_kill = true;
+                        break;
+                }
+                if(Buy_Open_kill==true)
+                {
+                    break;
+                }
+            }
         }
 
         public static void Buy()
         {
             nego = (catalog.name == ShopName.고물상.ToString()) ? 2f : 1;
-
-            Buy_Screen(LinePick.물건볼때);
-
-            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
-            Console.WriteLine();
-
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine();
-            Console.Write("구매할 아이템의 숫자를 적고 엔터를 눌러주세요");
-            Console.Write(">> ");
-
-
+            
             while (true)
             {
-                if (int.TryParse(Console.ReadLine(), out int num))
+                bool Kill_buy = false;
+                bool Again_buy = false;
+                Buy_Screen(LinePick.물건볼때);
+
+                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
+                Console.WriteLine();
+
+                Console.WriteLine("0. 나가기");
+                Console.WriteLine();
+                Console.Write("구매할 아이템의 숫자를 적고 엔터를 눌러주세요");
+                Console.Write(">> ");
+
+
+                while (true)
                 {
-                    if (--num < 0)
+                    if (int.TryParse(Console.ReadLine(), out int num))
                     {
-                        Buy_Open();
-                        break;
-                    }
-
-                    check = 100000000;
-
-                    if (num < catalog.slots.Length)
-                    {
-
-                        if (catalog.slots[num].item != null)
+                        if (--num < 0)
                         {
-                            if (((MainLogic.dummy.Gold - (int)(catalog.slots[num].item.ItemPrice * nego)) >= 0)) // 돈이 안모자를때
+                            Kill_buy = true;
+                            break;
+                        }
+                        check = 100000000;
+
+                        if (num < catalog.slots.Length)
+                        {
+
+                            if (catalog.slots[num].item != null)
                             {
-                                check = num;
-
-                                if (Buy_Choice(num))    // 정말 구매하시겠습니까?
+                                if (((MainLogic.dummy.Gold - (int)(catalog.slots[num].item.ItemPrice * nego)) >= 0)) // 돈이 안모자를때
                                 {
-                                    MainLogic.dummy.Gold -= (int)(catalog.slots[num].item.ItemPrice * nego);
-                                    MainLogic.dummy.Inven.Add(catalog.slots[num].item);
+                                    check = num;
 
-                                    int i = catalog.slots[num].item.Id;
-
-                                    if (--catalog.slots[num].count <= 0)
-                                        catalog.slots[num].item = null;
-
-
-                                    check = 100000000;
-
-                                    Buy_Screen(LinePick.구매했을때);
-                                    Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
-                                    Console.WriteLine();
-                                    Console.WriteLine($"※ {items[i].Name}이 인벤토리에 추가되었습니다.");
-                                    Console.WriteLine();
-
-
-                                    Console.WriteLine("1. 더 둘러보기");
-                                    Console.WriteLine("0. 나가기");
-                                    Console.WriteLine();
-                                    Console.Write(">> ");
-
-                                    switch (CheckValidInput(0, 1))
+                                    if (Buy_Choice(num))    // 정말 구매하시겠습니까?
                                     {
-                                        case 1:
-                                            Buy();
-                                            break;
-                                        case 0:
-                                            Buy_Open();
-                                            break;
-                                    }
+                                        MainLogic.dummy.Gold -= (int)(catalog.slots[num].item.ItemPrice * nego);
+                                        MainLogic.dummy.Inven.Add(catalog.slots[num].item);
 
+                                        int i = catalog.slots[num].item.Id;
+
+                                        if (--catalog.slots[num].count <= 0)
+                                            catalog.slots[num].item = null;
+
+
+                                        check = 100000000;
+
+                                        Buy_Screen(LinePick.구매했을때);
+                                        Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
+                                        Console.WriteLine();
+                                        Console.WriteLine($"※ {items[i].Name}이 인벤토리에 추가되었습니다.");
+                                        Console.WriteLine();
+
+
+                                        Console.WriteLine("1. 더 둘러보기");
+                                        Console.WriteLine("0. 나가기");
+                                        Console.WriteLine();
+                                        Console.Write(">> ");
+
+                                        switch (CheckValidInput(0, 1))
+                                        {
+                                            case 1:
+                                                Again_buy = true;
+                                                break;
+                                            case 0:
+                                                Kill_buy = true;
+                                                break;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        check = 100000000;
+                                        Buy_Screen(LinePick.안샀을때);
+
+                                        Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
+                                        Console.WriteLine();
+
+                                        Console.WriteLine("1. 다른 물건을 산다");
+                                        Console.WriteLine("0. 나가기");
+                                        Console.WriteLine();
+                                        Console.Write(">> ");
+
+                                        switch (CheckValidInput(0, 1))
+                                        {
+                                            case 0:
+                                                Kill_buy = true;
+                                                break;
+                                            case 1:
+                                                Again_buy = true;
+                                                break;
+                                        }
+
+                                    }
                                 }
-                                else
+                                else // 소지금 부족
                                 {
                                     check = 100000000;
-                                    Buy_Screen(LinePick.안샀을때);
+                                    Buy_Screen(LinePick.돈이부족해);
 
                                     Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
                                     Console.WriteLine();
 
-                                    Console.WriteLine("1. 다른 물건을 산다");
+                                    Console.WriteLine();
                                     Console.WriteLine("0. 나가기");
                                     Console.WriteLine();
                                     Console.Write(">> ");
 
-                                    switch (CheckValidInput(0, 1))
+                                    switch (CheckValidInput(0, 0))
                                     {
-                                        case 1:
-                                            Buy();
-                                            break;
                                         case 0:
-                                            Buy_Open();
+                                            Kill_buy = true;
                                             break;
                                     }
-
                                 }
                             }
-                            else // 소지금 부족
+                            else
                             {
-                                check = 100000000;
-                                Buy_Screen(LinePick.돈이부족해);
-
-                                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
-                                Console.WriteLine();
-
-                                Console.WriteLine();
-                                Console.WriteLine("0. 나가기");
-                                Console.WriteLine();
-                                Console.Write(">> ");
-
-                                switch (CheckValidInput(0, 0))
-                                {
-                                    case 0:
-                                        Buy_Open();
-                                        break;
-                                }
+                                Console.WriteLine("품절된 상품입니다.");
+                                Thread.Sleep(200);
+                                continue;
                             }
                         }
                         else
                         {
-                            Console.WriteLine("품절된 상품입니다.");
-                            Console.Write("구매할 아이템의 숫자를 적고 엔터를 눌러주세요");
-                            Console.Write(">> ");
+                            Console.WriteLine("잘못된 입력입니다.");
+                            Thread.Sleep(200);
                             continue;
                         }
                     }
                     else
                     {
                         Console.WriteLine("잘못된 입력입니다.");
+                        Thread.Sleep(200);
                         continue;
                     }
+                    if ((Kill_buy == true)||(Again_buy==true))
+                    {
+                        break;
+                    }
                 }
-                else
+                if(Kill_buy == true)
                 {
-                    Console.WriteLine("잘못된 입력입니다.");
-                    continue;
+                    break;
                 }
-
             }
+           
+
         }
 
         public static bool Buy_Choice(int num)
@@ -336,7 +357,7 @@ namespace TeamProject07.Shop
             while (true)
             {
                 string input = Console.ReadLine();
-
+                
                 bool parseSuccess = int.TryParse(input, out var ret);
                 if (parseSuccess)
                 {
@@ -368,7 +389,6 @@ namespace TeamProject07.Shop
                     Sell();
                     break;
                 case 0:
-                    Open();
                     break;
             }
 
@@ -378,68 +398,97 @@ namespace TeamProject07.Shop
         {
             nego = 0.5f;
 
-            Sell_Screen(LinePick.내템봐줘);
-
-            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
-            Console.WriteLine();
-
-            Console.WriteLine("판매할 아이템의 숫자를 적고 엔터를 눌러주세요");
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine();
-            Console.Write(">> ");
-
-            while (true)
+            while(true)
             {
-                if (int.TryParse(Console.ReadLine(), out int num))
+                bool Kill_sell = false;
+                bool Again_sell = false;
+                Sell_Screen(LinePick.내템봐줘);
+
+                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
+                Console.WriteLine();
+
+                Console.WriteLine("판매할 아이템의 숫자를 적고 엔터를 눌러주세요");
+                Console.WriteLine("0. 나가기");
+                Console.WriteLine();
+                Console.Write(">> ");
+
+                while (true)
                 {
-                    if (--num < 0)
+                    if (int.TryParse(Console.ReadLine(), out int num))
                     {
-                        Sell_Open();
-                        break;
-                    }
-
-                    check = 100000000;
-
-                    if (num < MainLogic.dummy.Inven.Count)
-                    {
-                        check = num;
-
-                        if (Sell_Choice(num))
+                        if (--num < 0)
                         {
-                            int i = MainLogic.dummy.Inven[num].Id;
+                            Kill_sell = true;
+                            break;
+                        }
 
-                            Shop_Reseller.resellerInven.Add(items[i]); // 고물상 인벤에 아이템추가
-                            Shop_Reseller.ReLoad(); // 고물상인벤 갱신
+                        check = 100000000;
 
+                        if (num < MainLogic.dummy.Inven.Count)
+                        {
+                            check = num;
 
-                            MainLogic.dummy.Gold += (int)(MainLogic.dummy.Inven[num].ItemPrice * nego);
-                            MainLogic.dummy.Inven.Remove(MainLogic.dummy.Inven[num]);
-
-
-                            check = 100000000;
-
-                            Sell_Screen(LinePick.팔겠습니다);
-                            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
-                            Console.WriteLine();
-                            Console.WriteLine($"※ {items[i].Name}를 판매하였습니다.");
-                            Console.WriteLine();
-
-                            if (MainLogic.dummy.Inven.Count <= 0)
+                            if (Sell_Choice(num))
                             {
-                                Console.WriteLine("0. 나가기");
-                                Console.WriteLine();
-                                Console.Write(">> ");
+                                int i = MainLogic.dummy.Inven[num].Id;
 
-                                switch (CheckValidInput(0, 0))
+                                Shop_Reseller.resellerInven.Add(items[i]); // 고물상 인벤에 아이템추가
+                                Shop_Reseller.ReLoad(); // 고물상인벤 갱신
+
+
+                                MainLogic.dummy.Gold += (int)(MainLogic.dummy.Inven[num].ItemPrice * nego);
+                                MainLogic.dummy.Inven.Remove(MainLogic.dummy.Inven[num]);
+
+
+                                check = 100000000;
+
+                                Sell_Screen(LinePick.팔겠습니다);
+                                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
+                                Console.WriteLine();
+                                Console.WriteLine($"※ {items[i].Name}를 판매하였습니다.");
+                                Console.WriteLine();
+
+                                if (MainLogic.dummy.Inven.Count <= 0)
                                 {
-                                    case 0:
-                                        Sell_Open();
-                                        break;
+                                    Console.WriteLine("0. 나가기");
+                                    Console.WriteLine();
+                                    Console.Write(">> ");
+
+                                    switch (CheckValidInput(0, 0))
+                                    {
+                                        case 0:
+                                            Kill_sell = true;
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("1. 더 팔기");
+                                    Console.WriteLine("0. 나가기");
+                                    Console.WriteLine();
+                                    Console.Write(">> ");
+
+                                    switch (CheckValidInput(0, 1))
+                                    {
+                                        case 1:
+                                            Again_sell = true;
+                                            break;
+                                        case 0:
+                                            Kill_sell = true;
+                                            break;
+                                    }
+
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("1. 더 팔기");
+                                check = 100000000;
+                                Sell_Screen(LinePick.안팔래);
+
+                                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
+                                Console.WriteLine();
+
+                                Console.WriteLine("1. 다른걸 팔게요");
                                 Console.WriteLine("0. 나가기");
                                 Console.WriteLine();
                                 Console.Write(">> ");
@@ -447,65 +496,52 @@ namespace TeamProject07.Shop
                                 switch (CheckValidInput(0, 1))
                                 {
                                     case 1:
-                                        Sell();
+                                        Again_sell = true;
                                         break;
                                     case 0:
-                                        Sell_Open();
+                                        Kill_sell = true;
                                         break;
                                 }
-
                             }
                         }
+
                         else
                         {
-                            check = 100000000;
-                            Sell_Screen(LinePick.안팔래);
-
-                            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
-                            Console.WriteLine();
-
-                            Console.WriteLine("1. 다른걸 팔게요");
-                            Console.WriteLine("0. 나가기");
-                            Console.WriteLine();
-                            Console.Write(">> ");
-
-                            switch (CheckValidInput(0, 1))
-                            {
-                                case 1:
-                                    Sell();
-                                    break;
-                                case 0:
-                                    Sell_Open();
-                                    break;
-                            }
+                            Console.WriteLine("잘못된 입력입니다.");
+                            Thread.Sleep(200);
+                            continue;
                         }
                     }
-
                     else
                     {
                         Console.WriteLine("잘못된 입력입니다.");
+                        Thread.Sleep(200);
                         continue;
                     }
+                    if ((Kill_sell == true)||(Again_sell==true))
+                    {
+                        break;
+                    }
+
                 }
-                else
+
+                /*Console.WriteLine("0. 나가기");
+                Console.WriteLine();
+                Console.Write(">> ");
+
+                switch (CheckValidInput(0, 0))
                 {
-                    Console.WriteLine("잘못된 입력입니다.");
-                    continue;
-                }
-
-            }
-
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine();
-            Console.Write(">> ");
-
-            switch (CheckValidInput(0, 0))
-            {
-                case 0:
-                default:
-                    Sell_Open();
+                    case 0:
+                    default:
+                        Sell_Open();
+                        break;
+                }*/
+                if (Kill_sell == true)
+                {
                     break;
+                }
             }
+            
         }
 
 
