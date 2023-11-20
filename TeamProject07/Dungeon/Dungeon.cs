@@ -9,7 +9,7 @@ using TeamProject07.Characters;
 using TeamProject07.Dungeon;
 using TeamProject07.Utils;
 using static TeamProject07.Utils.Define;
-
+using TeamProject07.Skills;
 namespace TeamProject07.Controller
 {
     enum DungeonEntranceSelect
@@ -70,7 +70,7 @@ namespace TeamProject07.Controller
 
         public List<Monster> CreateMonsters { get; set; }
         public Dictionary<int, Monster> monsterData;
-
+        int MonsterNumber;
         public void LoadMosters()
         {
 
@@ -99,9 +99,9 @@ namespace TeamProject07.Controller
         public void StartDungeon(int stage)
         {
 
-            int monsternum = 0;
-            if (stage == 1) { monsternum = 4; }            //난이도
-            else if (stage == 2) { monsternum = 7; }
+            int monsternum = 1;
+            if (stage == 2) { monsternum = 4; }            //난이도
+            else if (stage == 3) { monsternum = 7; }
 
             CreateMonsters = new List<Monster>();
             CreateMonsters.Clear();
@@ -144,24 +144,53 @@ namespace TeamProject07.Controller
         public void PlayerPhase(Player player)
         {
             Console.Clear();
-            
             for (int i = 0; i < CreateMonsters.Count; i++)
             {
                 Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack},");
             }
-            Console.WriteLine("\n\n플레이어의 차례입니다!");
-            Console.WriteLine("공격할 몬스터를 선택하세요.");
-            int monsterChoice = CheckValidInput(0, CreateMonsters.Count - 1);
-            //선택된 몬스터의 글자 색이 바뀌는 코드가 추가되면 좋겠어요
-            Console.WriteLine("공격할 스킬을 선택하세요.");
-            if (CreateMonsters[monsterChoice].IsDead != false)
+            while (!player.IsDead && MonsterNumber != 0)//&& !CreateMonsters[0].IsDead
             {
-                var skillChoice = CheckValidInput(1, player.Skills.Count);
-                CreateMonsters[monsterChoice].TakeDamage(player, player.Skills[skillChoice-1].Damage);
-            }
-            else
-            {
-                Console.WriteLine("올바른 몬스터를 선택하십시오");
+
+
+                Console.WriteLine("\n전투가 시작됩니다!!");
+                Console.WriteLine("공격할 몬스터를 선택하세요.");
+                int monsterChoice = CheckValidInput(0, MonsterNumber);
+                Console.Clear();
+                //선택된 몬스터의 글자 색이 바뀌는 코드가 추가되면 좋겠어요
+                for (int i = 0; i < MonsterNumber; i++)
+                {
+                    if (monsterChoice == i + 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                    }
+                }
+                Console.WriteLine("공격할 스킬을 선택하세요.");
+                int skillChoice = CheckValidInput(1, player.Skills.Count);
+                Console.Clear();
+                // int skillChoice = CheckValidInput(1, player.Skills.Count);
+                /*for (int i = 0; i < MonsterNumber; i++)
+                {
+                    switch (skillChoice)
+                    {
+                        case 1:
+                            //스킬 받는피해 코드
+                            break;
+                    }
+                }*/
+                if (CreateMonsters[monsterChoice].IsDead != false)
+                {
+                    CreateMonsters[monsterChoice].TakeDamage(player, player.Skills[skillChoice - 1].Damage);
+                }
+                else
+                {
+                    Console.WriteLine("올바른 몬스터를 선택하십시오");
+                }
             }
 
         }
