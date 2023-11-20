@@ -46,7 +46,6 @@ namespace TeamProject07.Shop
                     Sell_Open();
                     break;
                 case 0:
-                    Open();
                     break;
             }
         }
