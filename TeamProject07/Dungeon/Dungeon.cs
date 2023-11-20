@@ -206,12 +206,12 @@ namespace TeamProject07.Controller
                     Console.Write($"\n  {player.Name} "); Console.ResetColor(); Console.Write("가 공격합니다. ");
                     int damageValue =CreateMonsters[monsterChoice].TakeDamage(player, player.Skills[skillChoice].Damage);
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write($"\n{CreateMonsters[monsterChoice].Name} "); Console.ResetColor(); Console.Write("님이 공격하였습니다.");
+                    Console.Write($"\n{CreateMonsters[monsterChoice].Name} "); Console.ResetColor(); Console.Write("가 ");
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write($" {player.Name} "); Console.ResetColor(); Console.Write("가");
+                    Console.Write($" {player.Name} "); Console.ResetColor(); Console.Write("에게");
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write($" {damageValue} "); Console.ResetColor(); Console.Write($"의 피해를 받았습니다!\n\n");
-                    Thread.Sleep(3000);
+                    Thread.Sleep(5000);
                     Console.Clear();
                     if (CreateMonsters[monsterChoice].IsDead==true)
                     {
@@ -245,7 +245,6 @@ namespace TeamProject07.Controller
                     if (!CreateMonsters[i].IsDead)
                     {
                         int damageValue = player.TakeDamage(CreateMonsters[i], 0);
-                        player.Hp -= damageValue;
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write($"\n{player.Name} "); Console.ResetColor(); Console.Write("이/가");
 
