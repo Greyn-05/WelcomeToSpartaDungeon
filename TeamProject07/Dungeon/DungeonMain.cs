@@ -48,9 +48,6 @@ namespace TeamProject07.Dungeon
                         Dungeon.PlayerPhase(player);
                         Console.WriteLine();
                         //Thread.Sleep(1000);  
-
-
-                        Console.WriteLine();
                         break;
                     case 2:
                         choicePhase = Define.MainGamePhase.Main;
@@ -62,7 +59,7 @@ namespace TeamProject07.Dungeon
                     break;
                 }*/
             }
-            
+            player.IsDead = true;
             return Define.MainGamePhase.Main;
         }
         
