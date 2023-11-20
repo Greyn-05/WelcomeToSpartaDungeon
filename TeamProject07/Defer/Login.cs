@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Utils;
-using TeamProject07.View;
 using TeamProject07.Characters;
 using System.IO;
 using System.Numerics;
