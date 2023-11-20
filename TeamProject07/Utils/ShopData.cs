@@ -2,6 +2,35 @@
 {
     internal class ShopData
     {
+        public enum ShopName // 상점이름
+        {
+            장비상점,
+            소모품상점,
+            고물상
+        }
+        public enum LinePick
+        {
+            // 0 상점이름
+            // 1 상점주인이름
+
+            상점설명 = 2,
+            잡답,
+            방문인사,
+            물건볼때,
+            물건골랐을때,
+            구매했을때,
+            안샀을때,
+            돈이부족해,
+            전량품절,
+            작별인사,
+            
+            내템봐줘,
+            이거팔까,
+            팔겠습니다,
+            안팔래,
+        }
+
+
         public static string path = Define.ShopPath; //파일경로
         public static Dictionary<string, Dictionary<string, string>> shopDialogue;
 
@@ -9,7 +38,6 @@
         {
 
             shopDialogue = new Dictionary<string, Dictionary<string, string>>(); // 상점이름 / 언제대사인지 / 대사
-
 
             if (File.Exists(path))
             {
@@ -22,25 +50,18 @@
                         string line = sr.ReadLine();
                         string[] data = line.Split(',');
 
+                        Dictionary<string, string> dic = new Dictionary<string, string>();
 
-                        Dictionary<string, string> dic = new Dictionary<string, string>
-                               {{ "주인이름", data[1] }, { "방문인사", data[2] }, { "물건볼때", data[3]}, { "구매했을때", data[4] },{ "안살때", data[5] },{ "작별인사", data[6]}};
+                        dic.Add("주인이름", data[1]);
 
-                        switch (data[0])
+                        for (int i = 0; i < Enum.GetValues(typeof(LinePick)).Length; i++)
                         {
-                            case "장비":
-                                shopDialogue.Add(Shop.Shop.Name.장비상점.ToString(), dic);
-                                break;
-                            case "소모품":
-                                shopDialogue.Add(Shop.Shop.Name.소모품상점.ToString(), dic);
-                                break;
+                            dic.Add(((LinePick)(i + 2)).ToString(), data[i + 2]);
                         }
 
-                        
-
+                        shopDialogue.Add(((ShopName)(int.Parse(data[0]))).ToString(), dic);
                     }
                 }
-
             }
             else
             {

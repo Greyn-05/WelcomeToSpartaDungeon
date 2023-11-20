@@ -25,15 +25,16 @@ namespace TeamProject07.Utils
                         string[] data = line.Split(',');
 
 
-                        if (data[1] == "장비")
+                        if (Define.ItemType.Equip == (Define.ItemType)(int.Parse(data[1]))) // 아이템종류 늘어나면 else if로 추가할것
                         {
                             Equipment item = new Equipment();
-                            item.Setting(data[0], data[2], data[3], data[4]); // Item클래스안에 들어있는 변수만 초기화 
-                            item.Type = Define.ItemType.Equip;
-                            item.Part = (Define.Parts)(int.Parse(data[5]));
-                            item.buffName = (Define.Buff)(int.Parse(data[6]));
+                            item.Setting(data[0], data[3], data[4], data[5]); // Item클래스안에 들어있는 변수만 초기화 
+                            item.Type = (Define.ItemType)(int.Parse(data[1]));
                             item.point = int.Parse(data[7]);
 
+
+                            item.Part = (Define.Parts)(int.Parse(data[2]));
+                            item.buff = (Define.Buff)(int.Parse(data[6]));
                             item.set = (Define.SetEquip)int.Parse(data[8]);
 
                             items.Add(item.Id, item);
@@ -41,8 +42,8 @@ namespace TeamProject07.Utils
                         else
                         {
                             ConsumableItem item = new ConsumableItem();
-                            item.Setting(data[0], data[2], data[3], data[4]); // Item클래스안에 들어있는 변수만 초기화 
-                            item.Type = Define.ItemType.Consum;
+                            item.Setting(data[0], data[3], data[4], data[5]);  // Item클래스안에 들어있는 변수만 초기화 
+                            item.Type = (Define.ItemType)(int.Parse(data[1]));
                             item.point = int.Parse(data[7]);
 
                             items.Add(item.Id, item);

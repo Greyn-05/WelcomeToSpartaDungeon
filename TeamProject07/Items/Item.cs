@@ -9,14 +9,15 @@ namespace TeamProject07
 {
     internal class Item
     {
-        public Define.ItemType Type;
-
         public int Id { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }
         public int ItemPrice { get; set; }
 
         public bool IsEquipped { get; set; } = false;
+
+
+
 
         public void Setting(string myId, string myName, string myComment, string myPrice)
         {
@@ -27,6 +28,11 @@ namespace TeamProject07
 
             ItemPrice = int.Parse(myPrice);
         }
+
+        public Define.ItemType Type;
+        public Define.Parts Part;
+        public Define.Buff buff;
+        public int point;
 
     }
 }
