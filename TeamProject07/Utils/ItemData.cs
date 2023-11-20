@@ -37,10 +37,10 @@ namespace TeamProject07.Utils
                             item.Part = (Define.Parts)(int.Parse(data[2]));
 
                             item.buff = (Define.Buff)(int.Parse(data[6]));
-                            item.buffValue = int.Parse(data[7]);
-
+                            item.buffValue = (data[7] == "") ? 0 :int.Parse(data[7]);
+                         
                             item.debuff = (Define.DeBuff)(int.Parse(data[8]));
-                            item.debuffValue = int.Parse(data[9]);
+                            item.debuffValue = (data[9] == "") ?  0 : int.Parse(data[9]);
 
                             item.set = (Define.SetEquip)int.Parse(data[10]);
 
