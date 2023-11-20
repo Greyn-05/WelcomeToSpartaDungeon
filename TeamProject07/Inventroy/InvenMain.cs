@@ -39,7 +39,7 @@ namespace TeamProject07.Inventroy
             ItemDescription(player, selectedItemIndex);
 
 
-            static void ItemList(Player player)
+            static int ItemList(Player player)
             {
                 int startListY = 0;
 
@@ -65,11 +65,11 @@ namespace TeamProject07.Inventroy
 
             static void ItemDescription(Player player, int selectedItemIndex)
             {
+                int startDescriptionY = 6;
+
                 if (selectedItemIndex >= 0 && selectedItemIndex < player.Inven.Count)
                 {
                     Item selectedItem = player.Inven[selectedItemIndex];
-
-                    int startDescriptionY = 6;
 
                     //""부분 수정해야함
                     Console.SetCursorPosition(75, startDescriptionY++); // 출력위치
@@ -89,6 +89,8 @@ namespace TeamProject07.Inventroy
                 Console.SetCursorPosition(75, startDescriptionY);
                 Console.WriteLine("0. 돌아가기");
             }
+
+            return Define.MainGamePhase.Main;
         }
 
         static void WriteLineInParts(string text, int startX, ref int startDescriptionY) // 10글자마자 잘라서 출력
@@ -101,7 +103,7 @@ namespace TeamProject07.Inventroy
             }
         }
 
-        private int CheckValidInput(int min, int max)
+        private static int CheckValidInput(int min, int max)
         {
             while (true)
             {
