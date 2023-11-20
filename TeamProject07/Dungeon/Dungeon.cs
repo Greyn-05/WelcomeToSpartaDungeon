@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TeamProject07.Characters;
+using TeamProject07.Dungeon;
 using TeamProject07.Utils;
 using static TeamProject07.Utils.Define;
 
@@ -18,72 +19,15 @@ namespace TeamProject07.Controller
         EnterDungeon,
         UseItem = 2,
     }
+    
     internal class DungeonEntrance
     {
-        public List<Monster> CreateMonsters { get; set; }
-
-
-        public void StartDungeon(int stage)
-        {
-
-            int monsternum = 0;
-            if (stage == 1) { monsternum = 4; }            //난이도
-            else if (stage == 2) { monsternum = 7; }
-
-            CreateMonsters = new List<Monster>();
-            CreateMonsters.Clear();
-            Random rand = new Random();
-            int MonsterNumber = rand.Next(3, 4);    // 2마리~4마리
-            int MonsterType;
-
-            for (int i = 0; i < MonsterNumber; i++)
-            {
-
-                MonsterType = rand.Next(monsternum, monsternum + 3);   //몬스터 데이터 보고 조정   
-                Monster monsterinfo = monsterData.ElementAt(MonsterType).Value;
-                CreateMonsters.Add(monsterinfo);
-                Console.WriteLine($"LV.{monsterinfo.Level} \t {monsterinfo.Name} \t HP : {monsterinfo.Hp} \t ATK : {monsterinfo.Attack},");
-            }
-
-        }
+        public Player player = new Player("1", 1, 1, 1, 1, 1, 1, 1);
         public void InDungeon(Monster monster)
         {
             //전투 씬
             //enum switch -> 스킬쓸지 공격할지 방어?회피? 선택지
         }
-        public void DungeonClear(Monster monster)
-        {
-
-            CreateMonsters.Clear();
-        }
-
-        public Dictionary<int, Monster> monsterData;
-
-        public string path = "MonsterData.csv";
-        public void LoadMosters()
-        {
-            monsterData = new Dictionary<int, Monster>();
-            monsterData.Clear();
-
-            if (File.Exists(path))
-            {
-                using (StreamReader sr = new StreamReader(new FileStream(path, FileMode.Open)))
-                {
-                    sr.ReadLine();
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-
-                        string[] data = line.Split(',');
-
-                        Monster monster = new Monster(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
-                        monsterData.Add(monster.Id, monster);
-
-                    }
-                }
-            }
-        }
-
 
         void BattleMonster(int level)
         {
@@ -91,39 +35,8 @@ namespace TeamProject07.Controller
         }
 
 
-        private int CheckValidInput(int min, int max)
-        {
-            while (true)
-            {
-                string input = Console.ReadLine();
 
-                bool parseSuccess = int.TryParse(input, out var ret);
-                if (parseSuccess)
-                {
-                    if (ret >= min && ret <= max)
-                        return ret;
-                }
-
-                Console.WriteLine("잘못된 입력입니다.");
-            }
-        }
-
-        public void WinBoard(List<Monster> monster, Player player)
-        {
-            int rewardGold;
-            int rewardExp;
-            rewardGold = monster[0].Gold + monster[1].Gold + monster[2].Gold;
-            rewardExp = monster[0].RewardExp + monster[1].RewardExp + monster[2].RewardExp;
-            player.Gold += rewardGold;
-            player.LevelUpExp += rewardExp;
-            // stage++;
-        }
-        public void LoseBoard()
-        {
-            Console.WriteLine("키 입력으로  던전 입구로 돌아가기");
-        }
-
-        public Define.MainGamePhase Entrance(Player player)
+/*        public Define.MainGamePhase Entrance(Player player)
         {
             Console.Clear();
             //종욱님 그림
@@ -151,36 +64,143 @@ namespace TeamProject07.Controller
 
             }
             return choice;
-        }
-        private void battleView(Player player)
+        }*/
+
+
+        public List<Monster> CreateMonsters { get; set; }
+        public Dictionary<int, Monster> monsterData;
+
+        public void LoadMosters()
         {
-            Console.WriteLine("aaaaaaa");
-            int input = CheckValidInput(1, 3);
-            //while (!player.Isdead&&!moster.Isdead) { }
-            switch (input)
-            {
-                case 1:
-                    //공격
-                    break;
-                case 2:
-                    //스킬
-                    break;
-                case 3:
-                    //도망
-                    break;
-            }
 
-            if (player.IsDead)
-            {
-                Console.WriteLine("플레이어 사망");
-                LoseBoard();
+            string path = MonsterPath;
+            monsterData = new Dictionary<int, Monster>();
+            monsterData.Clear();
 
-            }
-            else if (CreateMonsters.Count == 0)//몹 리스트 길이 0이면
+            if (File.Exists(path))
             {
-                WinBoard(CreateMonsters, player);
+                using (StreamReader sr = new StreamReader(new FileStream(path, FileMode.Open)))
+                {
+                    sr.ReadLine();
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+
+                        string[] data = line.Split(',');
+
+                        Monster monster = new Monster(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
+                        monsterData.Add(monster.Id, monster);
+
+                    }
+                }
             }
         }
+        public void StartDungeon(int stage)
+        {
+
+            int monsternum = 0;
+            if (stage == 1) { monsternum = 4; }            //난이도
+            else if (stage == 2) { monsternum = 7; }
+
+            CreateMonsters = new List<Monster>();
+            CreateMonsters.Clear();
+            Random rand = new Random();
+            int MonsterNumber = rand.Next(3, 4);    // 3마리~4마리
+            int MonsterType;
+
+            for (int i = 0; i < MonsterNumber; i++)
+            {
+
+                MonsterType = rand.Next(monsternum, monsternum + 3);   //몬스터 데이터 보고 조정   
+                Monster monsterinfo = monsterData.ElementAt(MonsterType).Value;
+                CreateMonsters.Add(monsterinfo);
+                Console.WriteLine($"LV.{monsterinfo.Level} \t {monsterinfo.Name} \t HP : {monsterinfo.Hp} \t ATK : {monsterinfo.Attack},");
+            }
+        }
+
+        public void DungeonClear(Monster monster)
+        {
+
+            CreateMonsters.Clear();
+        }
+        public int CheckValidInput(int min, int max)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                bool parseSuccess = int.TryParse(input, out var ret);
+                if (parseSuccess)
+                {
+                    if (ret >= min && ret <= max)
+                        return ret;
+                }
+
+                Console.WriteLine("잘못된 입력입니다.");
+            }
+        }
+
+        public void PlayerPhase()
+        {
+            Console.Clear();
+            Console.WriteLine("플레이어의 차례입니다!");
+            for (int i = 0; i < CreateMonsters.Count; i++)
+            {
+                Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack},");
+            }
+            Console.WriteLine("공격할 몬스터를 선택하세요.");
+            int monsterChoice = CheckValidInput(0, CreateMonsters.Count - 1);
+            //선택된 몬스터의 글자 색이 바뀌는 코드가 추가되면 좋겠어요
+            Console.WriteLine("공격할 스킬을 선택하세요.");
+            if (CreateMonsters[monsterChoice].IsDead != false)
+            {
+
+                var skillChoice = CheckValidInput(0, player.Skills.Count - 1);
+                CreateMonsters[monsterChoice].TakeDamage(player);
+            }
+            else
+            {
+                Console.WriteLine("올바른 몬스터를 선택하십시오");
+            }
+
+        }
+
+        public void WinBoard(List<Monster> monster, Player player)
+        {
+            int rewardGold;
+            int rewardExp;
+
+            rewardGold = monster[0].Gold + monster[1].Gold + monster[2].Gold;
+            rewardExp = monster[0].RewardExp + monster[1].RewardExp + monster[2].RewardExp;
+            player.Gold += rewardGold;
+            player.LevelUpExp += rewardExp;
+            Console.WriteLine("승리하셨습니다!");
+            Console.WriteLine($"획득한 골드 : {0}", rewardGold);
+            Console.WriteLine($"획득한 경험치 : {0}", rewardExp);
+            Console.WriteLine("0.돌아가기");
+            switch (CheckValidInput(0, 0))
+            {
+                case 0
+                :
+                    //dungeonEnter();
+                    break;
+            }
+            // stage++;
+        }
+        public void LoseBoard()
+        {
+            Console.WriteLine("실패하셨습니다!");
+            Console.WriteLine("0.돌아가기");
+            switch (CheckValidInput(0, 0))
+            {
+                case 0
+                :
+                    //dungeonEnter();
+                    break;
+            }
+            Console.WriteLine("키 입력으로  던전 입구로 돌아가기");
+        }
+
         public void DungeonEntranceView()
         {
             Console.WriteLine("==================================================");

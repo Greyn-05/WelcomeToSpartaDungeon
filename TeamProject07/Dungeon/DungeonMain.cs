@@ -1,61 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Characters;
+using TeamProject07.Controller;
+using TeamProject07.Logic;
+using TeamProject07.Shop;
 using TeamProject07.Utils;
+using static TeamProject07.Utils.Define;
 
 namespace TeamProject07.Dungeon
 {
     internal class DungeonMain
     {
+        Define.MainGamePhase choicePhase = Define.MainGamePhase.temp;
+
+        DungeonEntrance Dungeon = new DungeonEntrance();
+        enum DungeonEntranceSelect
+        {
+            exit = 0,
+            EnterDungeon,
+            UseItem = 2,
+        }
+
+
         public Define.MainGamePhase Entrance(Player player)
         {
-            while(true)
+
+            while (!player.IsDead)//&& !CreateMonsters[0].IsDead
             {
-                Define.MainGamePhase choicePhase = Define.MainGamePhase.temp;
                 
+                Console.Clear();
                 DungeonEntranceView();
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
-
+                
                 int input = CheckValidInput(0, 2);
                 switch (input)
                 {
                     case 1:
+                        Console.Clear();
                         DungeonDifSelect(player);
                         break;
                     case 2:
-                        break;
-                    case 0:
                         choicePhase = Define.MainGamePhase.Main;
                         break;
 
                 }
-                if(choicePhase == Define.MainGamePhase.Main)
+/*                if(choicePhase == Define.MainGamePhase.Main)
                 {
                     break;
-                }
+                }*/
             }
             
             return Define.MainGamePhase.Main;
         }
-
+        
         private void DungeonDifSelect(Player player)
         {
             DungeonSelectView();
             Console.WriteLine();
             Console.WriteLine("입장할 던전을 선택하세요.");
-
+            Dungeon.LoadMosters();
             int input = CheckValidInput(0, 3);
             switch (input)
             {
                 case 1:
+                    Console.Clear();
+                    Dungeon.StartDungeon(input);
+
                     break;
                 case 2:
+                    Console.Clear();
+                    Dungeon.StartDungeon(input);
+
                     break;
                 case 3:
+                    Console.Clear();
+                    Dungeon.StartDungeon(input);
+
                     break;
                 case 0:
                     break;
