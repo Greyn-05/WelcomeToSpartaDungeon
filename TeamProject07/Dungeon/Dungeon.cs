@@ -103,6 +103,10 @@ namespace TeamProject07.Controller
             if (stage == 2) { monsternum = 4; }            //난이도
             else if (stage == 3) { monsternum = 7; }
 
+            /*int monsternum = 100;
+            if (stage == 2) { monsternum = 200; }            //난이도
+            else if (stage == 3) { monsternum = 300; }*/
+
             CreateMonsters = new List<Monster>();
             CreateMonsters.Clear();
             Random rand = new Random();
@@ -114,6 +118,7 @@ namespace TeamProject07.Controller
 
                 MonsterType = rand.Next(monsternum, monsternum + 3);   //몬스터 데이터 보고 조정   
                 Monster monsterinfo = monsterData.ElementAt(MonsterType).Value;
+                //Monster monsterinfo = monsterData[101];
                 CreateMonsters.Add(monsterinfo);
                 Console.WriteLine($"LV.{monsterinfo.Level} \t {monsterinfo.Name} \t HP : {monsterinfo.Hp} \t ATK : {monsterinfo.Attack},");
             }
@@ -144,47 +149,52 @@ namespace TeamProject07.Controller
         public void PlayerPhase(Player player)
         {
             Console.Clear();
-            Console.WriteLine("\n전투가 시작됩니다!!");
+            Console.WriteLine("\n전투가 시작됩니다!!\n\n");
             
             while (!player.IsDead && MonsterNumber != 0)//&& !CreateMonsters[0].IsDead
             {
                 for (int i = 0; i < CreateMonsters.Count; i++)
                 {
-                    Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack},");
+                    if (CreateMonsters[i].IsDead == true)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"{i}. {CreateMonsters[i].Name} 사망");
+                        Console.ResetColor();
+                    }
+                    else
+                        Console.WriteLine($"{i}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
                 }
-                Console.WriteLine("공격할 몬스터를 선택하세요.");
-                int monsterChoice = CheckValidInput(0, MonsterNumber);
+                Console.WriteLine("\n공격할 몬스터를 선택하세요.");
+                int monsterChoice = CheckValidInput(0, MonsterNumber-1);
                 Console.Clear();
                 //선택된 몬스터의 글자 색이 바뀌는 코드가 추가되면 좋겠어요
                 for (int i = 0; i < MonsterNumber; i++)
                 {
-                    if (monsterChoice == i + 1)
+                    if (CreateMonsters[i].IsDead == true)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                        Console.WriteLine($"{i}. {CreateMonsters[i].Name} 사망");
+                        Console.ResetColor();
+                    }
+                    else if (monsterChoice == i)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine($"{i}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
                         Console.ResetColor();
                     }
                     else
                     {
-                        Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                        Console.WriteLine($"{i}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+
                     }
+
                 }
                 Console.WriteLine("공격할 스킬을 선택하세요.");
                 int skillChoice = CheckValidInput(1, player.Skills.Count);
                 Console.Clear();
-                // int skillChoice = CheckValidInput(1, player.Skills.Count);
-                /*for (int i = 0; i < MonsterNumber; i++)
+                if (CreateMonsters[monsterChoice].IsDead == false)
                 {
-                    switch (skillChoice)
-                    {
-                        case 1:
-                            //스킬 받는피해 코드
-                            break;
-                    }
-                }*/
-                if (CreateMonsters[monsterChoice].IsDead != false)
-                {
-                    CreateMonsters[monsterChoice].TakeDamage(player, player.Skills[skillChoice - 1].Damage);
+                    CreateMonsters[monsterChoice].TakeDamage(player, player.Skills[skillChoice].Damage);
                 }
                 else
                 {

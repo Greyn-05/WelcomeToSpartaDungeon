@@ -9,7 +9,7 @@ namespace TeamProject07.Characters
     internal class Monster : Character
     {
         public int RewardExp { get; set; }
-
+        public Monster() { }
         public Monster(string myId, string myName, string myLevel, string myAttack, string myDefence, string myHp, string myGold, string myCritRate, string myMissRate, string myExp)
         {
             Id = int.Parse(myId);
