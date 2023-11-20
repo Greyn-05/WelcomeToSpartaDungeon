@@ -31,7 +31,7 @@ namespace TeamProject07.Dungeon
 
         public Define.MainGamePhase Entrance(Player player)
         {
-            Dungeon.LoadMosters();
+            Dungeon.LoadMonsters();
             while (!player.IsDead)//&& !CreateMonsters[0].IsDead
             {
                 DungeonEntranceView();

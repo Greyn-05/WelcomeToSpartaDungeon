@@ -71,7 +71,7 @@ namespace TeamProject07.Controller
         public List<Monster> CreateMonsters { get; set; }
         public Dictionary<int, Monster> monsterData;
         int MonsterNumber;
-        public void LoadMosters()
+        public void LoadMonsters()
         {
 
             string path = MonsterPath;
@@ -106,7 +106,7 @@ namespace TeamProject07.Controller
             CreateMonsters = new List<Monster>();
             CreateMonsters.Clear();
             Random rand = new Random();
-            int MonsterNumber = rand.Next(3, 4);    // 3마리~4마리
+            MonsterNumber = rand.Next(3, 4);    // 3마리~4마리
             int MonsterType;
 
             for (int i = 0; i < MonsterNumber; i++)
@@ -144,15 +144,14 @@ namespace TeamProject07.Controller
         public void PlayerPhase(Player player)
         {
             Console.Clear();
-            for (int i = 0; i < CreateMonsters.Count; i++)
-            {
-                Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack},");
-            }
+            Console.WriteLine("\n전투가 시작됩니다!!");
+            
             while (!player.IsDead && MonsterNumber != 0)//&& !CreateMonsters[0].IsDead
             {
-
-
-                Console.WriteLine("\n전투가 시작됩니다!!");
+                for (int i = 0; i < CreateMonsters.Count; i++)
+                {
+                    Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack},");
+                }
                 Console.WriteLine("공격할 몬스터를 선택하세요.");
                 int monsterChoice = CheckValidInput(0, MonsterNumber);
                 Console.Clear();
