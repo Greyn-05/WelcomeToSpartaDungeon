@@ -149,11 +149,13 @@ namespace TeamProject07.Controller
         {
             Console.Clear();
             Console.WriteLine("\n전투가 시작됩니다!!\n\n");
-            
-            while (!player.IsDead && MonsterNumber != 0)//&& !CreateMonsters[0].IsDead
+            int killMonsterNum = 0;
+            while (!player.IsDead || MonsterNumber != killMonsterNum)//&& !CreateMonsters[0].IsDead
             {
+
                 for (int i = 0; i < CreateMonsters.Count; i++)
                 {
+                     
                     if (CreateMonsters[i].IsDead == true)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -194,6 +196,10 @@ namespace TeamProject07.Controller
                 if (CreateMonsters[monsterChoice].IsDead == false)
                 {
                     CreateMonsters[monsterChoice].TakeDamage(player, player.Skills[skillChoice].Damage);
+                    if (CreateMonsters[monsterChoice].IsDead==true)
+                    {
+                        killMonsterNum++;
+                    }
                 }
                 else
                 {
