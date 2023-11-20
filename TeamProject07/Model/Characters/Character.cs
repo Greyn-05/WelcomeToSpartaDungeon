@@ -27,7 +27,7 @@ namespace TeamProject07.Characters
         public int CritRate { get; set; }
         public int MissRate { get; set; }
 
-        public void TakeDamage(Character enemy) // 매개변수 임의로 작성
+        public int TakeDamage(Character enemy) // 매개변수 임의로 작성
         {
             // 데미지 오차 랜덤
             int damageRange = (int)Math.Ceiling((double)(enemy.Attack / 10));
@@ -53,11 +53,14 @@ namespace TeamProject07.Characters
             {
                 IsDead = true;
             }
+
+            return Damage - Defence;
         }
 
         //Dead는 임시 보류
         public void Dead()
         {
+
             // TODO
         }
     }

@@ -13,7 +13,7 @@ namespace TeamProject07
     {
         static void Main(string[] args)
         {
-            Shop_Init();
+            
 
             MainLogic mainLogic = new MainLogic();
 
@@ -24,14 +24,6 @@ namespace TeamProject07
             mainLogic.End();
         }
 
-
-        static void Shop_Init()
-        {
-            ItemData.Init(); 
-            ShopData.Init();
-            Shop_Normal.Init();
-            Shop_Reseller.Init();
-        }
     
     }
 

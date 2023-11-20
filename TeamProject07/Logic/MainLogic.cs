@@ -30,7 +30,7 @@ namespace TeamProject07.Logic
        
         static public Player dummy = new Player("KIm", 1, 5, 5, 10, 10000, 50, 50);
         
-        MainGamePhase mainGamePhase = MainGamePhase.Main;
+        MainGamePhase mainGamePhase = MainGamePhase.temp;
 
         //프로그램 종료 트리거
         private bool gameEndTrigger = false;
@@ -50,7 +50,8 @@ namespace TeamProject07.Logic
 
             
             Console.ReadLine();
-            skill.LoadSkills(); //스킬정보 로드
+            Shop_Init();    // 상점 초기화 + 아이템 정보 load
+            skill.LoadSkills(); // 스킬정보 load
         }
 
         public void Game()
@@ -66,12 +67,12 @@ namespace TeamProject07.Logic
                 Console.WriteLine("0. 게임종료");
                 Console.WriteLine("\n개발자 도구");
                 Console.WriteLine("11. 스킬정보 확인");
-                Console.WriteLine("12. 아이템정보 확인");
+                Console.WriteLine("12. 모든 아이템 사기");
                 Console.WriteLine("13. 상점 정보 확인");
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-                int input = CheckValidInput(0, 11);
+                int input = CheckValidInput(0, 12);
                 switch (input)
                 {
                     case (int)MainGamePhase.Exit:
@@ -91,6 +92,9 @@ namespace TeamProject07.Logic
                         break;
                     case 11:
                         mainGamePhase = skill.ShowSkillProto();
+                        break;
+                    case 12:
+                        itemcheat();
                         break;
                 }
 
@@ -127,7 +131,7 @@ namespace TeamProject07.Logic
             }
         }
 
-        public void GameTitle()
+        private void GameTitle()
         {
             Console.WriteLine("                       __      __       .__                                ___________          ");
             Console.WriteLine("                      /  \\    /  \\ ____ |  |   ____  ____   _____   ____   \\__    ___/___   ");
@@ -141,6 +145,24 @@ namespace TeamProject07.Logic
             Console.WriteLine(" /        \\  |_> > __ \\|  | \\/|  |  / __ \\_  |    `   \\  |  /   |  \\/ /_/  >  ___(  <_> )   |  \\");
             Console.WriteLine("/_______  /   __(____  /__|   |__| (____  / /_______  /____/|___|  /\\___  / \\___  >____/|___|  /");
             Console.WriteLine("        \\/|__|       \\/                 \\/          \\/           \\//_____/      \\/           \\/");
+        }
+
+        private void itemcheat()
+        {
+            foreach(Item i in ItemData.items.Values)
+            {
+                dummy.Inven.Add(i);
+            }
+            Console.WriteLine("모든 아이템 추가 완료");
+            Thread.Sleep(200);
+        }
+
+        static void Shop_Init()
+        {
+            ItemData.Init();
+            ShopData.Init();
+            Shop_Normal.Init();
+            Shop_Reseller.Init();
         }
     }
 }
