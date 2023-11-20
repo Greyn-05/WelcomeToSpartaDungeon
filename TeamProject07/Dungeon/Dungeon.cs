@@ -121,7 +121,6 @@ namespace TeamProject07.Controller
 
         public void DungeonClear(Monster monster)
         {
-
             CreateMonsters.Clear();
         }
         public int CheckValidInput(int min, int max)

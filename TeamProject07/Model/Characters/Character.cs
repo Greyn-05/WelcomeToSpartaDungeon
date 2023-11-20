@@ -48,7 +48,14 @@ namespace TeamProject07.Characters
             }
 
             //받는 데미지에서 방어력 만큼 뺀 수치만큼 HP를 깎는다.
-            Hp -= (Damage - Defence);
+            if(Damage <= Defence)
+            {
+                Hp -= 1;
+            }
+            else
+            {
+                Hp -= (Damage - Defence);
+            }
             if (Hp <= 0)
             {
                 IsDead = true;
