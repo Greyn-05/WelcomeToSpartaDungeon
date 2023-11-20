@@ -91,7 +91,7 @@ namespace TeamProject07.Inventroy
             }
         }
 
-        static void WriteLineInParts(string text, int startX, ref int startDescriptionY)
+        static void WriteLineInParts(string text, int startX, ref int startDescriptionY) // 10글자마자 잘라서 출력
         {
             for (int i = 0; i < text.Length; i += 10)
             {
