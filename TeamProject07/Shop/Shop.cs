@@ -17,6 +17,8 @@ namespace TeamProject07.Shop
 
         public static void Open()
         {
+            catalog.Mix(); // 정렬
+
             Console.ForegroundColor = ConsoleColor.Gray;
             check = 100000000;
 
