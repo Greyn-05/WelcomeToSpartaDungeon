@@ -10,7 +10,6 @@ namespace TeamProject07.Utils
 
         public static void Init()
         {
-
             items = new Dictionary<int, Item>();
             items.Clear();
 
@@ -27,7 +26,6 @@ namespace TeamProject07.Utils
 
                         // id 	타입	  파츠	이름	설명	가격	올려지는능력	올려지는수치	내려가는능력	내려가는수치	세트이름
 
-
                         if (Define.ItemType.Equip == (Define.ItemType)(int.Parse(data[1]))) // 아이템종류 늘어나면 else if로 추가할것
                         {
                             Equipment item = new Equipment();
@@ -36,13 +34,22 @@ namespace TeamProject07.Utils
 
                             item.Part = (Define.Parts)(int.Parse(data[2]));
 
-                            item.buff = (Define.Buff)(int.Parse(data[6]));
-                            item.buffValue = (data[7] == "") ? 0 :int.Parse(data[7]);
-                         
-                            item.debuff = (Define.DeBuff)(int.Parse(data[8]));
-                            item.debuffValue = (data[9] == "") ?  0 : int.Parse(data[9]);
+                            if (data[6] != "") // 능력치 상승효과가 있다면
+                            {
+                                item.buff = (Define.Buff)(int.Parse(data[6]));
+                                item.buffValue = (data[7] == "") ? 0 : int.Parse(data[7]);
+                            }
 
-                            item.set = (Define.SetEquip)int.Parse(data[10]);
+                            if (data[8] != "") // 능력치 너프효과가 있다면
+                            {
+                                item.debuff = (Define.Buff)(int.Parse(data[8]));
+                                item.debuffValue = (data[9] == "") ? 0 : int.Parse(data[9]);
+                            }
+                             
+                            if (data[10] != "") // 세트명
+                            {
+                                item.set = (Define.SetEquip)int.Parse(data[10]);
+                            }
 
                             items.Add(item.Id, item);
                         }

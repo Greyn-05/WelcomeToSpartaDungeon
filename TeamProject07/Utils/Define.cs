@@ -22,8 +22,6 @@
             temp
         }
 
-
-
         public enum Parts
         {
             Weapon,
@@ -40,7 +38,7 @@
             DeBuff,
         }
 
-        public enum Buff // 올려준거거 하나
+        public enum Buff 
         {
             atk,
             def,
@@ -48,23 +46,13 @@
             dex,
             maxHp
         }
-        public enum DeBuff // 낮추는거 하나
-        {
-            atk,
-            def,
-            cri,
-            dex,
-            maxHp
-        }
-
 
         public enum SetEquip
         {
-            세트효과없음,
             종이세트,
+            천세트,
             나무세트,
-            철세트,
-            아다만세트
+            강철세트
         }
         public enum ItemType
         {

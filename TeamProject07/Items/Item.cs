@@ -13,10 +13,7 @@ namespace TeamProject07
         public string Name { get; set; }
         public string Info { get; set; }
         public int ItemPrice { get; set; }
-
         public bool IsEquipped { get; set; } = false;
-
-
 
 
         public void Setting(string myId, string myName, string myComment, string myPrice)
@@ -34,22 +31,7 @@ namespace TeamProject07
 
         public Define.Buff buff;
         public int buffValue;
-
-        public Define.DeBuff debuff;
+        public Define.Buff debuff;
         public int debuffValue;
     }
 }
-
-/*
- 무기
-머리
-몸
-장갑
-발
-장신구
-
-스탯
-올려준거거 하나
-낮추는거 하나
- 
- */

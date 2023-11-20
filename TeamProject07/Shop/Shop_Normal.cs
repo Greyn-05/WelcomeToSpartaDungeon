@@ -20,11 +20,11 @@ namespace TeamProject07.Shop
         {
             for (int i = 0; i < 20; i++)
             {
-                equipSale.Add(items[random.Next(0, 12)]);
+                equipSale.Add(items[random.Next(0, 24)]);
             }
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 150; i++)
             {
-                consumSale.Add(items[random.Next(12, 18)]);
+                consumSale.Add(items[random.Next(24, 30)]);
             }
         }
 
