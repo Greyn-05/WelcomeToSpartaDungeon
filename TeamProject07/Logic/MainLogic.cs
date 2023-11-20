@@ -28,7 +28,7 @@ namespace TeamProject07.Logic
         Define define = new Define();
         Skill skill = new Skill();
        
-        static public Player dummy = new Player("KIm", 1, 5, 5, 20, 10000, 50, 50);
+        static public Player dummy = new Player("KIm", 1, 5, 5, 100, 10000, 50, 50);
         
         MainGamePhase mainGamePhase = MainGamePhase.temp;
 

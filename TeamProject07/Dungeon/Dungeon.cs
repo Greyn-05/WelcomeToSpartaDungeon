@@ -106,7 +106,7 @@ namespace TeamProject07.Controller
             CreateMonsters = new List<Monster>();
             CreateMonsters.Clear();
             Random rand = new Random();
-            MonsterNumber = rand.Next(3, 4);    // 3마리~4마리
+            MonsterNumber = rand.Next(3, 5);    // 3마리~4마리
             int MonsterType;
 
             for (int i = 0; i < MonsterNumber; i++)
@@ -260,6 +260,7 @@ namespace TeamProject07.Controller
                     }
                 }
                 else {
+                    Console.Clear();
                     Console.Write($" {player.Name} 가 사망하였습니다. ");
                     player.Hp = 1;
                     Thread.Sleep(4000);
