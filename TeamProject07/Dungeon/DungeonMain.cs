@@ -45,7 +45,7 @@ namespace TeamProject07.Dungeon
                         Console.Clear();
                         DungeonDifSelect(player);
                         Console.WriteLine();
-                        Dungeon.PlayerPhase();
+                        Dungeon.PlayerPhase(player);
                         Console.WriteLine();
                         //Thread.Sleep(1000);  
 

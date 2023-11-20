@@ -27,11 +27,10 @@ namespace TeamProject07.Characters
         public int CritRate { get; set; }
         public int MissRate { get; set; }
 
-        public int TakeDamage(Character enemy) // 매개변수 임의로 작성
+        public int TakeDamage(Character enemy, int skill_damage) // 매개변수 임의로 작성
         {
             // 데미지 오차 랜덤
-            int skilldamage = 0;
-            int damageRange = (int)Math.Ceiling((double)(enemy.Attack / 10));
+            int damageRange = (int)Math.Ceiling((double)(enemy.Attack+ skill_damage / 10));
             int Damage = rand.Next(enemy.Attack - damageRange, enemy.Attack + damageRange);
 
             //1.치명타인지 아닌지 확인

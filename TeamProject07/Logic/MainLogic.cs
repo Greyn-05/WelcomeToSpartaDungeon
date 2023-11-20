@@ -51,7 +51,7 @@ namespace TeamProject07.Logic
             
             Console.ReadLine();
             Shop_Init();    // 상점 초기화 + 아이템 정보 load
-            skill.LoadSkills(); // 스킬정보 load
+            dummy.LoadSkills();
         }
 
         public void Game()
@@ -91,7 +91,7 @@ namespace TeamProject07.Logic
                         mainGamePhase = dungeon.Entrance(dummy);
                         break;
                     case 11:
-                        mainGamePhase = skill.ShowSkillProto();
+                        mainGamePhase = dummy.ShowSkillProto();
                         break;
                     case 12:
                         itemcheat();
