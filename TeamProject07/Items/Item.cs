@@ -32,7 +32,22 @@ namespace TeamProject07
         public Define.ItemType Type;
         public Define.Parts Part;
         public Define.Buff buff;
+        public Define.DeBuff debuff;
         public int point;
 
     }
 }
+
+/*
+ 무기
+머리
+몸
+장갑
+발
+장신구
+
+스탯
+올려준거거 하나
+낮추는거 하나
+ 
+ */
