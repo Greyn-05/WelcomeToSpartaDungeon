@@ -1,14 +1,17 @@
 ﻿using static TeamProject07.Utils.ShopData;
+using static TeamProject07.Utils.ItemData;
 
 namespace TeamProject07.Shop
 {
-    internal class Shop_Reseller : Shop // 되팔이하는 상점
+    static class Shop_Reseller
     {
+
+        static Random random = new Random();
 
         static public ShopInven reSellSale; // 되팔이상점
         static public List<Item> resellerInven;  // 고물상이 가진 템목록. 내가 고물상한테 판매한 템 목록, 아이템 큐로 해야하나
 
-        public static void Init()
+        static public void Init()
         {
             reSellSale = new ShopInven(ShopName.고물상);
             resellerInven = new List<Item>();
@@ -16,7 +19,7 @@ namespace TeamProject07.Shop
             ReLoad();
         }
 
-        public static void ReLoad() 
+        static public void ReLoad() 
         {
             for (int i = 0; i < resellerInven.Count; i++) // 될라나??
             {
@@ -25,17 +28,6 @@ namespace TeamProject07.Shop
                 resellerInven.Remove(resellerInven[num]);
 
             }
-        }
-        static public void Visit(ShopName nam)
-        {
-            switch (nam)
-            {
-                case ShopName.고물상:
-                    catalog = reSellSale;
-                    break;
-            }
-
-            Open();
         }
     }
 }

@@ -82,7 +82,7 @@ namespace TeamProject07
         }
 
 
-        public void Mix() // id 낮은것부터 높은 순으로 정렬 실험
+        public void Mix() // null이 중간중간에 껴있을때 오류남 수정좀
         {
             Array.Sort(slots, (a, b) =>
             {
