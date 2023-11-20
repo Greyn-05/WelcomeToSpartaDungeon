@@ -33,7 +33,7 @@ namespace TeamProject07.Dungeon
             while (!player.IsDead)//&& !CreateMonsters[0].IsDead
             {
                 
-                Console.Clear();
+
                 DungeonEntranceView();
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -44,6 +44,9 @@ namespace TeamProject07.Dungeon
                     case 1:
                         Console.Clear();
                         DungeonDifSelect(player);
+                        Dungeon.PlayerPhase();
+                        // 배틀부분반복
+                        Console.WriteLine();
                         break;
                     case 2:
                         choicePhase = Define.MainGamePhase.Main;

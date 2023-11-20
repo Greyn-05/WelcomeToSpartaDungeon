@@ -143,11 +143,12 @@ namespace TeamProject07.Controller
         public void PlayerPhase()
         {
             Console.Clear();
-            Console.WriteLine("플레이어의 차례입니다!");
+            
             for (int i = 0; i < CreateMonsters.Count; i++)
             {
                 Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack},");
             }
+            Console.WriteLine("\n\n플레이어의 차례입니다!");
             Console.WriteLine("공격할 몬스터를 선택하세요.");
             int monsterChoice = CheckValidInput(0, CreateMonsters.Count - 1);
             //선택된 몬스터의 글자 색이 바뀌는 코드가 추가되면 좋겠어요
