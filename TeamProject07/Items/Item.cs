@@ -31,10 +31,12 @@ namespace TeamProject07
 
         public Define.ItemType Type;
         public Define.Parts Part;
-        public Define.Buff buff;
-        public Define.DeBuff debuff;
-        public int point;
 
+        public Define.Buff buff;
+        public int buffValue;
+
+        public Define.DeBuff debuff;
+        public int debuffValue;
     }
 }
 

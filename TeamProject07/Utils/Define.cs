@@ -46,7 +46,7 @@
             def,
             cri,
             dex,
-            hp
+            maxHp
         }
         public enum DeBuff // 낮추는거 하나
         {
@@ -54,7 +54,7 @@
             def,
             cri,
             dex,
-            hp
+            maxHp
         }
 
 
