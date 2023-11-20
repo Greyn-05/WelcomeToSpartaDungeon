@@ -115,7 +115,7 @@ namespace TeamProject07.Controller
                 MonsterType = rand.Next(monsternum, monsternum + 3);   //몬스터 데이터 보고 조정   
                 Monster monsterinfo = monsterData.ElementAt(MonsterType).Value;
                 CreateMonsters.Add(monsterinfo);
-                Console.WriteLine($"LV.{monsterinfo.Level} \t {monsterinfo.Name} \t HP : {monsterinfo.Hp} \t ATK : {monsterinfo.Attack},");
+                //Console.WriteLine($"LV.{monsterinfo.Level} \t {monsterinfo.Name} \t HP : {monsterinfo.Hp} \t ATK : {monsterinfo.Attack},");
             }
         }
 
@@ -143,11 +143,14 @@ namespace TeamProject07.Controller
 
         public void PlayerPhase()
         {
+            Console.WriteLine("\n전투가 시작됩니다!!");
 
             while (!player.IsDead && MonsterNumber != 0)//&& !CreateMonsters[0].IsDead
             {
-
-                Console.WriteLine("\n전투가 시작됩니다!!");
+                for (int i = 0; i < MonsterNumber; i++)
+                {
+                        Console.WriteLine($"LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                }
                 Console.WriteLine("공격할 몬스터를 선택하세요.");
                 int monsterChoice = CheckValidInput(0, MonsterNumber);
                 Console.Clear();
