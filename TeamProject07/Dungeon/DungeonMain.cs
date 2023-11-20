@@ -3,32 +3,84 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamProject07.Characters;
 using TeamProject07.Utils;
 
 namespace TeamProject07.Dungeon
 {
     internal class DungeonMain
     {
-        public Define.MainGamePhase test()
+        public Define.MainGamePhase Entrance(Player player)
         {
-            Define.MainGamePhase choicePhase;
-            Console.Clear();
-            Console.WriteLine("던전입니다.");
-            Console.WriteLine("던전을 플레이할 수 있습니다.");
-            Console.WriteLine("0. 메인화면");
-            Console.WriteLine();
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            while(true)
+            {
+                Define.MainGamePhase choicePhase = Define.MainGamePhase.temp;
+                
+                DungeonEntranceView();
+                Console.WriteLine();
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            int input = CheckValidInput(0, 0);
+                int input = CheckValidInput(0, 2);
+                switch (input)
+                {
+                    case 1:
+                        DungeonDifSelect(player);
+                        break;
+                    case 2:
+                        break;
+                    case 0:
+                        choicePhase = Define.MainGamePhase.Main;
+                        break;
+
+                }
+                if(choicePhase == Define.MainGamePhase.Main)
+                {
+                    break;
+                }
+            }
+            
+            return Define.MainGamePhase.Main;
+        }
+
+        private void DungeonDifSelect(Player player)
+        {
+            DungeonSelectView();
+            Console.WriteLine();
+            Console.WriteLine("입장할 던전을 선택하세요.");
+
+            int input = CheckValidInput(0, 3);
             switch (input)
             {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
                 case 0:
-                    choicePhase = Define.MainGamePhase.Main;
+                    break;
+            }
+        }
+
+        private void UseItem(Player player)
+        {
+            Console.WriteLine("인벤토리 출력");
+            Console.WriteLine("사용할 아이템 선택");
+            Console.WriteLine("아이템 효과 보여주기??");
+
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+
+            int input = CheckValidInput(0, 2);
+            switch (input)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 0:
                     break;
 
-
             }
-            return Define.MainGamePhase.Main;
         }
 
         private int CheckValidInput(int min, int max)
@@ -47,5 +99,42 @@ namespace TeamProject07.Dungeon
                 Console.WriteLine("잘못된 입력입니다.");
             }
         }
+
+        private void DungeonEntranceView()
+        {
+            Console.Clear();
+            Console.WriteLine("==================================================");
+            Console.WriteLine("  ┏   ┓             ◆ ;");
+            Console.WriteLine(" |      |          └┼┐ == ");
+            Console.WriteLine("|        |         ┌│  ==");
+            Console.WriteLine("==================================================");
+            Console.WriteLine("======== 던전에 가기 전 준비를 해주세요. =========\n\n");
+            Console.WriteLine("==================");
+            Console.WriteLine("= 1. 던전 입장   =");
+            Console.WriteLine("= 2. 소모품 사용 =");
+            Console.WriteLine("= 0. 나가기      =");
+            Console.WriteLine("==================");
+        }
+
+        private void DungeonSelectView()
+        {
+            Console.Clear();
+            Console.WriteLine("==================================================");
+            Console.WriteLine("  ┏   ┓             ◆ ;");
+            Console.WriteLine(" |      |          └┼┐ == ");
+            Console.WriteLine("|        |         ┌│  ==");
+            Console.WriteLine("==================================================");
+            Console.WriteLine("======== 던전에 가기 전 준비를 해주세요. =========\n\n");
+            Console.WriteLine("=========================");
+            Console.WriteLine("= 1. 던전 1 (난이도 하) =");
+            Console.WriteLine("= 2. 던전 2 (난이도 중) =");
+            Console.WriteLine("= 3. 던전 3 (난이도 상) =");
+            Console.WriteLine("= 0. 나가기             =");
+            Console.WriteLine("=========================");
+        }
+
+
     }
+
+
 }

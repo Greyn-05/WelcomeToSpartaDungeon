@@ -27,8 +27,6 @@ namespace TeamProject07.Status
             Console.WriteLine("\n");
             Console.WriteLine("\n");
             Console.WriteLine("0. 메인화면");
-            Console.WriteLine("0. 메인화면");
-            Console.WriteLine("0. 메인화면");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 

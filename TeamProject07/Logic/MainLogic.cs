@@ -12,6 +12,7 @@ using TeamProject07.Dungeon;
 using TeamProject07.Inventroy;
 using TeamProject07.Skills;
 using TeamProject07.Characters;
+using TeamProject07.Controller;
 
 namespace TeamProject07.Logic
 {
@@ -27,7 +28,7 @@ namespace TeamProject07.Logic
         Define define = new Define();
         Skill skill = new Skill();
        
-       static public Player dummy = new Player("KIm", 1, 5, 5, 10, 10000, 50, 50);
+        static public Player dummy = new Player("KIm", 1, 5, 5, 10, 10000, 50, 50);
         
         MainGamePhase mainGamePhase = MainGamePhase.Main;
 
@@ -86,7 +87,7 @@ namespace TeamProject07.Logic
                         mainGamePhase = shop.test();
                         break;
                     case (int)MainGamePhase.Dungeon:
-                        mainGamePhase = dungeon.test();
+                        mainGamePhase = dungeon.Entrance(dummy);
                         break;
                     case 11:
                         mainGamePhase = skill.ShowSkillProto();

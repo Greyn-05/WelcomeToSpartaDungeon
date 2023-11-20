@@ -18,8 +18,11 @@
             Inventory,
             Shop,
             Dungeon,
-            Main
+            Main,
+            temp
         }
+
+        
 
         public enum Parts
         {

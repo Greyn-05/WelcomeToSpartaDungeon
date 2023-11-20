@@ -58,7 +58,7 @@ namespace TeamProject07.Skills
             Console.WriteLine("Load된 스킬정보");
             foreach (KeyValuePair<int, Skill> s in skillData )
             {
-                Console.WriteLine($"key : {s.Key}, ID : {s.Value.Id}, Name : {s.Value.Name},Damage : {s.Value.Damage}, MP : {s.Value.Mp}");
+                Console.WriteLine($"key : {s.Key}, ID : {s.Value.Id}, Name : {s.Value.Name}, Damage : {s.Value.Damage}, MP : {s.Value.Mp}");
             }
             Console.WriteLine("\n0. 메인화면");
             Console.WriteLine();

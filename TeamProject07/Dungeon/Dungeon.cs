@@ -6,16 +6,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TeamProject07.Characters;
+using TeamProject07.Utils;
+using static TeamProject07.Utils.Define;
 
 namespace TeamProject07.Controller
 {
-    enum Select
+    enum DungeonEntranceSelect
     {
-        exit = 1,
+
+        exit = 0,
         EnterDungeon,
-        UseItem = 3
+        UseItem = 2,
     }
-    internal class BattleController
+    internal class DungeonEntrance
     {
         public List<Monster> CreateMonsters { get; set; }
 
@@ -88,7 +91,7 @@ namespace TeamProject07.Controller
         }
 
 
-        static int CheckValidInput(int min, int max)
+        private int CheckValidInput(int min, int max)
         {
             while (true)
             {
@@ -120,35 +123,38 @@ namespace TeamProject07.Controller
             Console.WriteLine("키 입력으로  던전 입구로 돌아가기");
         }
 
-        public void dungeonEnter(Player player)
+        public Define.MainGamePhase Entrance(Player player)
         {
+            Console.Clear();
             //종욱님 그림
-            DungeonSelectView();
-
-            int firstView = (int)Select.EnterDungeon;
-            firstView = CheckValidInput(1, 3);
-            Select enumValue = (Select)firstView;
+            DungeonEntranceView();
+            Define.MainGamePhase choice = MainGamePhase.Main;
+            int firstView = (int)DungeonEntranceSelect.EnterDungeon;
+            firstView = CheckValidInput(0, 2);
+            DungeonEntranceSelect enumValue = (DungeonEntranceSelect)firstView;
 
             switch (enumValue)
             {
-                case Select.EnterDungeon:
+                case DungeonEntranceSelect.EnterDungeon:
                     battleView(player);
                     // 던전입장
                     break;
 
-                case Select.UseItem:
+                case DungeonEntranceSelect.UseItem:
                     Console.WriteLine("아이템사용 ");
                     break;
 
-                case Select.exit:
+                case DungeonEntranceSelect.exit:
+                    choice = Define.MainGamePhase.Main;
                     // 메인으로 나가기
                     break;
 
             }
+            return choice;
         }
         private void battleView(Player player)
-
         {
+            Console.WriteLine("aaaaaaa");
             int input = CheckValidInput(1, 3);
             //while (!player.Isdead&&!moster.Isdead) { }
             switch (input)
@@ -161,7 +167,6 @@ namespace TeamProject07.Controller
                     break;
                 case 3:
                     //도망
-
                     break;
             }
 
@@ -176,7 +181,7 @@ namespace TeamProject07.Controller
                 WinBoard(CreateMonsters, player);
             }
         }
-        public void DungeonSelectView()
+        public void DungeonEntranceView()
         {
             Console.WriteLine("==================================================");
             Console.WriteLine("  ┏   ┓             ◆ ;");
