@@ -68,11 +68,13 @@ namespace TeamProject07.Logic
                 Console.WriteLine("\n개발자 도구");
                 Console.WriteLine("11. 스킬정보 확인");
                 Console.WriteLine("12. 모든 아이템 사기");
-                Console.WriteLine("13. 상점 정보 확인");
+                Console.WriteLine("13. 플레이어 공격력 1000000");
+                Console.WriteLine("14. 플레이어 치명차 확률 100%");
+                Console.WriteLine("15. 플레이어 회피 확률 100%");
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-                int input = CheckValidInput(0, 12);
+                int input = CheckValidInput(0, 15);
                 switch (input)
                 {
                     case (int)MainGamePhase.Exit:
@@ -95,6 +97,15 @@ namespace TeamProject07.Logic
                         break;
                     case 12:
                         itemcheat();
+                        break;
+                    case 13:
+                        AttackCheat();
+                        break;
+                    case 14:
+                        CritCheat();
+                        break;
+                    case 15:
+                        MissCheat();
                         break;
                 }
 
@@ -147,22 +158,44 @@ namespace TeamProject07.Logic
             Console.WriteLine("        \\/|__|       \\/                 \\/          \\/           \\//_____/      \\/           \\/");
         }
 
-        private void itemcheat()
-        {
-            foreach(Item i in ItemData.items.Values)
-            {
-                dummy.Inven.Add(i);
-            }
-            Console.WriteLine("모든 아이템 추가 완료");
-            Thread.Sleep(200);
-        }
-
         static void Shop_Init()
         {
             ItemData.Init();
             ShopData.Init();
             Shop_Normal.Init();
             Shop_Reseller.Init();
+        }
+
+        //치트, 나중에 삭제
+        private void itemcheat()
+        {
+            foreach (Item i in ItemData.items.Values)
+            {
+                dummy.Inven.Add(i);
+            }
+            Console.WriteLine("모든 아이템 추가 완료");
+            Thread.Sleep(300);
+        }
+
+        private void AttackCheat()
+        {
+            dummy.Attack = 1000000;
+            Console.WriteLine("공격력 재조정 완료");
+            Thread.Sleep(300);
+        }
+
+        private void CritCheat()
+        {
+            dummy.CritRate = 100;
+            Console.WriteLine("치명타 확률 재조정 완료");
+            Thread.Sleep(300);
+        }
+
+        private void MissCheat()
+        {
+            dummy.MissRate = 100;
+            Console.WriteLine("회피 확률 재조정 재조정 완료");
+            Thread.Sleep(300);
         }
     }
 }
