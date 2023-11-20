@@ -30,6 +30,7 @@ namespace TeamProject07.Characters
         public void TakeDamage(Character enemy) // 매개변수 임의로 작성
         {
             // 데미지 오차 랜덤
+            int skilldamage = 0;
             int damageRange = (int)Math.Ceiling((double)(enemy.Attack / 10));
             int Damage = rand.Next(enemy.Attack - damageRange, enemy.Attack + damageRange);
 

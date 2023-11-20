@@ -11,6 +11,8 @@ using TeamProject07.Logic;
 using TeamProject07.Shop;
 using TeamProject07.Utils;
 using static TeamProject07.Utils.Define;
+using TeamProject07.Skills;
+using System.Threading;
 
 namespace TeamProject07.Dungeon
 {
@@ -29,11 +31,9 @@ namespace TeamProject07.Dungeon
 
         public Define.MainGamePhase Entrance(Player player)
         {
-
+            Dungeon.LoadMosters();
             while (!player.IsDead)//&& !CreateMonsters[0].IsDead
             {
-                
-
                 DungeonEntranceView();
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -44,8 +44,12 @@ namespace TeamProject07.Dungeon
                     case 1:
                         Console.Clear();
                         DungeonDifSelect(player);
+                        Console.WriteLine();
                         Dungeon.PlayerPhase();
-                        // 배틀부분반복
+                        Console.WriteLine();
+                        //Thread.Sleep(1000);  
+
+
                         Console.WriteLine();
                         break;
                     case 2:
@@ -67,7 +71,7 @@ namespace TeamProject07.Dungeon
             DungeonSelectView();
             Console.WriteLine();
             Console.WriteLine("입장할 던전을 선택하세요.");
-            Dungeon.LoadMosters();
+            
             int input = CheckValidInput(0, 3);
             switch (input)
             {

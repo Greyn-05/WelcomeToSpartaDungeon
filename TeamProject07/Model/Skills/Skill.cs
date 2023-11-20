@@ -15,13 +15,15 @@ namespace TeamProject07.Skills
         public string Name { get; set; }
         public int Damage { get; set; }
         public int Mp { get; set; }
-        /*public Skill(string myId, string myName, string myDamage, string myMp)
+
+        /* public Skill(string myId, string myName, string myDamage, string myMp)
         {
             Id = int.Parse(myId);
             Name = myName;
             Damage = int.Parse(myDamage);
             Mp = int.Parse(myMp);
         }*/
+
         public void LoadSkills()
         {
             skillData = new Dictionary<int, Skill>();
