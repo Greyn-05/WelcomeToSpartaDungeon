@@ -43,7 +43,14 @@ namespace TeamProject07.Inventroy
             InvenDraw();
 
             int selectedItemIndex = ItemListPage(player);
-            ItemDescription(player, selectedItemIndex);
+            if(selectedItemIndex == 0)
+            {
+                return Define.MainGamePhase.Main;
+            }
+            else
+            {
+                ItemDescription(player, selectedItemIndex);
+            }
 
             return Define.MainGamePhase.Main;
         }

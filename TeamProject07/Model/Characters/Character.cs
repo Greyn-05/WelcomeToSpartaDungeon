@@ -64,6 +64,20 @@ namespace TeamProject07.Characters
             return Damage - Defence;
         }
 
+        public int Heal(int healVal)
+        {
+            if((Hp+healVal) >= MaxHp)
+            {
+                int temp = MaxHp - Hp;
+                Hp = MaxHp;
+                return temp;
+            }
+            else
+            {
+                Hp += healVal;
+                return healVal;
+            }
+        }
         //Dead는 임시 보류
         public void Dead()
         {
