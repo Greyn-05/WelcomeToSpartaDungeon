@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,8 +28,8 @@ namespace TeamProject07.Inventroy
                 Console.Write("|");
             }
 
-            Console.SetCursorPosition(1, 3);
-            Console.Write("0. 돌아가기"); // 돌아가기 - (1, 3)
+           // Console.SetCursorPosition(1, 3);
+           // Console.Write("0. 돌아가기"); // 돌아가기 - (1, 3)
             Console.SetCursorPosition(15, 4);
             Console.WriteLine("[아이템 목록]"); // [아이템 목록] - (15, 4)
             Console.SetCursorPosition(75, 4);
@@ -42,69 +43,101 @@ namespace TeamProject07.Inventroy
 
             InvenDraw();
 
+            // Keyboard.KeyDown();
+
+            //var key = Console.ReadKey(true);
+
+            //if (key.Key == ConsoleKey.Escape)
+            //{
+            //    return Define.MainGamePhase.Main;
+            //}
+
             int selectedItemIndex = ItemListPage(player);
-            ItemDescription(player, selectedItemIndex);
+
+            if (selectedItemIndex >= 0)
+            {
+                ItemDescription(player, selectedItemIndex);
+            }
 
             return Define.MainGamePhase.Main;
         }
 
         static int ItemListPage(Player player)
         {
-            int currentPage = 0;
-            int itemsPerPage = 10;
-            int totalPages = (player.Inven.Count + itemsPerPage - 1) / itemsPerPage;
+            int currentPage = 0;   // 지금 페이지
+            int itemsPerPage = 10; // 페이지당 아이템 갯수
+            int totalPages = (player.Inven.Count + itemsPerPage - 1) / itemsPerPage; // 전체 페이지
+            int selectedItemIndex = 0; // 선택한 아이템
+
 
             while (true)
             {
-                Console.Clear();
+
                 InvenDraw();
+
+                // 페이지 아이템 범위
                 int startPage = currentPage * itemsPerPage;
                 int endPage = Math.Min((currentPage + 1) * itemsPerPage, player.Inven.Count);
 
+                Console.SetCursorPosition(16, 5);
+                Console.WriteLine("페이지: " + (currentPage + 1) + "/" + totalPages);
+
+                // 아이템 목록
                 for (int i = startPage; i < endPage; i++)
                 {
                     Item item = player.Inven[i];
                     string equipSign = item.IsEquipped ? "[E]" : "";
                     string pageList = $"[{i + 1}] {equipSign} {item.Name}";
 
+                    int lineIndex = 0;
+
                     for (int j = 0; j < pageList.Length; j += 30)
                     {
                         string substring = pageList.Substring(j, Math.Min(30, pageList.Length - j));
-                        Console.SetCursorPosition(12, 7 + (i - startPage) * 2 + j / 30);
-                        Console.WriteLine(substring);
-                    }
-                }
+                        int itemY = 7 + (i - startPage) * 2 + lineIndex;
 
-                Console.SetCursorPosition(8, 28);
-                Console.WriteLine("[이전 페이지는 A, 다음 페이지는 D]");
-                Console.SetCursorPosition(16, 5);
-                Console.WriteLine("페이지: " + (currentPage + 1) + "/" + totalPages);
-
-                string nextPage = Console.ReadLine().ToUpper();
-                if (nextPage == "A" && currentPage > 0)
-                {
-                    currentPage--;
-                }
-                else if (nextPage == "D" && currentPage < totalPages - 1)
-                {
-                    currentPage++;
-                }
-                else
-                {
-                    if (int.TryParse(nextPage, out var selectedIndex))
-                    {
-                        if (selectedIndex > 0 && selectedIndex <= player.Inven.Count)
+                        if (selectedItemIndex == i - startPage)
                         {
-                            return selectedIndex - 1;
+                            Console.ForegroundColor = ConsoleColor.Green; // 선택한 아이템 초록색으로
                         }
+
+                        Console.SetCursorPosition(12, itemY);
+                        Console.WriteLine(substring);
+
+                        Console.ResetColor();
+                        lineIndex++;
                     }
+                }
+
+                var key = Keyboard.KeyDown();
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selectedItemIndex = Math.Max(0, selectedItemIndex - 1);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedItemIndex = Math.Min(itemsPerPage - 1, selectedItemIndex + 1);
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        if (currentPage > 0) currentPage--;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (currentPage < totalPages - 1) currentPage++;
+                        break;
+                    case ConsoleKey.Enter:
+                        return currentPage * itemsPerPage + selectedItemIndex;
+                    case ConsoleKey.Escape:
+                        return -1;
                 }
             }
         }
 
         static void ItemDescription(Player player, int selectedItemIndex)
         {
-            int startDescriptionY = 6;
+            InvenDraw();
+
+            int startDescriptionY = 6; // 첫 출력 좌표 y = 6
+            int option = 0;  // 0은 장착 또ㅓ는 사용 1은 해제
 
             if (selectedItemIndex >= 0 && selectedItemIndex < player.Inven.Count)
             {
@@ -119,18 +152,51 @@ namespace TeamProject07.Inventroy
                 WriteLineInParts("세트 이름", 75, ref startDescriptionY); //세트 이름 // .set 없음 수정
                 WriteLineInParts($"{selectedItem.ItemPrice}", 75, ref startDescriptionY); //가격
 
-                Console.SetCursorPosition(75, startDescriptionY++);
-                Console.WriteLine("1. 장착/해제");
-                Console.WriteLine("0. 뒤로 가기");
-
-                int input = CheckValidInput(0, 1);
-
-                if (input == 1)
+                while (true)
                 {
-                    selectedItem.IsEquipped = !selectedItem.IsEquipped;
                     Console.SetCursorPosition(75, startDescriptionY);
-                    Console.WriteLine($"{selectedItem.Name} {(selectedItem.IsEquipped ? "장착 완료!" : "해제 완료!")}");
-                    Console.ReadKey();
+                    SelectOption("장착/사용", option == 0);
+
+                    Console.SetCursorPosition(75, startDescriptionY + 1);
+                    SelectOption("해제", option == 1);
+
+                    Console.SetCursorPosition(75, startDescriptionY + 2);
+                    SelectOption("취소", option == 2);
+
+                    var key = Console.ReadKey(true);
+
+                    switch (key.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            option = option > 0 ? option - 1 : 2;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            option = option < 2 ? option + 1 : 0;
+                            break;
+                        case ConsoleKey.Enter:
+                            if (option == 0)
+                            {
+                                selectedItem.IsEquipped = !selectedItem.IsEquipped;
+                                Console.SetCursorPosition(75, startDescriptionY);
+                                Console.WriteLine($"{selectedItem.Name} {(selectedItem.IsEquipped ? "장착 완료!" : "")}"); // 사용하기 추가 예정
+                                Console.ReadKey();
+                                return;
+                            }
+                            else if (option == 1)
+                            {
+                                selectedItem.IsEquipped = selectedItem.IsEquipped;
+                                Console.SetCursorPosition(75, startDescriptionY);
+                                Console.WriteLine($"{selectedItem.Name} {(selectedItem.IsEquipped ? "해제 완료!" : "")}"); // 해제 옵션이랑 장착해제 스탯 다 만들어야함..
+                                Console.ReadKey();
+                                return;
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        case ConsoleKey.Escape:
+                            return;
+                    }
                 }
             }
             else
@@ -140,7 +206,7 @@ namespace TeamProject07.Inventroy
             }
         }
 
-        static void WriteLineInParts(string text, int startX, ref int startDescriptionY) // 10글자마자 잘라서 출력
+        static void WriteLineInParts(string text, int startX, ref int startDescriptionY) // 30글자마자 잘라서 출력
         {
             for (int i = 0; i < text.Length; i += 30)
             {
@@ -150,22 +216,15 @@ namespace TeamProject07.Inventroy
             }
         }
 
-        private static int CheckValidInput(int min, int max)
+        static void SelectOption(string text, bool isSelected)
         {
-            while (true)
+            if (isSelected)
             {
-                string input = Console.ReadLine();
-
-                bool parseSuccess = int.TryParse(input, out var ret);
-
-                if (parseSuccess)
-                {
-                    if (ret >= min && ret <= max)
-                        return ret;
-                }
-
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.ForegroundColor = ConsoleColor.Green;
             }
+
+            Console.WriteLine(text);
+            Console.ResetColor();
         }
     }
 }
