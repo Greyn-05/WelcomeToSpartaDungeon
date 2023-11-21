@@ -15,6 +15,8 @@ namespace TeamProject07.Characters
         public string Class { get; set; }
         public int LevelUpExp { get; set; }
         public int Mp { get; set; }
+
+        public int MaxMp;
         public Dictionary<int, Skill> Skills;
 
         public Player() { 
@@ -27,6 +29,7 @@ namespace TeamProject07.Characters
             Hp = hp;
             MaxHp = hp;
             Mp = mp;
+            MaxMp = mp;
             Gold = gold;
             CritRate = critRate;
             MissRate = missRate;

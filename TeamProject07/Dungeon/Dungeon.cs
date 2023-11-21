@@ -401,7 +401,8 @@ namespace TeamProject07.Controller
                 UpHp = player.Level * 10;
                 UpDefence = player.Level * 1;
                 UpAttack =  player.Level * 2;
-                player.Hp += UpHp;
+                player.MaxHp += UpHp;
+                player.Hp = player.MaxHp;
                 player.Defence += UpDefence;
                 player.Attack += UpAttack;
 

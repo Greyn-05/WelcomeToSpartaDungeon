@@ -13,6 +13,8 @@ namespace TeamProject07
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(120, 40);
+
             MainLogic mainLogic = new MainLogic();
 
             mainLogic.Start();

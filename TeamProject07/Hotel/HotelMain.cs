@@ -77,10 +77,12 @@ namespace TeamProject07.Hotel
                         if(player.Gold < 100)
                         {
                             Console.WriteLine("Gold가 부족합니다.");
+                            Thread.Sleep(400);
                         }
                         else
                         {
                             Console.WriteLine("이미 체력이 충분합니다.");
+                            Thread.Sleep(400);
                         }
                     }
                     else
