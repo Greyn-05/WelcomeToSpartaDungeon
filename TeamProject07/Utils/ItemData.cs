@@ -60,7 +60,6 @@ namespace TeamProject07.Utils
                             item.Type = (Define.ItemType)(int.Parse(data[1]));
                             item.buffValue = int.Parse(data[7]);
 
-
                             items.Add(item.Id, item);
                         }
                     }

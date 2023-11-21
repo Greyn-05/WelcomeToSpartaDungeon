@@ -9,7 +9,6 @@ namespace TeamProject07.Hotel
 {
     internal class JsonSave
     {
-        // 장착중인템 상태 저장 불러오기 미구현
 
 
 
@@ -38,11 +37,17 @@ namespace TeamProject07.Hotel
                     new JProperty("Defence", MainLogic.dummy.Defence),
                     new JProperty("Hp", MainLogic.dummy.Hp),
                     new JProperty("MaxHp", MainLogic.dummy.MaxHp),
+                    new JProperty("MaxHp", MainLogic.dummy.Mp),
+                    new JProperty("MaxHp", MainLogic.dummy.MaxMp),
                     new JProperty("Gold", MainLogic.dummy.Gold),
                     new JProperty("CritRate", MainLogic.dummy.CritRate),
                     new JProperty("MissRate", MainLogic.dummy.MissRate),
                     new JProperty("LevelUpExp", MainLogic.dummy.LevelUpExp),
                     new JProperty("Inven", inv)
+
+                // 장착중인템  저장
+
+
                 );
 
             File.WriteAllText(path, characterData.ToString());
@@ -50,9 +55,9 @@ namespace TeamProject07.Hotel
         }
 
 
-        public static void Load() 
+        public static void Load()
         {
-            if (File.Exists(path)) 
+            if (File.Exists(path))
             {
                 using (StreamReader file = File.OpenText(path))
                 {
@@ -67,6 +72,10 @@ namespace TeamProject07.Hotel
                         MainLogic.dummy.Defence = (int)json["Defence"];
                         MainLogic.dummy.Hp = (int)json["Hp"];
                         MainLogic.dummy.MaxHp = (int)json["MaxHp"];
+                        MainLogic.dummy.Mp = (int)json["Mp"];
+                        MainLogic.dummy.MaxMp = (int)json["MaxMp"];
+
+
                         MainLogic.dummy.Gold = (int)json["Gold"];
                         MainLogic.dummy.CritRate = (int)json["CritRate"];
                         MainLogic.dummy.MissRate = (int)json["MissRate"];
@@ -77,6 +86,9 @@ namespace TeamProject07.Hotel
 
                         for (int i = 0; i < inven.Length; i++)
                             MainLogic.dummy.Inven.Add(Utils.ItemData.items[int.Parse(inven[i])]);
+
+
+                        // 장착중인템 반영
 
                     }
                 }
