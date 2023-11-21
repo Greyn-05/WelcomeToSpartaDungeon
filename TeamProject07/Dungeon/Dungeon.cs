@@ -312,7 +312,12 @@ namespace TeamProject07.Controller
                     
                     
                 }
-                
+                else if (CreateMonsters[i].Name == "드래곤")
+                {
+
+
+                }
+
                 Console.Clear();
                 if (CreateMonsters[i].Name == "슬라임")
                 {
@@ -333,6 +338,11 @@ namespace TeamProject07.Controller
                 else if (CreateMonsters[i].Name == " 골램 ")
                 {
                    
+                }
+                else if (CreateMonsters[i].Name == "드래곤")
+                {
+
+
                 }
 
                 Console.Clear();
