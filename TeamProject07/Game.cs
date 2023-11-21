@@ -13,8 +13,6 @@ namespace TeamProject07
     {
         static void Main(string[] args)
         {
-
-
             MainLogic mainLogic = new MainLogic();
 
             mainLogic.Start();
@@ -22,6 +20,7 @@ namespace TeamProject07
             mainLogic.Game();
 
             mainLogic.End();
+
         }
     }
 }
