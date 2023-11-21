@@ -42,7 +42,7 @@ namespace TeamProject07.Dungeon
                 {
                     case 0:
                     Dungeon.Run();
-                    Thread.Sleep(2000);
+                    Thread.Sleep(700);
                     choicePhase = Define.MainGamePhase.Main;
                     break;
                     case 1:
@@ -75,30 +75,25 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("입장할 던전을 선택하세요.");
             
             int input = CheckValidInput(0, 4);
+            Console.Clear();
             switch (input)
             {
                 case 0:
                     choicePhase = Define.MainGamePhase.Main;
                     Dungeon.Run();
-                    Thread.Sleep(2000);
+                    Thread.Sleep(700);
                     Console.Clear();
                     break;
                 case 1:
-                    Console.Clear();
                     Dungeon.StartDungeon(input);
-
                     break;
                 case 2:
-                    Console.Clear();
                     Dungeon.StartDungeon(input);
-
                     break;
                 case 3:
-                    Console.Clear();
                     Dungeon.StartDungeon(input);
                     break;
                 case 4:
-                    Console.Clear();
                     Dungeon.StartDungeon(input);
                     break;
             }
