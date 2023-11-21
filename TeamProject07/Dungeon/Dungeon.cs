@@ -34,39 +34,6 @@ namespace TeamProject07.Controller
 
         }
 
-
-
-/*        public Define.MainGamePhase Entrance(Player player)
-        {
-            Console.Clear();
-            //종욱님 그림
-            DungeonEntranceView();
-            Define.MainGamePhase choice = MainGamePhase.Main;
-            int firstView = (int)DungeonEntranceSelect.EnterDungeon;
-            firstView = CheckValidInput(0, 2);
-            DungeonEntranceSelect enumValue = (DungeonEntranceSelect)firstView;
-
-            switch (enumValue)
-            {
-                case DungeonEntranceSelect.EnterDungeon:
-                    battleView(player);
-                    // 던전입장
-                    break;
-
-                case DungeonEntranceSelect.UseItem:
-                    Console.WriteLine("아이템사용 ");
-                    break;
-
-                case DungeonEntranceSelect.exit:
-                    choice = Define.MainGamePhase.Main;
-                    // 메인으로 나가기
-                    break;
-
-            }
-            return choice;
-        }*/
-
-
         public List<Monster> CreateMonsters { get; set; }
         public Dictionary<int, Monster> monsterData;
         int MonsterNumber;
@@ -166,9 +133,7 @@ namespace TeamProject07.Controller
                      
                     if (CreateMonsters[i].IsDead == true)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"{i}. {CreateMonsters[i].Name} 사망");
-                        Console.ResetColor();
+                        RedText($"{CreateMonsters[i].Name} 사망");
                     }
                     else
                         Console.WriteLine($"{i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
@@ -189,15 +154,11 @@ namespace TeamProject07.Controller
                 {
                     if (CreateMonsters[i].IsDead == true)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"{i+1}. {CreateMonsters[i].Name} 사망");
-                        Console.ResetColor();
+                        RedText($"{i + 1}. {CreateMonsters[i].Name} 사망");
                     }
                     else if (monsterChoice == i+1)
                     {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine($"{i+1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
-                        Console.ResetColor();
+                        Bluetext($"{i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
                     }
                     else
                     {
@@ -207,27 +168,32 @@ namespace TeamProject07.Controller
 
                 }
                 Console.WriteLine("\n공격할 스킬을 선택하세요.\n");
-                Console.WriteLine($"번호 \t이름\t데미지");
+                Console.WriteLine($"\n\t   {player.Name} 체력 :{player.Hp} 마나 : {player.Mp}\n");
+                Console.WriteLine($"번호 \t이름\t기본데미지\t소모MP");
                 for (int i = 1; i <= player.Skills.Count; i++) { 
                 
-                Console.WriteLine($"{i}. \t{player.Skills[i].Name} \t{player.Skills[i].Damage}");
+                Console.WriteLine($"{i}. \t{player.Skills[i].Name} \t{player.Skills[i].Damage}          \t{player.Skills[i].Mp}");
 
                 }
                 int skillChoice = CheckValidInput(1, player.Skills.Count);
                 Console.Clear();
+                if(player.Mp <player.Skills[skillChoice].Mp) 
+                {
+                    Console.WriteLine("MP가 부족합니다. 평타로 공격합니다.");
+                    Thread.Sleep(1500);
+                    skillChoice = 1;
+                }
                 Console.WriteLine($"\n\t   {player.Name} 체력 :{player.Hp} \n");
                 if (CreateMonsters[monsterChoice-1].IsDead == false)
                 {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write($"\n{player.Name} "); Console.ResetColor(); Console.Write("가 공격합니다. ");
+                    player.Mp -= player.Skills[skillChoice].Mp;
+                    BluetextNo($"\n{player.Name} "); Console.Write("가 공격합니다. ");
                     int damageValue =CreateMonsters[monsterChoice - 1].TakeDamage(player, player.Skills[skillChoice].Damage);
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write($"\n{CreateMonsters[monsterChoice -1].Name} "); Console.ResetColor(); Console.Write("가 ");
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write($" {player.Name} "); Console.ResetColor(); Console.Write("에게");
+                    RedTextNo($"\n{CreateMonsters[monsterChoice - 1].Name} "); Console.Write("가 ");
+
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write($" {damageValue} "); Console.ResetColor(); Console.Write($"의 피해를 받았습니다!\n\n");
-                    Thread.Sleep(400);
+                    Thread.Sleep(1700);
                     Console.Clear();
                     if (CreateMonsters[monsterChoice-1].IsDead==true)
                     {
@@ -246,14 +212,36 @@ namespace TeamProject07.Controller
                 }
                 monsterPhase(player);
             }
-            
 
+            
         }
 
-        public void monsterPhase(Player player)
+        public void RedText(String s) {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{s}"); 
+            Console.ResetColor();
+        }
+        public void RedTextNo(String s)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write($"\n몬스터 "); Console.ResetColor(); Console.Write("가 공격합니다. ");
+            Console.Write($"{s}");
+            Console.ResetColor();
+        }
+        public void Bluetext(String s)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"{s}");
+            Console.ResetColor();
+        }
+        public void BluetextNo(String s)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write($"{s}");
+            Console.ResetColor();
+        }
+        public void monsterPhase(Player player)
+        {
+            RedTextNo($"\n몬스터 "); Console.Write("가 공격합니다. ");
             for (int i = 0; i < CreateMonsters.Count; i++)
             {
                 if (!player.IsDead)
@@ -261,27 +249,26 @@ namespace TeamProject07.Controller
                     if (!CreateMonsters[i].IsDead)
                     {
                         int damageValue = player.TakeDamage(CreateMonsters[i], 0);
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.Write($"\n{player.Name} "); Console.ResetColor(); Console.Write("이/가");
-
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write($" {CreateMonsters[i].Name} "); Console.ResetColor(); Console.Write("에게");
+                        BluetextNo($"\n{player.Name} "); Console.Write("이/가");
+                        RedTextNo($" {CreateMonsters[i].Name} "); Console.Write("에게");
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write($" {damageValue} "); Console.ResetColor(); Console.WriteLine($"의 피해를 받았습니다!\n\n");
 
                         Console.WriteLine($"\t   {player.Name} 체력 :{player.Hp} \n");
-                        Thread.Sleep(3000);
-                        
+                        Thread.Sleep(300);
+
                     }
                 }
-                else {
+                if (player.IsDead)
+                {
                     Console.Clear();
-                    Console.Write($" {player.Name} 가 사망하였습니다. ");
+                    Console.Write($" {player.Name} 가 치명상을 입었습니다. 휴식이 필요합니다. ");
                     //비석 그림
-                    Thread.Sleep(400);
+                    Thread.Sleep(1000);
                     break;
                 }
             }
+            Thread.Sleep(500);
             Console.Clear();
 
         }
@@ -289,11 +276,19 @@ namespace TeamProject07.Controller
         public void FirstStageMonsterView()
         {
             if ( CreateMonsters == null ) { return; }
+            
+                viewMonster();
+                viewMonster();
+            
+        }
+
+        private void viewMonster()
+        {
             for (int i = 0; i < CreateMonsters.Count; i++)
             {
                 if (CreateMonsters[i].Name == "슬라임")
                 {
-                    Console.WriteLine("\t강한 몬스터가 등장했습니다.");
+                    RedText("\t강한 몬스터가 등장합니다.");
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("                                                  \r\n                                                  \r\n                                                  \r\n                                                  \r\n                                          +#***   \r\n                                         +#+++*%  \r\n                       ..=@@@@@@..       +#+++*%  \r\n                       @%        =@:.....+-       \r\n   :   :.              %                :+.=-     \r\n  +-+:+:-            .%@@@+.          ..=@:#+..   \r\n   +. +.          ..*++++++%@:.       ::::.::::   \r\n  -:=% +.       -@%+++++++++++*@*     @@@@:#@@@   \r\n             .@*+++++++++++++++++#+.    -@:#=     \r\n           :#*+++++++++++++++++++++%+             \r\n         :**+##+++++++++++++++++%%+++@.           \r\n         #*+++#@#++++++++++++%%@*++++*@           \r\n         %++++++#@#+++++++#@**+++++++++#          \r\n       .@++++++++++++++++++++++++++++++#          \r\n       .%*+++++++++***%*++++++++++++++*#          \r\n         #*+++++**##+++*%%**+++++++++*#           \r\n          :##*++++++++++++++++++++*##*.           \r\n             =###################*-               \r\n                                                  ");
                     Console.ResetColor();
@@ -301,27 +296,41 @@ namespace TeamProject07.Controller
                 }
                 else if (CreateMonsters[i].Name == "고스트")
                 {
-                    Console.WriteLine("\t강한 몬스터가 등장했습니다.");
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("                                                  \r\n                                                  \r\n                                                  \r\n                                                  \r\n                                          +#***   \r\n                                         +#+++*%  \r\n                       ..=@@@@@@..       +#+++*%  \r\n                       @%        =@:.....+-       \r\n   :   :.              %                :+.=-     \r\n  +-+:+:-            .%@@@+.          ..=@:#+..   \r\n   +. +.          ..*++++++%@:.       ::::.::::   \r\n  -:=% +.       -@%+++++++++++*@*     @@@@:#@@@   \r\n             .@*+++++++++++++++++#+.    -@:#=     \r\n           :#*+++++++++++++++++++++%+             \r\n         :**+##+++++++++++++++++%%+++@.           \r\n         #*+++#@#++++++++++++%%@*++++*@           \r\n         %++++++#@#+++++++#@**+++++++++#          \r\n       .@++++++++++++++++++++++++++++++#          \r\n       .%*+++++++++***%*++++++++++++++*#          \r\n         #*+++++**##+++*%%**+++++++++*#           \r\n          :##*++++++++++++++++++++*##*.           \r\n             =###################*-               \r\n                                                  ");
+                    Console.WriteLine("\t강한 몬스터가 등장합니다.");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("       .=-                                \r\n      :=%                                 \r\n     .-=##                                \r\n   :=+-==.                                \r\n   *--==.                                 \r\n .-#---+.                                 \r\n.+=-=+-+:       ..:=--:..                 \r\n.*++..++#     .:=+:.  .+++..              \r\n.+=+*%===    .*-.*%*:  ..:*:              \r\n  -****:   .=*.%@@@@- +@@*.+.             \r\n          .=- :@@@@+  *@@@=.%.       .:.  \r\n          =:     ..***:.*#:.==       -*.  \r\n         -=    .=%@@@@@.    .*      .*=+- \r\n        .+-    .=#@@%@@.    .*     =+-+=  \r\n        -+            ..    .*    .:*-+:  \r\n       -:                   .*    -+--=+. \r\n      :=.                   .*    :=--+=  \r\n     .=+.                   .*   .*=***++:\r\n     :+.                    .*   .+=+=++=.\r\n    -=                      .*    .:---.  \r\n   :#:                      .*            \r\n   -* ..-%=-:.              .*            \r\n   +#===. ..+.              .*            \r\n            .#+   .*#*=*=   .*            \r\n              .=++.     .+=..*            \r\n                         .=++=            ");
                     Console.ResetColor();
                     Thread.Sleep(400);
                 }
-                else if (CreateMonsters[i].Name == " 골램 ")
+                else if (CreateMonsters[i].Name == " 골램  ")
                 {
-                    
-                    
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\t강한 몬스터가 등장합니다.");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("                                          \r\n                                          \r\n                                          \r\n              ..............              \r\n          .:==+************@=+.           \r\n        ..=%*----++++++++----#*=.         \r\n       .:##---*@*--------*@*---##         \r\n       :*#=--=%------------@---=#:        \r\n       :*+----%%----------=@----+*        \r\n       :*%=----%%=------=%------+*        \r\n        :*+------=%%%%%%%=-----=#         \r\n         :*=-------------------@*         \r\n          :#=-----------------@%          \r\n        .:#@@@%-------------@@@%.         \r\n       :*@@%-----+@@@@@@@@#***@@@*        \r\n     :*%+=#=-------+%*********#%-*@+      \r\n   .+%+-=%@@@@@@@@@@@@@@@@@@@@@@#-+@@-    \r\n  .+*=#@%#*****#@+++++++++@-----+@#--#-   \r\n .+#---=##*****#@+++++++++@-----+#---=%:  \r\n .+*--=#%##%+++++++++#%*******#@*#*---#:  \r\n +@%#+=##*#%---------*#+++++++*@+##--*%@: \r\n +*-=+*##*#%---------*#+++++++*@+#%#*+-%: \r\n-*=---=#*+++*@*******##%%########%#----+*.\r\n:==+####+---=%+++++++++%#********#%###+==.\r\n  ....:*#####@%%%%%%%%%@%%%%%%%%%@*....   \r\n      :*#++++++++*#----------@+++#*       \r\n      :**++++++++*#----------@+++#*       \r\n      .=+++++++++++++++++++++*++++-       ");
+                    Console.ResetColor();
+                    Thread.Sleep(400);
+
                 }
                 else if (CreateMonsters[i].Name == "드래곤")
                 {
-
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30);
+                    Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30); Console.WriteLine("\t보스(드래곤) 출현"); Thread.Sleep(30);
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("                                                  \r\n                                                  \r\n                         @@     @@                \r\n                    @   @@      @##%              \r\n                  %@%%%@%@   @%##%@@              \r\n                 %*## @ @@%@%#*%%@      @@        \r\n               %#%**%     %*#*%#%@     #%         \r\n             ##%#*#%*    ******%%@    %*#%        \r\n          %##%%**#      #*#*###%%%  @#*#%%@       \r\n        %##%%%***@     *****@ @#%@@@@ #*%%%       \r\n        #%%%%#****%% @***#***# %%@   #*%%%%%      \r\n      %#%%%%%%##*********##****####%#*%%%%%%%     \r\n      #%%%%%%%%%%%%%#***********#**##%%%%%%%%     \r\n     #%%%%%%%%%%%%%%%%**#*****#*#%%%%%%%%%%%%     \r\n    ##%%%%%%%%%%%%%%%%%#********%%%%%%%%%%%%%     \r\n    %%%%%%%%%%%%@@     @********#@@%%%%%%%%%%     \r\n    %%%%%%%%%%@@ %#*************@   @%%%%%%%%     \r\n    %%%%%%%%@%##********##*****%    @  @%%%#      \r\n    %%%%%%@ %#********#******#%        @%%%%      \r\n    %%%@    #**#***********##%           %%       \r\n    %%%    @*******##*###****##         @@        \r\n     %%     #****%%       %***#         @@        \r\n     @@    @**#*##@      @**#@                    \r\n      @    #**%%%%%%%%%@@#*#%@%                   \r\n          @*++*++@       #####*@                  \r\n            %                                     \r\n                                                  ");
+                    Console.ResetColor();
+                    Thread.Sleep(1000);
 
                 }
 
                 Console.Clear();
                 if (CreateMonsters[i].Name == "슬라임")
                 {
-                    Console.WriteLine("\t강한 몬스터가 등장했습니다.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\t강한 몬스터가 등장합니다.");
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("                                           =+.    \r\n                                        =#%*+#=.  \r\n      -    .-                    -=**==.%*++++@:  \r\n    *=:*-.=+.-                 -+.     +*#####*.  \r\n      *-:*.=*                 =:                  \r\n    .-* :.*:                 %*                   \r\n    *.-%:#::#:              .*=                   \r\n    :%    :*          .*#::#+                     \r\n                   .:*@=:.                        \r\n                ..:#+++++%@-.                     \r\n             ..=@+++++++++++#-.            . .    \r\n           .:%++++++++++++++++#:.        ..% %..  \r\n           :@++++++++++++++++++@+                 \r\n          :@++++++++++++++++++++*%-      .:% %::  \r\n        :%**@%+++++++++++++++%#+++%:       : :    \r\n        #*+++#@#+++++++++++%@#*++++@-             \r\n        @+++++*@%++++++++#%#*+++++++%:            \r\n      .*#++++++*##+++++#%%#+++++++++%:            \r\n      :@++++++++++++++++++++++++++++%:            \r\n      .*#++++++++*###*+++++++++++++#*.            \r\n        @+++++++*%+++#%*+++++++++++@-             \r\n        :#*++++*%++++++#%*+++++++*#:              \r\n          :%*+++++++++++++++++*%%:                \r\n            :@@@@@@@@@@@@@@@@@+                   \r\n                                                  ");
                     Console.ResetColor();
@@ -329,26 +338,26 @@ namespace TeamProject07.Controller
                 }
                 else if (CreateMonsters[i].Name == "고스트")
                 {
-                    Console.WriteLine("\t강한 몬스터가 등장했습니다.");
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("                                           =+.    \r\n                                        =#%*+#=.  \r\n      -    .-                    -=**==.%*++++@:  \r\n    *=:*-.=+.-                 -+.     +*#####*.  \r\n      *-:*.=*                 =:                  \r\n    .-* :.*:                 %*                   \r\n    *.-%:#::#:              .*=                   \r\n    :%    :*          .*#::#+                     \r\n                   .:*@=:.                        \r\n                ..:#+++++%@-.                     \r\n             ..=@+++++++++++#-.            . .    \r\n           .:%++++++++++++++++#:.        ..% %..  \r\n           :@++++++++++++++++++@+                 \r\n          :@++++++++++++++++++++*%-      .:% %::  \r\n        :%**@%+++++++++++++++%#+++%:       : :    \r\n        #*+++#@#+++++++++++%@#*++++@-             \r\n        @+++++*@%++++++++#%#*+++++++%:            \r\n      .*#++++++*##+++++#%%#+++++++++%:            \r\n      :@++++++++++++++++++++++++++++%:            \r\n      .*#++++++++*###*+++++++++++++#*.            \r\n        @+++++++*%+++#%*+++++++++++@-             \r\n        :#*++++*%++++++#%*+++++++*#:              \r\n          :%*+++++++++++++++++*%%:                \r\n            :@@@@@@@@@@@@@@@@@+                   \r\n                                                  ");
+                    Console.WriteLine("\t강한 몬스터가 등장합니다.");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("                                          \r\n                              .*.         \r\n                             .#**:        \r\n                             .:*-*.       \r\n                             .:+-=..      \r\n                             .+*-+*-.     \r\n                ..::::.        *+:%==.    \r\n              .**.   .:++:.   .+=+==.     \r\n             -*:... .+#*----.             \r\n.--.        :=.+@@@.:%@@@#.:=.            \r\n  -%%-      -:-@@@@.   =*:  -=.           \r\n .+=#.      +.#@%:.:%@@#.   ..*.          \r\n .==-=.     *     +@@@@@%:   .-:          \r\n.-#=-+:     *    :#%#+....     ++.        \r\n.=+--*-     *:                  =:        \r\n :+--+%*.   -:                  :#:.      \r\n.++#+=+-*   -:                   .@-      \r\n.*=+++*+-   -:                    .+:     \r\n .-*##*.    -:.                    :=.    \r\n            :=.                     :#.   \r\n            :=.                      :+   \r\n            :=.             .:*+===#=:#:  \r\n            :+.  :*=-+=.   .++.    ....   \r\n            .+- -*.   .:###*..            \r\n             .+=:.                        ");
                     Console.ResetColor();
                     Thread.Sleep(400);
                 }
-                else if (CreateMonsters[i].Name == " 골램 ")
+                else if (CreateMonsters[i].Name == " 골램  ")
                 {
-                   
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\t강한 몬스터가 등장합니다.");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("  .========:.                 .:========:.\r\n .++=-----*+.                 .+*------#*:\r\n :#-------++.                 .++-------#-\r\n :#-------++.-*+++++++++++*%*+.++-------#-\r\n :##%#####%%*=---*#######=---++%#+######+.\r\n .=+-----+#=--*%*--------+%#---#+------#-.\r\n  -*----=#=---#*----------=%---*%=-----#-.\r\n  :*=---=#=---=#*--------=*#----#%+===+#-.\r\n   =*++**%#----=**++++++##=----=*+==+#%=. \r\n   .**=--=#*------=======------##----=#-. \r\n    +#=---##=-----------------#*+*++*%=.  \r\n    .*+-+*+-*@#=------------*@#----*+..   \r\n     -%#---**--+*#%#*****%%%%%%=-+@+.     \r\n       =%##*-------+%*********#%%-.       \r\n         -%%*******#%%%%%%%###%@=.        \r\n        .*#*****%*+++++++*%----=*:..:.    \r\n      ..:#######%#********%=====#=.....   \r\n      ..*##%#+=======*%*******#%*@: ...   \r\n       .##*%*--------+#+++++++##+%:       \r\n       .%##%#++++++++#%*******#%*@:       \r\n       .#=---##++++++++##********@::.     \r\n       .#=---##++++++++##********@:       \r\n       .%%%%%%%%%%%##########@%%%@:       \r\n       .#*+++++++*#=--------=%+++%:       \r\n       .###########**********%###%:       ");
+                    Console.ResetColor();
+                    Thread.Sleep(400);
                 }
-                else if (CreateMonsters[i].Name == "드래곤")
-                {
-
-
-                }
-
                 Console.Clear();
-
             }
         }
+        
 
         public void WinBoard(List<Monster> monster, Player player)
         {
@@ -363,12 +372,12 @@ namespace TeamProject07.Controller
             player.LevelUpExp += rewardExp;
             Console.WriteLine($"\n\t\t{player.Name}님 승리하셨습니다!\n");
             
-            Console.WriteLine($"\t획득한 골드 : "); Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"{rewardGold}"); Console.ResetColor();
-            Console.WriteLine($"\t획득한 EXP  : "); Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine($"{rewardExp}\n\n"); Console.ResetColor();
-            Console.WriteLine($"\t{player.Name} 정보");
+            Console.Write($"\t획득한 골드 : "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write($"{rewardGold}\n"); Console.ResetColor();
+            Console.Write($"\t획득한 EXP  : "); Console.ForegroundColor = ConsoleColor.Blue; Console.Write($"{rewardExp}\n\n"); Console.ResetColor();
+            LevelUp(player);
+            Console.WriteLine($"\n\t{player.Name} 정보");
             Console.WriteLine($"\tGold  : {player.Gold}");
             Console.WriteLine($"\tLevel : {player.Level} , EXP : {player.LevelUpExp}");
-            
             Console.WriteLine("\n\n\t\t0.돌아가기");
             switch (CheckValidInput(0, 0))
             {
@@ -378,6 +387,30 @@ namespace TeamProject07.Controller
                     break;
             }
             // stage++;
+        }
+
+        public void LevelUp(Player player) {
+            int levelUpPoint = player.Level* player.Level * 100;
+            int UpHp;
+            int UpDefence ;
+            int UpAttack;
+            while (player.LevelUpExp > levelUpPoint)
+            {
+                player.Level++;
+                // 수치 조정
+                UpHp = player.Level * 10;
+                UpDefence = player.Level * 1;
+                UpAttack =  player.Level * 2;
+                player.Hp += UpHp;
+                player.Defence += UpDefence;
+                player.Attack += UpAttack;
+
+                player.LevelUpExp -= levelUpPoint;
+                Console.WriteLine($"레벨업! Level : {player.Level} 가 되었습니다.");
+                Console.WriteLine($"체력 + {UpHp}  공격력 + {UpAttack} 방어력 + {UpDefence}");
+                Thread.Sleep(400);
+                levelUpPoint = player.Level * player.Level * 100;
+            }
         }
 
         public void DungeonEntranceView()
@@ -400,9 +433,9 @@ namespace TeamProject07.Controller
             Console.Clear();
             Console.WriteLine("===================== RUN ========================");
             Console.WriteLine("==================================================");
-            Console.WriteLine("  ┏   ┓             ; ◆ ");
-            Console.WriteLine(" |      |        ==  ┌┼┘  ");
-            Console.WriteLine("|        |       ==   │┒  ");
+            Console.WriteLine("  ┏   ┓           ; ◆ ");
+            Console.WriteLine(" |      |        ==┌┼┘  ");
+            Console.WriteLine("|        |       == │┒  ");
             Console.WriteLine("==================================================");
         }
     }

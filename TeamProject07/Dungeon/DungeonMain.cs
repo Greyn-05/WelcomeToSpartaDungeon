@@ -32,38 +32,47 @@ namespace TeamProject07.Dungeon
         public Define.MainGamePhase Entrance(Player player)
         {
             Dungeon.LoadMonsters();
-
-                DungeonEntranceView();
-                Console.WriteLine();
-                Console.WriteLine("원하시는 행동을 입력해주세요.");
+            if (player.IsDead==true)
+            {
+                Console.Clear();
+                Console.WriteLine("\n\t휴식 후 다시오세요");
+                Thread.Sleep(700);
+                choicePhase = Define.MainGamePhase.Main;
+                return choicePhase;
+            }
+            DungeonEntranceView();
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
                 
-                int input = CheckValidInput(0, 2);
-                switch (input)
-                {
-                    case 0:
+            int input = CheckValidInput(0, 2);
+            
+            switch (input)
+            {
+                case 0:
+                    Dungeon.Run();
+                    Thread.Sleep(700);
                     choicePhase = Define.MainGamePhase.Main;
                     break;
-                    case 1:
-                        Console.Clear();
-                        choicePhase = Define.MainGamePhase.temp;
-                        choicePhase = DungeonDifSelect(player);
-                        if (choicePhase == Define.MainGamePhase.Main)
-                        {
-                            break;
-                        }
-                        Console.WriteLine();
-                        Dungeon.PlayerPhase(player);
-                        Console.WriteLine();
-                        //Thread.Sleep(1000);  
+                case 1:
+                    Console.Clear();
+                    choicePhase = Define.MainGamePhase.temp;
+                    choicePhase = DungeonDifSelect(player);
+                    if (choicePhase == Define.MainGamePhase.Main)
+                    {
                         break;
+                    }
+                    Console.WriteLine();
+                    Dungeon.PlayerPhase(player);
+                    Console.WriteLine();
+                    //Thread.Sleep(1000);  
+                    break;
 
-                    case 2:
+                case 2:
                     //포션사용
                     choicePhase = Define.MainGamePhase.Main;
                     break;
             }
-            Console.WriteLine("상태가 좋지 않습니다. 회복하고 다시 오세요");
-            Thread.Sleep(1000);
+            
             return choicePhase;
         }
 
@@ -74,30 +83,25 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("입장할 던전을 선택하세요.");
             
             int input = CheckValidInput(0, 4);
+            Console.Clear();
             switch (input)
             {
                 case 0:
                     choicePhase = Define.MainGamePhase.Main;
                     Dungeon.Run();
-                    Thread.Sleep(2000);
+                    Thread.Sleep(700);
                     Console.Clear();
                     break;
                 case 1:
-                    Console.Clear();
                     Dungeon.StartDungeon(input);
-
                     break;
                 case 2:
-                    Console.Clear();
                     Dungeon.StartDungeon(input);
-
                     break;
                 case 3:
-                    Console.Clear();
                     Dungeon.StartDungeon(input);
                     break;
                 case 4:
-                    Console.Clear();
                     Dungeon.StartDungeon(input);
                     break;
             }
