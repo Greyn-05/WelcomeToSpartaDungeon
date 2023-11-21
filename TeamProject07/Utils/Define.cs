@@ -45,7 +45,10 @@
             def,
             cri,
             dex,
-            maxHp
+            maxHp,
+            maxMp,
+            hp,
+            mp
         }
 
         public enum SetEquip

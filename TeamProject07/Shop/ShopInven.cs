@@ -90,7 +90,9 @@ namespace TeamProject07
                     return 1;
                 else
                     return ((a.item.Id > b.item.Id) ? 1 : -1);
-            }); // 값이 작은것부터 위에서 표시된다. null은 가장 하단 
+            });
+            
+            // 값이 작은것부터 위에서 표시된다. null은 가장 하단 
 
             // Array.Sort(consumSale.slots, (a, b) => (a.item.ItemPrice > b.item.ItemPrice) ? 1 : -1);
             // Array.Sort C#

@@ -370,8 +370,8 @@ namespace TeamProject07.Shop
                             Console.ForegroundColor = ConsoleColor.Green;
 
                         Console.WriteLine((isSelected ? $"{i + 1}. " : "") +
-                            ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"{catalog.slots[i].item.Part} | " : "") +
-                            ($"{catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf} {df}") +
+                            ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"{catalog.slots[i].item.Part,-10} | " : $"{ -10}") +
+                            ($"{catalog.slots[i].item.Name, -8} | {catalog.slots[i].item.Info, - 20} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf} {df}") +
                             (isSelected && (catalog.slots[i].count > 1) ? ($" | {catalog.slots[i].count}개") : ""));
 
 

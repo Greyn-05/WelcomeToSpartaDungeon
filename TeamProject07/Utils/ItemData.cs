@@ -39,16 +39,10 @@ namespace TeamProject07.Utils
                                 item.buff = (Define.Buff)(int.Parse(data[6]));
                                 item.buffValue = (data[7] == "") ? 0 : int.Parse(data[7]);
                             }
-
-                            if (data[8] != "") // 능력치 너프효과가 있다면
-                            {
-                                item.debuff = (Define.Buff)(int.Parse(data[8]));
-                                item.debuffValue = (data[9] == "") ? 0 : int.Parse(data[9]);
-                            }
                              
-                            if (data[10] != "") // 세트명
+                            if (data[8] != "") // 세트명
                             {
-                                item.set = (Define.SetEquip)int.Parse(data[10]);
+                                item.set = (Define.SetEquip)int.Parse(data[8]);
                             }
 
                             items.Add(item.Id, item);
@@ -58,7 +52,10 @@ namespace TeamProject07.Utils
                             ConsumableItem item = new ConsumableItem();
                             item.Setting(data[0], data[3], data[4], data[5]);  // Item클래스안에 들어있는 변수만 초기화 
                             item.Type = (Define.ItemType)(int.Parse(data[1]));
-                            item.buffValue = int.Parse(data[7]);
+                            
+                            item.buff = (Define.Buff)(int.Parse(data[6]));
+                            item.buffValue = (data[7] == "") ? 0 : int.Parse(data[7]);
+
 
                             items.Add(item.Id, item);
                         }
