@@ -13,7 +13,6 @@ namespace TeamProject07
     {
         static void Main(string[] args)
         {
-            
             MainLogic mainLogic = new MainLogic();
 
             mainLogic.Start();
