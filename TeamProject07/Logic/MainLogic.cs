@@ -31,6 +31,8 @@ namespace TeamProject07.Logic
         Skill skill = new Skill();
 
         static public Player player = new Player("KIm", 1, 5, 5, 100, 100, 10000, 50, 50);
+
+
         //static public Player player;
         MainGamePhase mainGamePhase = MainGamePhase.temp;
 
