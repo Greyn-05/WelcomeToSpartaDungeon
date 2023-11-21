@@ -11,7 +11,7 @@ namespace TeamProject07
 
         public string name = "";
 
-        public ShopInven(ShopName ne) 
+        public ShopInven(ShopName ne)
         {
             slots = new ShopInvenSlot[maxSlot];
 
@@ -26,7 +26,7 @@ namespace TeamProject07
         }
 
 
-        public bool Add(Item item) 
+        public bool Add(Item item)
         {
             if (slotCount < maxSlot)
             {
@@ -58,7 +58,7 @@ namespace TeamProject07
             }
         }
 
-        public bool Delete(Item item) 
+        public bool Delete(Item item)
         {
             for (int i = 0; i < slots.Length; i++)
             {
@@ -96,6 +96,16 @@ namespace TeamProject07
             // Array.Sort C#
             // compareTo
 
+        }
+
+        public void ClearArray()
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                slots[i].item = null;
+            }
+
+            slotCount = 0;
         }
 
     }

@@ -16,11 +16,14 @@ namespace TeamProject07.Shop
             equipSale = new ShopInven(ShopName.장비상점);
             consumSale = new ShopInven(ShopName.소모품상점);
 
-            ReLoad(); // 상점 재고채우기
         }
 
         static public void ReLoad() // 상점에 물건 채우기. 재고추가할거면 실행 여러번
         {
+
+            equipSale.ClearArray();
+            consumSale.ClearArray();
+
             for (int i = 0; i < 20; i++)
             {
                 equipSale.Add(items[random.Next(0, 24)]);
