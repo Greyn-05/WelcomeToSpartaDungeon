@@ -18,6 +18,7 @@
             Inventory,
             Shop,
             Dungeon,
+            Hotel,
             Main,
             temp
         }

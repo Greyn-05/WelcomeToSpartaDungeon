@@ -13,6 +13,7 @@ using TeamProject07.Inventroy;
 using TeamProject07.Skills;
 using TeamProject07.Characters;
 using TeamProject07.Controller;
+using TeamProject07.Hotel;
 
 namespace TeamProject07.Logic
 {
@@ -26,9 +27,10 @@ namespace TeamProject07.Logic
         DungeonMain dungeon = new DungeonMain();
         InvenMain inventory = new InvenMain();
         Define define = new Define();
+        HotelMain hotel = new HotelMain();
         Skill skill = new Skill();
        
-        static public Player dummy = new Player("KIm", 1, 5, 5, 10, 10000, 50, 50);
+        static public Player dummy = new Player("KIm", 1, 5, 5, 100, 10000, 50, 50);
         
         MainGamePhase mainGamePhase = MainGamePhase.temp;
 
@@ -51,7 +53,7 @@ namespace TeamProject07.Logic
             
             Console.ReadLine();
             Shop_Init();    // 상점 초기화 + 아이템 정보 load
-            dummy.LoadSkills();
+            dummy.LoadSkills(); // 플레이어 스킬 정보 load
         }
 
         public void Game()
@@ -64,6 +66,7 @@ namespace TeamProject07.Logic
                 Console.WriteLine("2. 인벤토리");
                 Console.WriteLine("3. 상점");
                 Console.WriteLine("4. 던전");
+                Console.WriteLine("5. 호텔");
                 Console.WriteLine("0. 게임종료");
                 Console.WriteLine("\n개발자 도구");
                 Console.WriteLine("11. 스킬정보 확인");
@@ -71,10 +74,11 @@ namespace TeamProject07.Logic
                 Console.WriteLine("13. 플레이어 공격력 1000000");
                 Console.WriteLine("14. 플레이어 치명차 확률 100%");
                 Console.WriteLine("15. 플레이어 회피 확률 100%");
+                Console.WriteLine("16. 플레이어 체력을 1로");
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-                int input = CheckValidInput(0, 15);
+                int input = CheckValidInput(0, 16);
                 switch (input)
                 {
                     case (int)MainGamePhase.Exit:
@@ -92,6 +96,9 @@ namespace TeamProject07.Logic
                     case (int)MainGamePhase.Dungeon:
                         mainGamePhase = dungeon.Entrance(dummy);
                         break;
+                    case (int)MainGamePhase.Hotel:
+                        mainGamePhase = hotel.Entrance(dummy);
+                        break;
                     case 11:
                         mainGamePhase = dummy.ShowSkillProto();
                         break;
@@ -106,6 +113,9 @@ namespace TeamProject07.Logic
                         break;
                     case 15:
                         MissCheat();
+                        break;
+                    case 16:
+                        PlayerHPto1();
                         break;
                 }
 
@@ -194,7 +204,14 @@ namespace TeamProject07.Logic
         private void MissCheat()
         {
             dummy.MissRate = 100;
-            Console.WriteLine("회피 확률 재조정 재조정 완료");
+            Console.WriteLine("회피 확률 재조정 완료");
+            Thread.Sleep(300);
+        }
+
+        private void PlayerHPto1()
+        {
+            dummy.Hp = 1;
+            Console.WriteLine("플레이어 체력 재조정 완료");
             Thread.Sleep(300);
         }
     }

@@ -32,8 +32,7 @@ namespace TeamProject07.Dungeon
         public Define.MainGamePhase Entrance(Player player)
         {
             Dungeon.LoadMonsters();
-            while (!player.IsDead)//&& !CreateMonsters[0].IsDead
-            {
+
                 DungeonEntranceView();
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -41,40 +40,48 @@ namespace TeamProject07.Dungeon
                 int input = CheckValidInput(0, 2);
                 switch (input)
                 {
+                    case 0:
+                    choicePhase = Define.MainGamePhase.Main;
+                    break;
                     case 1:
                         Console.Clear();
-                        DungeonDifSelect(player);
+                        choicePhase = Define.MainGamePhase.temp;
+                        choicePhase = DungeonDifSelect(player);
+                        if (choicePhase == Define.MainGamePhase.Main)
+                        {
+                            break;
+                        }
                         Console.WriteLine();
                         Dungeon.PlayerPhase(player);
                         Console.WriteLine();
                         //Thread.Sleep(1000);  
-
-
-                        Console.WriteLine();
                         break;
+
                     case 2:
-                        choicePhase = Define.MainGamePhase.Main;
-                        break;
-
-                }
-/*                if(choicePhase == Define.MainGamePhase.Main)
-                {
+                    //포션사용
+                    choicePhase = Define.MainGamePhase.Main;
                     break;
-                }*/
             }
-            
-            return Define.MainGamePhase.Main;
+            Console.WriteLine("상태가 좋지 않습니다. 회복하고 다시 오세요");
+            Thread.Sleep(1000);
+            return choicePhase;
         }
-        
-        private void DungeonDifSelect(Player player)
+
+        public Define.MainGamePhase DungeonDifSelect(Player player)
         {
             DungeonSelectView();
             Console.WriteLine();
             Console.WriteLine("입장할 던전을 선택하세요.");
             
-            int input = CheckValidInput(0, 3);
+            int input = CheckValidInput(0, 4);
             switch (input)
             {
+                case 0:
+                    choicePhase = Define.MainGamePhase.Main;
+                    Dungeon.Run();
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    break;
                 case 1:
                     Console.Clear();
                     Dungeon.StartDungeon(input);
@@ -88,11 +95,13 @@ namespace TeamProject07.Dungeon
                 case 3:
                     Console.Clear();
                     Dungeon.StartDungeon(input);
-
                     break;
-                case 0:
+                case 4:
+                    Console.Clear();
+                    Dungeon.StartDungeon(input);
                     break;
             }
+            return choicePhase;
         }
 
         private void UseItem(Player player)
@@ -149,6 +158,8 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("==================");
         }
 
+        
+
         private void DungeonSelectView()
         {
             Console.Clear();
@@ -158,16 +169,13 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("|        |         ┌│  ==");
             Console.WriteLine("==================================================");
             Console.WriteLine("======== 던전에 가기 전 준비를 해주세요. =========\n\n");
-            Console.WriteLine("=========================");
-            Console.WriteLine("= 1. 던전 1 (난이도 하) =");
-            Console.WriteLine("= 2. 던전 2 (난이도 중) =");
-            Console.WriteLine("= 3. 던전 3 (난이도 상) =");
-            Console.WriteLine("= 0. 나가기             =");
-            Console.WriteLine("=========================");
+            Console.WriteLine("======================");
+            Console.WriteLine("= 1. 던전 1 (하)     =");
+            Console.WriteLine("= 2. 던전 2 (중)     =");
+            Console.WriteLine("= 3. 던전 3 (상)     =");
+            Console.WriteLine("= 4. 보스방 (드래곤) =");
+            Console.WriteLine("= 0. 나가기          =");
+            Console.WriteLine("=======================");
         }
-
-
     }
-
-
 }
