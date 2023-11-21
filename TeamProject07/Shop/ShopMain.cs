@@ -171,7 +171,7 @@ namespace TeamProject07.Shop
 
                 Buy_Screen(LinePick.물건볼때);
 
-                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
+                Console.WriteLine($"소지금 : {MainLogic.player.Gold} ");
                 Console.WriteLine();
 
                 Console.WriteLine("0. 나가기");
@@ -190,14 +190,14 @@ namespace TeamProject07.Shop
                     {
                         if (catalog.slots[num].item != null)
                         {
-                            if (((MainLogic.dummy.Gold - (int)(catalog.slots[num].item.ItemPrice * nego)) >= 0)) // 돈이 안모자를때
+                            if (((MainLogic.player.Gold - (int)(catalog.slots[num].item.ItemPrice * nego)) >= 0)) // 돈이 안모자를때
                             {
                                 check = num;
 
                                 if (Buy_Choice(num))    // 정말 구매하시겠습니까?
                                 {
-                                    MainLogic.dummy.Gold -= (int)(catalog.slots[num].item.ItemPrice * nego);
-                                    MainLogic.dummy.Inven.Add(catalog.slots[num].item);
+                                    MainLogic.player.Gold -= (int)(catalog.slots[num].item.ItemPrice * nego);
+                                    MainLogic.player.Inven.Add(catalog.slots[num].item);
 
                                     int i = catalog.slots[num].item.Id;
 
@@ -208,7 +208,7 @@ namespace TeamProject07.Shop
                                     check = 100000000;
 
                                     Buy_Screen(LinePick.구매했을때);
-                                    Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
+                                    Console.WriteLine($"소지금 : {MainLogic.player.Gold}");
                                     Console.WriteLine();
                                     Console.WriteLine($"※ {items[i].Name}이 인벤토리에 추가되었습니다.");
                                     Console.WriteLine();
@@ -231,7 +231,7 @@ namespace TeamProject07.Shop
                                     check = 100000000;
                                     Buy_Screen(LinePick.안샀을때);
 
-                                    Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
+                                    Console.WriteLine($"소지금 : {MainLogic.player.Gold} ");
                                     Console.WriteLine();
 
                                     Console.WriteLine("1. 다른거 살래요");
@@ -253,7 +253,7 @@ namespace TeamProject07.Shop
                                 check = 100000000;
                                 Buy_Screen(LinePick.돈이부족해);
 
-                                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
+                                Console.WriteLine($"소지금 : {MainLogic.player.Gold} ");
                                 Console.WriteLine();
 
                                 Console.WriteLine();
@@ -296,7 +296,7 @@ namespace TeamProject07.Shop
             // 장비 골랐을때 올라간 능력치 떠야함. 장비상점에서만
             // 산 장비를 착용하시겠습니까?
 
-            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ( -{(int)(catalog.slots[num].item.ItemPrice * nego)}원 )");
+            Console.WriteLine($"소지금 : {MainLogic.player.Gold} ( -{(int)(catalog.slots[num].item.ItemPrice * nego)}원 )");
             Console.WriteLine();
             Console.WriteLine($"{catalog.slots[num].item.Name}을 구매하시겠습니까?");
             Console.WriteLine();
@@ -424,7 +424,7 @@ namespace TeamProject07.Shop
 
                 Sell_Screen(LinePick.내템봐줘);
 
-                Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
+                Console.WriteLine($"소지금 : {MainLogic.player.Gold}");
                 Console.WriteLine();
 
                 Console.WriteLine("판매할 아이템의 숫자를 적고 엔터를 눌러주세요");
@@ -438,30 +438,30 @@ namespace TeamProject07.Shop
 
                     check = 100000000;
 
-                    if (num < MainLogic.dummy.Inven.Count)
+                    if (num < MainLogic.player.Inven.Count)
                     {
                         check = num;
 
                         if (Sell_Choice(num))
                         {
-                            int i = MainLogic.dummy.Inven[num].Id;
+                            int i = MainLogic.player.Inven[num].Id;
 
                             Shop_Reseller.resellerInven.Add(items[i]); // 고물상 인벤에 아이템추가
                             Shop_Reseller.ReLoad(); // 고물상인벤 갱신
 
-                            MainLogic.dummy.Gold += (int)(MainLogic.dummy.Inven[num].ItemPrice * nego);
-                            MainLogic.dummy.Inven.Remove(MainLogic.dummy.Inven[num]);
+                            MainLogic.player.Gold += (int)(MainLogic.player.Inven[num].ItemPrice * nego);
+                            MainLogic.player.Inven.Remove(MainLogic.player.Inven[num]);
 
                             check = 100000000;
 
                             Sell_Screen(LinePick.팔겠습니다);
 
-                            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold}");
+                            Console.WriteLine($"소지금 : {MainLogic.player.Gold}");
                             Console.WriteLine();
                             Console.WriteLine($"※ {items[i].Name}를 판매하였습니다.");
                             Console.WriteLine();
 
-                            if (MainLogic.dummy.Inven.Count <= 0)
+                            if (MainLogic.player.Inven.Count <= 0)
                             {
                                 Console.WriteLine("0. 나가기");
                                 Console.WriteLine();
@@ -494,7 +494,7 @@ namespace TeamProject07.Shop
                             check = 100000000;
                             Sell_Screen(LinePick.안팔래);
 
-                            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ");
+                            Console.WriteLine($"소지금 : {MainLogic.player.Gold} ");
                             Console.WriteLine();
 
                             Console.WriteLine("1. 다른걸 팔게요");
@@ -530,9 +530,9 @@ namespace TeamProject07.Shop
 
             Sell_Screen(LinePick.이거팔까);
 
-            Console.WriteLine($"소지금 : {MainLogic.dummy.Gold} ( +{(int)(MainLogic.dummy.Inven[num].ItemPrice * nego)}원 )");
+            Console.WriteLine($"소지금 : {MainLogic.player.Gold} ( +{(int)(MainLogic.player.Inven[num].ItemPrice * nego)}원 )");
             Console.WriteLine();
-            Console.WriteLine($"{MainLogic.dummy.Inven[num].Name}을 판매 하시겠습니까?");
+            Console.WriteLine($"{MainLogic.player.Inven[num].Name}을 판매 하시겠습니까?");
             Console.WriteLine();
             Console.WriteLine("1. 팝니다.");
             Console.WriteLine("0. 마음이바뀌었어요");
@@ -581,7 +581,7 @@ namespace TeamProject07.Shop
             Console.WriteLine();
             Console.WriteLine("[          내 인벤토리 목록           ]");
 
-            if (MainLogic.dummy.Inven.Count <= 0)
+            if (MainLogic.player.Inven.Count <= 0)
             {
                 Console.WriteLine("      인벤토리가 비어있습니다       ");
             }
@@ -589,14 +589,14 @@ namespace TeamProject07.Shop
             {
                 Console.WriteLine();
 
-                for (int i = 0; i < MainLogic.dummy.Inven.Count; i++)
+                for (int i = 0; i < MainLogic.player.Inven.Count; i++)
                 {
                     if (i == check)
                         Console.ForegroundColor = ConsoleColor.Green;
 
                     Console.WriteLine((isSelected ? $"{i + 1}. " : "") +
-                          ((MainLogic.dummy.Inven[i].Type == Utils.Define.ItemType.Equip) ? $"{MainLogic.dummy.Inven[i].Part} | " : "") +
-                        ($"{MainLogic.dummy.Inven[i].Name} | {MainLogic.dummy.Inven[i].Info} | {(int)(MainLogic.dummy.Inven[i].ItemPrice * nego)}원"));
+                          ((MainLogic.player.Inven[i].Type == Utils.Define.ItemType.Equip) ? $"{MainLogic.player.Inven[i].Part} | " : "") +
+                        ($"{MainLogic.player.Inven[i].Name} | {MainLogic.player.Inven[i].Info} | {(int)(MainLogic.player.Inven[i].ItemPrice * nego)}원"));
 
 
                     Console.ForegroundColor = ConsoleColor.Gray;

@@ -14,35 +14,35 @@ namespace TeamProject07.Hotel
 
         public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\SaveData.json";
 
-        // public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + MainLogic.dummy.Name + ".json";
+        // public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + MainLogic.player.Name + ".json";
 
         public static void Save()
         {
 
             string inv = "";
 
-            for (int i = 0; i < MainLogic.dummy.Inven.Count; i++)
+            for (int i = 0; i < MainLogic.player.Inven.Count; i++)
             {
-                if (i == MainLogic.dummy.Inven.Count - 1)
-                    inv += $"{MainLogic.dummy.Inven[i].Id}";
+                if (i == MainLogic.player.Inven.Count - 1)
+                    inv += $"{MainLogic.player.Inven[i].Id}";
                 else
-                    inv += $"{MainLogic.dummy.Inven[i].Id},";
+                    inv += $"{MainLogic.player.Inven[i].Id},";
             }
 
             JObject characterData = new JObject(
-                    new JProperty("Name", MainLogic.dummy.Name),
-                    new JProperty("Level", MainLogic.dummy.Level),
-                    new JProperty("Class", MainLogic.dummy.Class),
-                    new JProperty("Attack", MainLogic.dummy.Attack),
-                    new JProperty("Defence", MainLogic.dummy.Defence),
-                    new JProperty("Hp", MainLogic.dummy.Hp),
-                    new JProperty("MaxHp", MainLogic.dummy.MaxHp),
-                    new JProperty("Mp", MainLogic.dummy.Mp),
-                    new JProperty("MaxMp", MainLogic.dummy.MaxMp),
-                    new JProperty("Gold", MainLogic.dummy.Gold),
-                    new JProperty("CritRate", MainLogic.dummy.CritRate),
-                    new JProperty("MissRate", MainLogic.dummy.MissRate),
-                    new JProperty("LevelUpExp", MainLogic.dummy.LevelUpExp),
+                    new JProperty("Name", MainLogic.player.Name),
+                    new JProperty("Level", MainLogic.player.Level),
+                    new JProperty("Class", MainLogic.player.Class),
+                    new JProperty("Attack", MainLogic.player.Attack),
+                    new JProperty("Defence", MainLogic.player.Defence),
+                    new JProperty("Hp", MainLogic.player.Hp),
+                    new JProperty("MaxHp", MainLogic.player.MaxHp),
+                    new JProperty("Mp", MainLogic.player.Mp),
+                    new JProperty("MaxMp", MainLogic.player.MaxMp),
+                    new JProperty("Gold", MainLogic.player.Gold),
+                    new JProperty("CritRate", MainLogic.player.CritRate),
+                    new JProperty("MissRate", MainLogic.player.MissRate),
+                    new JProperty("LevelUpExp", MainLogic.player.LevelUpExp),
                     new JProperty("Inven", inv)
 
                 // 장착중인템  저장
@@ -65,27 +65,27 @@ namespace TeamProject07.Hotel
                     {
                         JObject json = (JObject)JToken.ReadFrom(reader);
 
-                        MainLogic.dummy.Name = json["Name"].ToString();
-                        MainLogic.dummy.Level = (int)json["Level"];
-                        MainLogic.dummy.Class = json["Class"].ToString();
-                        MainLogic.dummy.Attack = (int)json["Attack"];
-                        MainLogic.dummy.Defence = (int)json["Defence"];
-                        MainLogic.dummy.Hp = (int)json["Hp"];
-                        MainLogic.dummy.MaxHp = (int)json["MaxHp"];
-                        MainLogic.dummy.Mp = (int)json["Mp"];
-                        MainLogic.dummy.MaxMp = (int)json["MaxMp"];
+                        MainLogic.player.Name = json["Name"].ToString();
+                        MainLogic.player.Level = (int)json["Level"];
+                        MainLogic.player.Class = json["Class"].ToString();
+                        MainLogic.player.Attack = (int)json["Attack"];
+                        MainLogic.player.Defence = (int)json["Defence"];
+                        MainLogic.player.Hp = (int)json["Hp"];
+                        MainLogic.player.MaxHp = (int)json["MaxHp"];
+                        MainLogic.player.Mp = (int)json["Mp"];
+                        MainLogic.player.MaxMp = (int)json["MaxMp"];
 
 
-                        MainLogic.dummy.Gold = (int)json["Gold"];
-                        MainLogic.dummy.CritRate = (int)json["CritRate"];
-                        MainLogic.dummy.MissRate = (int)json["MissRate"];
-                        MainLogic.dummy.LevelUpExp = (int)json["LevelUpExp"];
+                        MainLogic.player.Gold = (int)json["Gold"];
+                        MainLogic.player.CritRate = (int)json["CritRate"];
+                        MainLogic.player.MissRate = (int)json["MissRate"];
+                        MainLogic.player.LevelUpExp = (int)json["LevelUpExp"];
 
 
                         string[] inven = (json["Inven"].ToString()).Split(',');
 
                         for (int i = 0; i < inven.Length; i++)
-                            MainLogic.dummy.Inven.Add(Utils.ItemData.items[int.Parse(inven[i])]);
+                            MainLogic.player.Inven.Add(Utils.ItemData.items[int.Parse(inven[i])]);
 
 
                         // 장착중인템 반영
