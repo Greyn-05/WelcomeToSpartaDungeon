@@ -10,6 +10,7 @@ namespace TeamProject07.Hotel
 {
     internal class HotelMain
     {
+        private BlackJack BJ = new BlackJack();
         public Define.MainGamePhase Entrance(Player player)
         {
             while(true)
@@ -45,6 +46,10 @@ namespace TeamProject07.Hotel
 
             }
             return Define.MainGamePhase.Main;
+        }
+        private void casino()
+        {
+
         }
 
         private void rest(Player player)
@@ -108,10 +113,7 @@ namespace TeamProject07.Hotel
             Console.WriteLine($" 체력이 {Healrate}만큼 회복되었습니다.!");
             Thread.Sleep(350);
         }
-        private void casino()
-        {
-
-        }
+        
 
         private int CheckValidInput(int min, int max)
         {

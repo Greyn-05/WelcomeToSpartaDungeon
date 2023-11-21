@@ -179,7 +179,7 @@ namespace TeamProject07.Controller
                 Console.Clear();
                 if (monsterChoice == 0) {
                     Run();
-                    Thread.Sleep(2000);
+                    Thread.Sleep(200);
                     Console.Clear();
                     break;
                 }
@@ -227,7 +227,7 @@ namespace TeamProject07.Controller
                     Console.Write($" {player.Name} "); Console.ResetColor(); Console.Write("에게");
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write($" {damageValue} "); Console.ResetColor(); Console.Write($"의 피해를 받았습니다!\n\n");
-                    Thread.Sleep(4000);
+                    Thread.Sleep(400);
                     Console.Clear();
                     if (CreateMonsters[monsterChoice-1].IsDead==true)
                     {
@@ -278,7 +278,7 @@ namespace TeamProject07.Controller
                     Console.Clear();
                     Console.Write($" {player.Name} 가 사망하였습니다. ");
                     //비석 그림
-                    Thread.Sleep(4000);
+                    Thread.Sleep(400);
                     break;
                 }
             }
