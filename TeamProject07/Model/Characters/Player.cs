@@ -23,8 +23,8 @@ namespace TeamProject07.Characters
             Level = level;
             Attack = attack;
             Defence = defence;
+            Hp = hp;
             MaxHp = hp;
-            hp = MaxHp;
 
             Gold = gold;
             CritRate = critRate;

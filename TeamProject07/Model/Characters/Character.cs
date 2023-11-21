@@ -51,17 +51,20 @@ namespace TeamProject07.Characters
             if(Damage <= Defence)
             {
                 Hp -= 1;
+                Damage = 1;
             }
             else
             {
-                Hp -= (Damage - Defence);
+                Damage = Damage - Defence;
+                Hp -= Damage;
             }
             if (Hp <= 0)
             {
                 IsDead = true;
+                Hp = 0;
             }
 
-            return Damage - Defence;
+            return Damage;
         }
 
         public int Heal(int healVal)
