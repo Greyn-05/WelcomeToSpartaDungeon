@@ -24,10 +24,12 @@ namespace TeamProject07.Hotel
                 Console.WriteLine("1. 휴식하기 (체력을 50% 회복합니다.)");
                 Console.WriteLine("2. 카지노 입장 (미니게임을 통해 골드를 벌 수 있습니다.)");
                 Console.WriteLine("3. 숙박하기 (저장합니다.)");
+                Console.WriteLine("4. 불러오기 ");
+
                 Console.WriteLine("0. 메인화면으로 돌아가기");
                 Console.WriteLine("\n원하시는 행동을 입력해주세요\n>>");
 
-                int input = CheckValidInput(0, 3);
+                int input = CheckValidInput(0, 4);
                 switch (input)
                 {
                     case 1:
@@ -37,6 +39,9 @@ namespace TeamProject07.Hotel
                         break;
                     case 3:
                         JsonSave.Save();
+                        break;
+                    case 4:
+                        JsonSave.Load();
                         break;
                     case 0:
                         Kill_hotel = true;

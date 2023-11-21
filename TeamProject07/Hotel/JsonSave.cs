@@ -1,19 +1,34 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
-using System;
-using System.IO;
+﻿using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using TeamProject07.Characters;
 using TeamProject07.Logic;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using static TeamProject07.Utils.ShopData;
 
 namespace TeamProject07.Hotel
 {
     internal class JsonSave
     {
+
+
         public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\SaveData.json";
+
+        // public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + MainLogic.dummy.Name + ".json";
 
         public static void Save()
         {
+
+            string inv = "";
+
+            for (int i = 0; i < MainLogic.dummy.Inven.Count; i++)
+            {
+                if (i == MainLogic.dummy.Inven.Count - 1)
+                    inv += $"{MainLogic.dummy.Inven[i].Id}";
+                else
+                            inv += $"{MainLogic.dummy.Inven[i].Id},";
+
+            }
+
             JObject characterData = new JObject(
                     new JProperty("Name", MainLogic.dummy.Name),
                     new JProperty("Level", MainLogic.dummy.Level),
@@ -25,27 +40,18 @@ namespace TeamProject07.Hotel
                     new JProperty("Gold", MainLogic.dummy.Gold),
                     new JProperty("CritRate", MainLogic.dummy.CritRate),
                     new JProperty("MissRate", MainLogic.dummy.MissRate),
-                    new JProperty("LevelUpExp", MainLogic.dummy.LevelUpExp)
+                    new JProperty("LevelUpExp", MainLogic.dummy.LevelUpExp),
+                       new JProperty("Inven", inv)
                 );
 
 
-            List<int> inven = new List<int>();
-
-
-            for (int i = 0; i < MainLogic.dummy.Inven.Count; i++)
-            {
-                inven.Add(MainLogic.dummy.Inven[i].Id);
-            }
-
-            characterData.Add("Inven", JArray.FromObject(inven));
 
             File.WriteAllText(path, characterData.ToString());
-
 
         }
 
 
-        void Load()
+        public static void Load()
         {
             if (File.Exists(path)) // 세이브 파일이 존재할때만
             {
@@ -56,13 +62,28 @@ namespace TeamProject07.Hotel
                     {
                         JObject json = (JObject)JToken.ReadFrom(reader);
 
-                        //      config.Ip = json["레벨"].ToString();
-                        //      config.Port = (int)json["Port"];
-                        //     config.LogPath = json["LogPath"].ToString();
-                        //     config.LogKeepDate = (int)json["LogKeepDate"];
+                        MainLogic.dummy.Name = json["Name"].ToString();
+                        MainLogic.dummy.Level = (int)json["Level"];
+                        MainLogic.dummy.Class = json["Class"].ToString();
+                        MainLogic.dummy.Attack = (int)json["Attack"];
+                        MainLogic.dummy.Defence = (int)json["Defence"];
+                        MainLogic.dummy.Hp = (int)json["Hp"];
+                        MainLogic.dummy.MaxHp = (int)json["MaxHp"];
+                        MainLogic.dummy.Gold = (int)json["Gold"];
+                        MainLogic.dummy.CritRate = (int)json["CritRate"];
+                        MainLogic.dummy.MissRate = (int)json["MissRate"];
+                        MainLogic.dummy.LevelUpExp = (int)json["LevelUpExp"];
+
+
+                        string[] inven = (json["Inven"].ToString()).Split(',');
+
+                        for (int i = 0; i < inven.Length; i++)
+                        {
+                            MainLogic.dummy.Inven.Add(Utils.ItemData.items[int.Parse(inven[i])]);
+                        }
+
                     }
                 }
-
             }
         }
     }
