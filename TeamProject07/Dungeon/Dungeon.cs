@@ -101,21 +101,28 @@ namespace TeamProject07.Controller
             int monsternum = 101;
             if (stage == 2) { monsternum = 201; }            //난이도
             else if (stage == 3) { monsternum = 301; }
-
+            else if (stage == 4) { monsternum = 400; }
 
             CreateMonsters = new List<Monster>();
             CreateMonsters.Clear();
             Random rand = new Random();
             MonsterNumber = rand.Next(3, 5);    // 3마리~4마리
             int MonsterType;
-
+            Monster m;
             for (int i = 0; i < MonsterNumber; i++)
             {
-
+                if (monsternum == 400)
+                {
+                    MonsterType = 400;
+                    MonsterNumber = 1;
+                    Monster monsterinfo = monsterData[MonsterType];
+                     m = new Monster(monsterinfo);
+                } else { 
                 MonsterType = rand.Next(monsternum, monsternum + 3);   //몬스터 데이터 보고 조정   
                 Monster monsterinfo = monsterData[MonsterType];
 
-                Monster m = new Monster(monsterinfo);
+                m = new Monster(monsterinfo);
+                }
 
                 CreateMonsters.Add(m);
                 //Console.WriteLine($"LV.{monsterinfo.Level} \t {monsterinfo.Name} \t HP : {monsterinfo.Hp} \t ATK : {monsterinfo.Attack},");

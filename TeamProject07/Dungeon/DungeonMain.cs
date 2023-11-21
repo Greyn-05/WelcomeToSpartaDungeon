@@ -73,7 +73,7 @@ namespace TeamProject07.Dungeon
             Console.WriteLine();
             Console.WriteLine("입장할 던전을 선택하세요.");
             
-            int input = CheckValidInput(0, 3);
+            int input = CheckValidInput(0, 4);
             switch (input)
             {
                 case 0:
@@ -93,6 +93,10 @@ namespace TeamProject07.Dungeon
 
                     break;
                 case 3:
+                    Console.Clear();
+                    Dungeon.StartDungeon(input);
+                    break;
+                case 4:
                     Console.Clear();
                     Dungeon.StartDungeon(input);
                     break;
@@ -165,16 +169,13 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("|        |         ┌│  ==");
             Console.WriteLine("==================================================");
             Console.WriteLine("======== 던전에 가기 전 준비를 해주세요. =========\n\n");
-            Console.WriteLine("=========================");
-            Console.WriteLine("= 1. 던전 1 (난이도 하) =");
-            Console.WriteLine("= 2. 던전 2 (난이도 중) =");
-            Console.WriteLine("= 3. 던전 3 (난이도 상) =");
-            Console.WriteLine("= 0. 나가기             =");
-            Console.WriteLine("=========================");
+            Console.WriteLine("======================");
+            Console.WriteLine("= 1. 던전 1 (하)     =");
+            Console.WriteLine("= 2. 던전 2 (중)     =");
+            Console.WriteLine("= 3. 던전 3 (상)     =");
+            Console.WriteLine("= 4. 보스방 (드래곤) =");
+            Console.WriteLine("= 0. 나가기          =");
+            Console.WriteLine("=======================");
         }
-
-
     }
-
-
 }
