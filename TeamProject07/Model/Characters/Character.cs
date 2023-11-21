@@ -61,6 +61,7 @@ namespace TeamProject07.Characters
             if (Hp <= 0)
             {
                 IsDead = true;
+                Hp = 0;
             }
 
             return Damage;

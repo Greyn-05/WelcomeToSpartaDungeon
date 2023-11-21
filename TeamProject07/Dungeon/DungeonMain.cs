@@ -32,8 +32,7 @@ namespace TeamProject07.Dungeon
         public Define.MainGamePhase Entrance(Player player)
         {
             Dungeon.LoadMonsters();
-            while (!player.IsDead)//&& !CreateMonsters[0].IsDead
-            {
+
                 DungeonEntranceView();
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -41,29 +40,34 @@ namespace TeamProject07.Dungeon
                 int input = CheckValidInput(0, 2);
                 switch (input)
                 {
+                    case 0:
+                    choicePhase = Define.MainGamePhase.Main;
+                    break;
                     case 1:
                         Console.Clear();
-                        DungeonDifSelect(player);
+                        choicePhase = Define.MainGamePhase.temp;
+                        choicePhase = DungeonDifSelect(player);
+                        if (choicePhase == Define.MainGamePhase.Main)
+                        {
+                            break;
+                        }
                         Console.WriteLine();
                         Dungeon.PlayerPhase(player);
                         Console.WriteLine();
                         //Thread.Sleep(1000);  
                         break;
-                    case 2:
-                        choicePhase = Define.MainGamePhase.Main;
-                        break;
 
-                }
-/*                if(choicePhase == Define.MainGamePhase.Main)
-                {
+                    case 2:
+                    //포션사용
+                    choicePhase = Define.MainGamePhase.Main;
                     break;
-                }*/
             }
-            player.IsDead = true;
-            return Define.MainGamePhase.Main;
+            Console.WriteLine("상태가 좋지 않습니다. 회복하고 다시 오세요");
+            Thread.Sleep(1000);
+            return choicePhase;
         }
-        
-        private void DungeonDifSelect(Player player)
+
+        public Define.MainGamePhase DungeonDifSelect(Player player)
         {
             DungeonSelectView();
             Console.WriteLine();
@@ -72,6 +76,12 @@ namespace TeamProject07.Dungeon
             int input = CheckValidInput(0, 3);
             switch (input)
             {
+                case 0:
+                    choicePhase = Define.MainGamePhase.Main;
+                    Dungeon.Run();
+                    Thread.Sleep(2000);
+                    Console.Clear();
+                    break;
                 case 1:
                     Console.Clear();
                     Dungeon.StartDungeon(input);
@@ -85,11 +95,9 @@ namespace TeamProject07.Dungeon
                 case 3:
                     Console.Clear();
                     Dungeon.StartDungeon(input);
-
-                    break;
-                case 0:
                     break;
             }
+            return choicePhase;
         }
 
         private void UseItem(Player player)
@@ -145,6 +153,8 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("= 0. 나가기      =");
             Console.WriteLine("==================");
         }
+
+        
 
         private void DungeonSelectView()
         {
