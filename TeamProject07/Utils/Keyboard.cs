@@ -26,8 +26,6 @@ namespace TeamProject07.Utils
 
                 var keyInfo = Console.ReadKey(true);
 
-                Console.Clear();
-
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:

@@ -22,14 +22,14 @@ namespace TeamProject07.Inventroy
             Console.SetCursorPosition(1, 2);
             Console.WriteLine("상세 정보를 보고 싶은 아이템을 선택해주세요."); // (1, 2)
 
-            for (int i = 5; i< 30; i++)  // (3, 50++)로 가운데 분리선 그림
+            for (int i = 5; i < 30; i++)  // (3, 50++)로 가운데 분리선 그림
             {
                 Console.SetCursorPosition(50, i);
                 Console.Write("|");
             }
 
-           // Console.SetCursorPosition(1, 3);
-           // Console.Write("0. 돌아가기"); // 돌아가기 - (1, 3)
+            // Console.SetCursorPosition(1, 3);
+            // Console.Write("0. 돌아가기"); // 돌아가기 - (1, 3)
             Console.SetCursorPosition(15, 4);
             Console.WriteLine("[아이템 목록]"); // [아이템 목록] - (15, 4)
             Console.SetCursorPosition(75, 4);
@@ -110,6 +110,7 @@ namespace TeamProject07.Inventroy
                 }
 
                 var key = Keyboard.KeyDown();
+
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
@@ -143,14 +144,14 @@ namespace TeamProject07.Inventroy
             {
                 Item selectedItem = player.Inven[selectedItemIndex];
 
-                //""부분 수정해야함
+                //세트 이름 부분 수정해야함
                 Console.SetCursorPosition(75, startDescriptionY++); // 출력위치
-                WriteLineInParts($"{selectedItem.Type}", 75, ref startDescriptionY); //타입
-                WriteLineInParts($"{selectedItem.Name}", 75, ref startDescriptionY); //이름
-                WriteLineInParts($"{selectedItem.Info}", 75, ref startDescriptionY); //설명
-                WriteLineInParts($"{selectedItem.buff}", 75, ref startDescriptionY); //올라가는 능력치 buff? buffvalue? 수정
-                WriteLineInParts("세트 이름", 75, ref startDescriptionY); //세트 이름 // .set 없음 수정
-                WriteLineInParts($"{selectedItem.ItemPrice}", 75, ref startDescriptionY); //가격
+                WriteLineInParts($"이름 : {selectedItem.Type}", 75, ref startDescriptionY); //타입
+                WriteLineInParts($"부위 : {selectedItem.Name}", 75, ref startDescriptionY); //이름
+                WriteLineInParts($"설명 : {selectedItem.Info}", 75, ref startDescriptionY); //설명
+                WriteLineInParts($"능력치 정보 : {selectedItem.buff} + {selectedItem.buffValue}", 75, ref startDescriptionY); //올라가는 능력치
+                WriteLineInParts("세트 효과 : ", 75, ref startDescriptionY); //세트 이름 // .set 없음 수정
+                WriteLineInParts($"가격 : {selectedItem.ItemPrice}", 75, ref startDescriptionY); //가격
 
                 while (true)
                 {

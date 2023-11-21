@@ -12,6 +12,9 @@ namespace TeamProject07.Items
         public int AddAttack { get; set; } 
         public int AddDefence { get; set; }
         public int AddHp { get; set; }
+        public int AddMp { get; set; }
+
+
         /// <summary>
         /// 크리티컬 확률을 올려주는 변수 (Crit - Critical)
         /// </summary>
