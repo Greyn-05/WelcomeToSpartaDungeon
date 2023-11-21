@@ -48,7 +48,6 @@ namespace TeamProject07.Shop
                     case 0:
                         return Define.MainGamePhase.Main;
                 }
-
             }
         }
 
@@ -112,7 +111,6 @@ namespace TeamProject07.Shop
                 }
             }
         }
-
 
         static public void Talk()
         {
@@ -286,8 +284,6 @@ namespace TeamProject07.Shop
         }
 
 
-        public static string bf;
-        public static string df;
 
         public static bool Buy_Choice(int num)
         {
@@ -315,6 +311,8 @@ namespace TeamProject07.Shop
 
             return false;
         }
+
+        public static string bf;
 
         public static void Buy_Screen(LinePick state) // 구매화면
         {
@@ -356,22 +354,17 @@ namespace TeamProject07.Shop
                     if (catalog.slots[i].item != null)
                     {
                         if (catalog.slots[i].item.Type == Utils.Define.ItemType.Equip)
-                        {
                             bf = catalog.slots[i].item.buffValue != 0 ? $"{catalog.slots[i].item.buff} {catalog.slots[i].item.buffValue}↑" : "";
-                            df = catalog.slots[i].item.debuffValue != 0 ? $"{catalog.slots[i].item.debuff} {catalog.slots[i].item.debuffValue}↓" : "";
-                        }
                         else
-                        {
                             bf = catalog.slots[i].item.buffValue != 0 ? $"회복량 {catalog.slots[i].item.buffValue}" : "";
-                        }
 
 
                         if (i == check)
                             Console.ForegroundColor = ConsoleColor.Green;
 
                         Console.WriteLine((isSelected ? $"{i + 1}. " : "") +
-                            ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"{catalog.slots[i].item.Part,-10} | " : $"{ -10}") +
-                            ($"{catalog.slots[i].item.Name, -8} | {catalog.slots[i].item.Info, - 20} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf} {df}") +
+                            ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"{catalog.slots[i].item.Part} | " : "") +
+                            ($"{catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf}") +
                             (isSelected && (catalog.slots[i].count > 1) ? ($" | {catalog.slots[i].count}개") : ""));
 
 
