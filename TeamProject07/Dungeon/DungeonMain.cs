@@ -41,6 +41,8 @@ namespace TeamProject07.Dungeon
                 switch (input)
                 {
                     case 0:
+                    Dungeon.Run();
+                    Thread.Sleep(2000);
                     choicePhase = Define.MainGamePhase.Main;
                     break;
                     case 1:
@@ -62,8 +64,7 @@ namespace TeamProject07.Dungeon
                     choicePhase = Define.MainGamePhase.Main;
                     break;
             }
-            Console.WriteLine("상태가 좋지 않습니다. 회복하고 다시 오세요");
-            Thread.Sleep(1000);
+            
             return choicePhase;
         }
 

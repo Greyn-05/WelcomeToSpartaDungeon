@@ -363,8 +363,8 @@ namespace TeamProject07.Controller
             player.LevelUpExp += rewardExp;
             Console.WriteLine($"\n\t\t{player.Name}님 승리하셨습니다!\n");
             
-            Console.WriteLine($"\t획득한 골드 : "); Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"{rewardGold}"); Console.ResetColor();
-            Console.WriteLine($"\t획득한 EXP  : "); Console.ForegroundColor = ConsoleColor.Blue; Console.WriteLine($"{rewardExp}\n\n"); Console.ResetColor();
+            Console.Write($"\t획득한 골드 : "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write($"{rewardGold}\n"); Console.ResetColor();
+            Console.Write($"\t획득한 EXP  : "); Console.ForegroundColor = ConsoleColor.Blue; Console.Write($"{rewardExp}\n\n"); Console.ResetColor();
             Console.WriteLine($"\t{player.Name} 정보");
             Console.WriteLine($"\tGold  : {player.Gold}");
             Console.WriteLine($"\tLevel : {player.Level} , EXP : {player.LevelUpExp}");
@@ -400,9 +400,9 @@ namespace TeamProject07.Controller
             Console.Clear();
             Console.WriteLine("===================== RUN ========================");
             Console.WriteLine("==================================================");
-            Console.WriteLine("  ┏   ┓             ; ◆ ");
-            Console.WriteLine(" |      |        ==  ┌┼┘  ");
-            Console.WriteLine("|        |       ==   │┒  ");
+            Console.WriteLine("  ┏   ┓           ; ◆ ");
+            Console.WriteLine(" |      |        ==┌┼┘  ");
+            Console.WriteLine("|        |       == │┒  ");
             Console.WriteLine("==================================================");
         }
     }
