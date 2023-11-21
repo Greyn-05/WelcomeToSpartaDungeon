@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿
 using TeamProject07.Characters;
-using TeamProject07.Dungeon;
-using TeamProject07.Utils;
 using static TeamProject07.Utils.Define;
-using TeamProject07.Skills;
 namespace TeamProject07.Controller
 {
     enum DungeonEntranceSelect
@@ -23,20 +14,11 @@ namespace TeamProject07.Controller
     internal class DungeonEntrance
     {
         
-        public void InDungeon(Monster monster)
-        {
-            //전투 씬
-            //enum switch -> 스킬쓸지 공격할지 방어?회피? 선택지
-        }
-
-        void BattleMonster(int level)
-        {
-
-        }
-
+       
         public List<Monster> CreateMonsters { get; set; }
         public Dictionary<int, Monster> monsterData;
         int MonsterNumber;
+
         public void LoadMonsters()
         {
 
@@ -95,33 +77,11 @@ namespace TeamProject07.Controller
                 //Console.WriteLine($"LV.{monsterinfo.Level} \t {monsterinfo.Name} \t HP : {monsterinfo.Hp} \t ATK : {monsterinfo.Attack},");
             }
         }
-
-        public void DungeonClear(Monster monster)
-        {
-            CreateMonsters.Clear();
-        }
-        public int CheckValidInput(int min, int max)
-        {
-            while (true)
-            {
-                string input = Console.ReadLine();
-
-                bool parseSuccess = int.TryParse(input, out var ret);
-                if (parseSuccess)
-                {
-                    if (ret >= min && ret <= max)
-                        return ret;
-                }
-
-                Console.WriteLine("잘못된 입력입니다.");
-            }
-        }
-
         public void PlayerPhase(Player player)
         {
             Console.Clear();
             
-            FirstStageMonsterView();
+            StageMonsterView();
             Console.WriteLine("\n\t전투가 시작됩니다!!");
 
             int killMonsterNum = 0;
@@ -215,30 +175,6 @@ namespace TeamProject07.Controller
 
             
         }
-
-        public void RedText(String s) {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"{s}"); 
-            Console.ResetColor();
-        }
-        public void RedTextNo(String s)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write($"{s}");
-            Console.ResetColor();
-        }
-        public void Bluetext(String s)
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"{s}");
-            Console.ResetColor();
-        }
-        public void BluetextNo(String s)
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write($"{s}");
-            Console.ResetColor();
-        }
         public void monsterPhase(Player player)
         {
             RedTextNo($"\n몬스터 "); Console.Write("가 공격합니다. ");
@@ -272,16 +208,12 @@ namespace TeamProject07.Controller
             Console.Clear();
 
         }
-
-        public void FirstStageMonsterView()
+        public void StageMonsterView()
         {
             if ( CreateMonsters == null ) { return; }
-            
                 viewMonster();
                 viewMonster();
-            
         }
-
         private void viewMonster()
         {
             for (int i = 0; i < CreateMonsters.Count; i++)
@@ -357,7 +289,6 @@ namespace TeamProject07.Controller
                 Console.Clear();
             }
         }
-        
 
         public void WinBoard(List<Monster> monster, Player player)
         {
@@ -388,7 +319,6 @@ namespace TeamProject07.Controller
             }
             // stage++;
         }
-
         public void LevelUp(Player player) {
             int levelUpPoint = player.Level* player.Level * 100;
             int UpHp;
@@ -414,6 +344,17 @@ namespace TeamProject07.Controller
             }
         }
 
+        
+        public void Run()
+        {
+            Console.Clear();
+            Console.WriteLine("===================== RUN ========================");
+            Console.WriteLine("==================================================");
+            Console.WriteLine("  ┏   ┓           ; ◆ ");
+            Console.WriteLine(" |      |        ==┌┼┘  ");
+            Console.WriteLine("|        |       == │┒  ");
+            Console.WriteLine("==================================================");
+        }
         public void DungeonEntranceView()
         {
             Console.WriteLine("==================================================");
@@ -428,16 +369,45 @@ namespace TeamProject07.Controller
             Console.WriteLine("= 0. 나가기      =");
             Console.WriteLine("==================");
         }
-
-        public void Run()
+        public int CheckValidInput(int min, int max)
         {
-            Console.Clear();
-            Console.WriteLine("===================== RUN ========================");
-            Console.WriteLine("==================================================");
-            Console.WriteLine("  ┏   ┓           ; ◆ ");
-            Console.WriteLine(" |      |        ==┌┼┘  ");
-            Console.WriteLine("|        |       == │┒  ");
-            Console.WriteLine("==================================================");
+            while (true)
+            {
+                string input = Console.ReadLine();
+
+                bool parseSuccess = int.TryParse(input, out var ret);
+                if (parseSuccess)
+                {
+                    if (ret >= min && ret <= max)
+                        return ret;
+                }
+
+                Console.WriteLine("잘못된 입력입니다.");
+            }
+        }
+        public void RedText(String s)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{s}");
+            Console.ResetColor();
+        }
+        public void RedTextNo(String s)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write($"{s}");
+            Console.ResetColor();
+        }
+        public void Bluetext(String s)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine($"{s}");
+            Console.ResetColor();
+        }
+        public void BluetextNo(String s)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write($"{s}");
+            Console.ResetColor();
         }
     }
 }
