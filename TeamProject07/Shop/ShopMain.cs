@@ -3,6 +3,7 @@ using TeamProject07.Logic;
 using static TeamProject07.Utils.ShopData;
 using static TeamProject07.Utils.ItemData;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TeamProject07.Shop
 {
@@ -66,6 +67,9 @@ namespace TeamProject07.Shop
                     break;
             }
 
+            Shop_Normal.ReLoad();
+            Shop_Reseller.ReLoad();
+
             Open();
         }
 
@@ -73,7 +77,7 @@ namespace TeamProject07.Shop
         {
             while (true)
             {
-               // catalog.Mix(); // 정렬
+                // catalog.Mix(); // 정렬
 
                 Console.ForegroundColor = ConsoleColor.Gray;
                 check = 100000000;
@@ -282,6 +286,8 @@ namespace TeamProject07.Shop
         }
 
 
+        public static string bf;
+        public static string df;
 
         public static bool Buy_Choice(int num)
         {
@@ -349,15 +355,24 @@ namespace TeamProject07.Shop
                 {
                     if (catalog.slots[i].item != null)
                     {
+                        if (catalog.slots[i].item.Type == Utils.Define.ItemType.Equip)
+                        {
+                            bf = catalog.slots[i].item.buffValue != 0 ? $"{catalog.slots[i].item.buff} {catalog.slots[i].item.buffValue}↑" : "";
+                            df = catalog.slots[i].item.debuffValue != 0 ? $"{catalog.slots[i].item.debuff} {catalog.slots[i].item.debuffValue}↓" : "";
+                        }
+                        else
+                        {
+                            bf = catalog.slots[i].item.buffValue != 0 ? $"회복량 {catalog.slots[i].item.buffValue}" : "";
+                        }
+
+
                         if (i == check)
                             Console.ForegroundColor = ConsoleColor.Green;
 
-
                         Console.WriteLine((isSelected ? $"{i + 1}. " : "") +
                             ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"{catalog.slots[i].item.Part} | " : "") +
-                            ($"{catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원") +
+                            ($"{catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf} {df}") +
                             (isSelected && (catalog.slots[i].count > 1) ? ($" | {catalog.slots[i].count}개") : ""));
-
 
 
                         Console.ForegroundColor = ConsoleColor.Gray;

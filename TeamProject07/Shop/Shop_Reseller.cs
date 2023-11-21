@@ -21,6 +21,7 @@ namespace TeamProject07.Shop
 
         static public void ReLoad() 
         {
+
             for (int i = 0; i < resellerInven.Count; i++) // 될라나??
             {
                 int num = random.Next(0, resellerInven.Count);

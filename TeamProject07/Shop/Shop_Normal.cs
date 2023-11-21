@@ -8,7 +8,7 @@ namespace TeamProject07.Shop
 
         static Random random = new Random();
 
-       static public ShopInven equipSale; // 장비상점 판매목록
+        static public ShopInven equipSale; // 장비상점 판매목록
         static public ShopInven consumSale; // 소모품상점 판매목록
 
         static public void Init()
@@ -27,7 +27,7 @@ namespace TeamProject07.Shop
             }
             for (int i = 0; i < 150; i++)
             {
-                consumSale.Add(items[random.Next(24, 30)]);
+                consumSale.Add(items[random.Next(24, 33)]);
             }
 
         }

@@ -9,6 +9,8 @@ namespace TeamProject07.Hotel
 {
     internal class JsonSave
     {
+        // 장착중인템 상태 저장 불러오기 미구현
+
 
 
         public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\SaveData.json";
@@ -25,8 +27,7 @@ namespace TeamProject07.Hotel
                 if (i == MainLogic.dummy.Inven.Count - 1)
                     inv += $"{MainLogic.dummy.Inven[i].Id}";
                 else
-                            inv += $"{MainLogic.dummy.Inven[i].Id},";
-
+                    inv += $"{MainLogic.dummy.Inven[i].Id},";
             }
 
             JObject characterData = new JObject(
@@ -41,21 +42,18 @@ namespace TeamProject07.Hotel
                     new JProperty("CritRate", MainLogic.dummy.CritRate),
                     new JProperty("MissRate", MainLogic.dummy.MissRate),
                     new JProperty("LevelUpExp", MainLogic.dummy.LevelUpExp),
-                       new JProperty("Inven", inv)
+                    new JProperty("Inven", inv)
                 );
-
-
 
             File.WriteAllText(path, characterData.ToString());
 
         }
 
 
-        public static void Load()
+        public static void Load() 
         {
-            if (File.Exists(path)) // 세이브 파일이 존재할때만
+            if (File.Exists(path)) 
             {
-
                 using (StreamReader file = File.OpenText(path))
                 {
                     using (JsonTextReader reader = new JsonTextReader(file))
@@ -78,9 +76,7 @@ namespace TeamProject07.Hotel
                         string[] inven = (json["Inven"].ToString()).Split(',');
 
                         for (int i = 0; i < inven.Length; i++)
-                        {
                             MainLogic.dummy.Inven.Add(Utils.ItemData.items[int.Parse(inven[i])]);
-                        }
 
                     }
                 }
