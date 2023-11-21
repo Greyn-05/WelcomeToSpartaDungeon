@@ -14,18 +14,19 @@ namespace TeamProject07.Characters
         public List<Item> Inven { get; set; }
         public string Class { get; set; }
         public int LevelUpExp { get; set; }
+        public int Mp { get; set; }
         public Dictionary<int, Skill> Skills;
 
         public Player() { 
         }
-        public Player(string name, int level, int attack, int defence, int hp, int gold, int critRate,int missRate) { 
+        public Player(string name, int level, int attack, int defence, int hp, int mp, int gold, int critRate,int missRate) { 
             Name = name;
             Level = level;
             Attack = attack;
             Defence = defence;
             Hp = hp;
             MaxHp = hp;
-
+            Mp = mp;
             Gold = gold;
             CritRate = critRate;
             MissRate = missRate;
@@ -55,7 +56,7 @@ namespace TeamProject07.Characters
                         skill.Id = int.Parse(data[0]);
                         skill.Name = data[1];
                         skill.Damage = int.Parse(data[2]);
-                        skill.Damage = int.Parse(data[3]);
+                        skill.Mp = int.Parse(data[3]);
 
                         Skills.Add(skill.Id, skill);
                     }

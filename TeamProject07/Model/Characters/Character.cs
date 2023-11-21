@@ -37,6 +37,10 @@ namespace TeamProject07.Characters
             if (rand.Next(1, 101) <= enemy.CritRate)
             {
                 Damage = Damage * 2;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("치명타 발동");
+                Console.ResetColor();
+                
             }
             else
             {
