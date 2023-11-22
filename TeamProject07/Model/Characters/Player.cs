@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeamProject07.Inventroy;
 using TeamProject07.Items;
 using TeamProject07.Skills;
 using TeamProject07.Utils;
@@ -49,6 +50,9 @@ namespace TeamProject07.Characters
         public float TotalCritRate => CritRate + EquipStats.AddCritRate;
         public float TotalMissRate => MissRate + EquipStats.AddMissRate;
 
+
+
+        public Define.SetEquip set;
         public void TotalStats()
         {
             EquipStats.AddAttack = 0;
@@ -104,9 +108,50 @@ namespace TeamProject07.Characters
                 }
             }
 
-            // if (SetItemCheck()) // 세트효고ㅡㅏ있으면 세트 추가
+            if (InvenMain.SetItemCheck()) // 세트효고ㅡㅏ있으면 세트 추가
+            {
+                switch (set)
+                {
 
+                    case Define.SetEquip.신문지세트:
+                        EquipStats.AddCritRate += 3;
+                        EquipStats.AddMissRate += 5;
+                        break;
+                    case Define.SetEquip.천세트:
+                        EquipStats.AddAttack += 4;
+                        EquipStats.AddDefence += 6;
+                        EquipStats.AddMissRate += 10;
+                        break;
+                    case Define.SetEquip.나무세트:
+                        EquipStats.AddAttack += 10;
+                        EquipStats.AddDefence += 2;
+                        EquipStats.AddMissRate += 6;
+                        EquipStats.AddHp += 20;
+                        EquipStats.AddMp += 20;
+                        break;
+                    case Define.SetEquip.강철세트:
+                        EquipStats.AddDefence += 30;
+                        EquipStats.AddCritRate += 5;
+                        EquipStats.AddMissRate += 3;
+                        EquipStats.AddHp += 30;
+                        EquipStats.AddMp += 30;
+                        break;
+
+                    case Define.SetEquip.세트능력없음:
+                    default:
+                        break;
+                }
+
+            }
         }
+
+
+
+
+
+
+
+
 
         public void EquipItem(Item item)
         {

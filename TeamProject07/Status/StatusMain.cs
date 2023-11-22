@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Characters;
+using TeamProject07.Inventroy;
 using TeamProject07.Items;
 using TeamProject07.Logic;
 using TeamProject07.Utils;
@@ -30,6 +31,17 @@ namespace TeamProject07.Status
             Console.WriteLine($"   체력 : {player.Hp} / {player.MaxHp} + {player.EquipStats.AddHp} ");
             Console.WriteLine($"   마나 : {player.Mp} / {player.MaxMp} + {player.EquipStats.AddMp} ");
             Console.WriteLine($"   골  드 : {player.Gold} G");
+
+            if (InvenMain.SetItemCheck())
+            {
+                Console.WriteLine($"   세트효과 발동중 : {player.set}");
+
+            }
+
+
+            Console.WriteLine($"   골  드 : {player.Gold} G");
+
+
             Console.WriteLine("   \n");
             Console.WriteLine("   \n");
             Console.WriteLine("   0. 메인화면");

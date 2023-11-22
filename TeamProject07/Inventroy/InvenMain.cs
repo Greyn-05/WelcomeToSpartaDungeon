@@ -39,56 +39,40 @@ namespace TeamProject07.Inventroy
 
         }
 
-        static bool SetItemCheck() // 장비중인템 읽고 세트로 입었다면 세트효고ㅓㅏ
+
+
+        static List<int> check = new List<int>();
+
+        static public bool SetItemCheck() // 장비중인템 읽고 세트로 입었다면 세트효고ㅓㅏ
         {
 
-            List<int> check = new List<int>();
+            check.Clear();
 
             for (int i = 0; i < MainLogic.player.Inven.Count; i++)
             {
                 if (MainLogic.player.Inven[i].IsEquipped)
+                {
                     check.Add((int)MainLogic.player.Inven[i].set);
+                }
             }
 
             for (int i = 0; i < check.Count; i++)
+                if (check[0] != check[i]) 
+                    return false;
+
+
+            if (check.Count == 0)
             {
-                if (check[0] != check[i]) return false;
+                MainLogic.player.set = 0;
+                return false;
             }
-
-            /*
-     atk,
-    def,
-    cri,
-    miss,
-    maxHp,
-    maxMp,
-             */
-            switch ((Define.SetEquip)(check[0]))
+            else
             {
-                case Define.SetEquip.신문지세트:
-
-
-                    break;
-                case Define.SetEquip.천세트:
-
-
-                    break;
-                case Define.SetEquip.나무세트:
-
-
-                    break;
-                case Define.SetEquip.강철세트:
-
-                    // def + 2- 
-
-                    break;
+                MainLogic.player.set = (Define.SetEquip)(check[0]);
+                return true;
             }
-
-            return true;
 
         }
-
-
 
 
 
@@ -115,7 +99,7 @@ namespace TeamProject07.Inventroy
                 if (selectedItemIndex >= 0)
                 {
                     bool backToItemList = ItemDescription(player, selectedItemIndex);
-                   
+
                     if (backToItemList)
                     {
                         continue;
@@ -240,7 +224,7 @@ namespace TeamProject07.Inventroy
 
 
                         WriteLineInParts($"가격 : {selectedItem.ItemPrice}", 68, ref startDescriptionY); //가격
-                      
+
                         while (true)
                         {
                             Console.SetCursorPosition(75, startDescriptionY + 3);
@@ -265,10 +249,10 @@ namespace TeamProject07.Inventroy
                                 case ConsoleKey.Enter:
                                     bool isCancelled;
                                     SelectedOption(selectedItem, option, out isCancelled);
-                                         if (isCancelled)
-                                         {
-                                            return true;
-                                         }
+                                    if (isCancelled)
+                                    {
+                                        return true;
+                                    }
                                     break;
                                 case ConsoleKey.Escape:
                                     return false;
@@ -328,7 +312,7 @@ namespace TeamProject07.Inventroy
                             {
                                 selectedItem.IsEquipped = !selectedItem.IsEquipped;
                                 Console.SetCursorPosition(72, startDescriptionY + 3);
-                                Console.ForegroundColor= ConsoleColor.Green;
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine($"{selectedItem.Name} {(selectedItem.IsEquipped ? "장착 완료!" : "")}");
                                 Console.ResetColor();
                                 Console.ReadKey();
@@ -338,7 +322,7 @@ namespace TeamProject07.Inventroy
                             {
                                 selectedItem.IsUsed = !selectedItem.IsUsed;
                                 Console.SetCursorPosition(72, startDescriptionY + 3);
-                                Console.ForegroundColor= ConsoleColor.Green;
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine($"{selectedItem.buff} + {selectedItem.buffValue}");
                                 Console.ResetColor();
                                 Console.ReadKey();
