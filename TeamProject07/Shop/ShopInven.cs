@@ -82,7 +82,7 @@ namespace TeamProject07
         }
 
 
-        public void Mix() // null이 중간중간에 껴있을때 오류남 수정좀
+        public void Mix() // ID순으로 정렬
         {
             Array.Sort(slots, (a, b) =>
             {

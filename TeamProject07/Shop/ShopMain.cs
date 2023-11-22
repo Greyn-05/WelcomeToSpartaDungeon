@@ -122,13 +122,13 @@ namespace TeamProject07.Shop
                 Console.WriteLine($"   {shopDialogue[catalog.name][LinePick.상점설명.ToString()]}");
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("   1.대화");
+                Console.WriteLine("   1. 대화");
                 Console.WriteLine();
-                Console.WriteLine("   2.구매하기");
+                Console.WriteLine("   2. 구매하기");
                 Console.WriteLine();
-                Console.WriteLine("   3.판매하기");
+                Console.WriteLine("   3. 판매하기");
                 Console.WriteLine();
-                Console.WriteLine("   0.나가기");
+                Console.WriteLine("   0. 나가기");
                 Console.WriteLine();
 
                 OutLine();
@@ -164,7 +164,7 @@ namespace TeamProject07.Shop
                 Console.WriteLine($"   {shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][LinePick.잡답.ToString()]}");
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("   0.나가기");
+                Console.WriteLine("   0. 나가기");
                 Console.WriteLine();
 
                 OutLine();
@@ -191,9 +191,9 @@ namespace TeamProject07.Shop
                 Buy_Screen(LinePick.방문인사);
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("   1.구매하기");
+                Console.WriteLine("   1. 구매하기");
                 Console.WriteLine();
-                Console.WriteLine("   0.나가기");
+                Console.WriteLine("   0. 나가기");
                 Console.WriteLine();
 
                 OutLine();
@@ -403,15 +403,15 @@ namespace TeamProject07.Shop
 
             ScreenDown();
 
-            Console.WriteLine($"  -------------{catalog.name}-------------");
+            Console.WriteLine($"   -------------{catalog.name}-------------");
             Console.WriteLine();
-            Console.WriteLine($"  {shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][state.ToString()]}");
+            Console.WriteLine($"   {shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][state.ToString()]}");
 
             Console.WriteLine();
 
             if (state != LinePick.전량품절)
             {
-                Console.WriteLine("  [           판매목록           ]");
+                Console.WriteLine("   [           판매목록           ]");
                 Console.WriteLine();
 
                 for (int i = 0; i < catalog.slots.Length; i++)
@@ -428,9 +428,9 @@ namespace TeamProject07.Shop
                             Console.ForegroundColor = ConsoleColor.Green;
 
 
-                        Console.WriteLine((isSelected ? $"  {i + 1}. " : "") +
+                        Console.WriteLine((isSelected ? $"   {i + 1}. " : "   ") +
                             ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"  {catalog.slots[i].item.Part,-10} | " : $"  {(catalog.slots[i].item.buff.ToString()).ToUpper(),-3} | ") +
-                            ($"  {catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf}") +
+                            ($"{catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf}") +
                             (isSelected && (catalog.slots[i].count > 1) ? ($" | {catalog.slots[i].count}개") : ""));
 
 
@@ -440,7 +440,7 @@ namespace TeamProject07.Shop
                     }
                     else
                     {
-                        Console.WriteLine((isSelected ? $"   {i + 1}. " : "") + "   -----------------------------  품절  -----------------------------");
+                        Console.WriteLine((isSelected ? $"   {i + 1}. " : "   ") + "-----------------------------  품절  -----------------------------");
                     }
                 }
             }
