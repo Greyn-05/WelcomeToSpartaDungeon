@@ -44,7 +44,7 @@
             atk,
             def,
             cri,
-            dex,
+            miss,
             maxHp,
             maxMp,
             hp,

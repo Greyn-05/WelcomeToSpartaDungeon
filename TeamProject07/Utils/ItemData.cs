@@ -6,7 +6,7 @@ namespace TeamProject07.Utils
     internal class ItemData
     {
         public static Dictionary<int, Item> items;
-        public static string path = Define.ItemPath; //파일경로
+        public static string path = Define.ItemPath;
 
         public static void Init()
         {
@@ -29,7 +29,7 @@ namespace TeamProject07.Utils
                         if (Define.ItemType.Equip == (Define.ItemType)(int.Parse(data[1]))) // 아이템종류 늘어나면 else if로 추가할것
                         {
                             Equipment item = new Equipment();
-                            item.Setting(data[0], data[3], data[4], data[5]); // Item클래스안에 들어있는 변수만 초기화 
+                            item.Setting(data[0], data[3], data[4], data[5]);
                             item.Type = (Define.ItemType)(int.Parse(data[1]));
 
                             item.Part = (Define.Parts)(int.Parse(data[2]));
@@ -41,16 +41,14 @@ namespace TeamProject07.Utils
                             }
                              
                             if (data[8] != "") // 세트명
-                            {
                                 item.set = (Define.SetEquip)int.Parse(data[8]);
-                            }
 
                             items.Add(item.Id, item);
                         }
                         else
                         {
                             ConsumableItem item = new ConsumableItem();
-                            item.Setting(data[0], data[3], data[4], data[5]);  // Item클래스안에 들어있는 변수만 초기화 
+                            item.Setting(data[0], data[3], data[4], data[5]); 
                             item.Type = (Define.ItemType)(int.Parse(data[1]));
                             
                             item.buff = (Define.Buff)(int.Parse(data[6]));
