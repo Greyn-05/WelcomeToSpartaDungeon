@@ -27,7 +27,6 @@ namespace TeamProject07.Hotel
                 {
                     inv += $"{MainLogic.player.Inven[i].Id}";
                     eqi += (MainLogic.player.Inven[i].IsEquipped) ? 1 : 0;
-
                 }
                 else
                 {
@@ -93,17 +92,21 @@ namespace TeamProject07.Hotel
                         MainLogic.player.LevelUpExp = (int)json["LevelUpExp"];
 
 
-
                         string[] equip = (json["Equip"].ToString()).Split(',');
                         string[] inven = (json["Inven"].ToString()).Split(',');
 
                         for (int i = 0; i < inven.Length; i++)
                         {
-                            Item itme = new Item();
-                            itme = (Utils.ItemData.items[int.Parse(inven[i])]);
-                            itme.IsEquipped = (equip[i] == "1") ? true : false;
 
-                            MainLogic.player.Inven.Add(itme);
+                            if (int.TryParse(equip[i], out int id))
+                            {
+                                Item itme = new Item();
+
+                                itme.Id = Utils.ItemData.items[int.Parse(inven[i])].Id;
+                                itme.IsEquipped = (equip[i] == "1") ? true : false;
+
+                                MainLogic.player.Inven.Add(itme);
+                            }
                         }
 
                     }

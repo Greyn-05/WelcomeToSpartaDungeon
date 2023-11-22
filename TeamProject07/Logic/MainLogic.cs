@@ -45,23 +45,20 @@ namespace TeamProject07.Logic
 
         public void Start()
         {
-            GameTitle();
+            Shop_Init();
 
+            GameTitle();
             //Console.WriteLine("게임 시작부 입니다.");
             //Console.WriteLine("1. 타이틀 화면을 출력합니다.");
             //Console.WriteLine("2. 여기서 이름, 클래스를 입력받습니다.");
             //Console.WriteLine("3. 게임에 필요할 데이터를 로드 합니다. (Monster, Item)");
             //Console.WriteLine("4. 아무 키나 입력 받아서 메인화면으로 넘어가도록 합니다.");
-
-            Shop_Init();    // 상점 초기화 + 아이템 정보 load
-
+               // 상점 초기화 + 아이템 정보 load
             int selectNorL = SelectNewOrLoad();   // New로 할 것인지 Load로 할 것인지 선택
-
             if (selectNorL == 1) // New > 새로운 플레이어를 생성
             {
                 string TplayerName = InputName();
                 string TplayerClass = InputClass();
-
                 if (TplayerClass == "Warrior")
                 {
                     player = new Player(TplayerName, TplayerClass, 1, 15, 15, 150, 100, 1000, 20, 20);
@@ -77,9 +74,7 @@ namespace TeamProject07.Logic
             {
                 player = new Player("", "", 1, 10, 5, 100, 200, 1000, 20, 20);
                 string choosenPath = ChooseSaveFile();
-
                 //Console.WriteLine(choosenPath);
-
                 JsonSave.Load(choosenPath);
             }
 

@@ -40,6 +40,7 @@ namespace TeamProject07.Characters
 
             Inven = new List<Item>();
             EquipStats = new Equipment();
+            ConsumStats = new ConsumableItem();
         }
 
         public int TotalAttack => Attack + EquipStats.AddAttack;
