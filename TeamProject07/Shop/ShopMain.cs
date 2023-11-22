@@ -24,20 +24,27 @@ namespace TeamProject07.Shop
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine();
-                Console.WriteLine();
+                for (int i = 0; i < 7; i++)
+                {
+                    Console.WriteLine();
+                }
                 Console.WriteLine("   상점입니다.");
+                Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("   아이템을 사고팔 수 있습니다.");
                 Console.WriteLine();
-
+                Console.WriteLine();
                 Console.WriteLine("   1. 장비상점");
-               
+                Console.WriteLine();
                 Console.WriteLine("   2. 소모품상점");
+                Console.WriteLine();
                 Console.WriteLine("   3. 고물상");
+                Console.WriteLine();
                 Console.WriteLine("   0. 메인화면");
                 Console.WriteLine();
-                Console.WriteLine("   원하시는 행동을 입력해주세요.");
+                Console.WriteLine();
+                MainLogic.Textbox();
+                Console.WriteLine("       원하시는 행동을 입력해주세요.");
                 MainLogic.DrawWindowHigh();
                 MainLogic.DrawWindowLow();  
                 switch (CheckValidInput(0, 3))
@@ -88,20 +95,26 @@ namespace TeamProject07.Shop
                 check = 100000000;
 
                 Console.Clear();
-                Console.WriteLine();
-                Console.WriteLine();
+                for (int i = 0; i < 7; i++)
+                {
+                    Console.WriteLine();
+                }
                 Console.WriteLine($"   -------------{catalog.name}-------------");
+                Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine($"   {shopDialogue[catalog.name][LinePick.상점설명.ToString()]}");
                 Console.WriteLine();
-
+                Console.WriteLine();
                 Console.WriteLine("   1.대화");
+                Console.WriteLine();
                 Console.WriteLine("   2.구매하기");
+                Console.WriteLine();
                 Console.WriteLine("   3.판매하기");
-
+                Console.WriteLine();
                 Console.WriteLine("   0.나가기");
                 Console.WriteLine();
-                Console.Write("   >> ");
+                MainLogic.Textbox();
+                Console.WriteLine("       원하시는 행동을 입력해주세요.");
                 MainLogic.DrawWindowHigh();
                 MainLogic.DrawWindowLow();
 
@@ -127,17 +140,21 @@ namespace TeamProject07.Shop
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine();
-                Console.WriteLine();
+                Console.Clear();
+                for (int i = 0; i < 7; i++)
+                {
+                    Console.WriteLine();
+                }
                 Console.WriteLine($"   -------------{catalog.name}-------------");
                 Console.WriteLine();
-                Console.WriteLine($"   {shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][LinePick.잡답.ToString()]}");
-
                 Console.WriteLine();
-
+                Console.WriteLine($"   {shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][LinePick.잡답.ToString()]}");
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("   0.나가기");
                 Console.WriteLine();
-                Console.Write("   >> ");
+                MainLogic.Textbox();
+                Console.WriteLine("       원하시는 행동을 입력해주세요.");
                 MainLogic.DrawWindowHigh();
                 MainLogic.DrawWindowLow();
                 switch (CheckValidInput(0, 0))
@@ -155,14 +172,19 @@ namespace TeamProject07.Shop
             while (true)
             {
                 nego = (catalog.name == ShopName.고물상.ToString()) ? 2f : 1;
-                Console.WriteLine();
-                Console.WriteLine();
+                for (int i = 0; i < 7; i++)
+                {
+                    Console.WriteLine();
+                }
                 Buy_Screen(LinePick.방문인사);
-
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("   1.구매하기");
+                Console.WriteLine();
                 Console.WriteLine("   0.나가기");
                 Console.WriteLine();
-                Console.Write("   >> ");
+                MainLogic.Textbox();
+                Console.WriteLine("       원하시는 행동을 입력해주세요.");
                 MainLogic.DrawWindowHigh();
                 MainLogic.DrawWindowLow();
 
@@ -192,7 +214,8 @@ namespace TeamProject07.Shop
                 Console.WriteLine("   0. 나가기");
                 Console.WriteLine();
                 Console.Write("   구매할 아이템의 숫자를 적고 엔터를 눌러주세요");
-                Console.Write("   >> ");
+                MainLogic.Textbox();
+                Console.WriteLine("       원하시는 행동을 입력해주세요.");
                 MainLogic.DrawWindowHigh();
                 MainLogic.DrawWindowLow();
 
@@ -360,6 +383,10 @@ namespace TeamProject07.Shop
             Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.Clear();
+            for (int i = 0; i < 7; i++)
+            {
+                Console.WriteLine();
+            }
             Console.WriteLine($"  -------------{catalog.name}-------------");
             Console.WriteLine();
             Console.WriteLine($"  {shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][state.ToString()]}");
