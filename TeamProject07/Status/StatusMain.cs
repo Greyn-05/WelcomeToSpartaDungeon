@@ -42,12 +42,11 @@ namespace TeamProject07.Status
                 Console.WriteLine($"   세트효과 발동중 : {player.set}");
             }
             Console.WriteLine();
-            Console.WriteLine("   0. 메인화면");
             Console.WriteLine();
             Console.WriteLine();
-            MainLogic.Textbox();
 
-            Console.SetCursorPosition(2, 28);
+            MainLogic.Textbox();
+            Console.WriteLine("      0. 메인화면");
             Console.WriteLine("      원하시는 행동을 입력해주세요.");
 
             MainLogic.DrawWindowHigh();
