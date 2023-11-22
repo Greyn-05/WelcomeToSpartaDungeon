@@ -161,7 +161,7 @@ namespace TeamProject07.Dungeon
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("   ==================================================");
-            Console.WriteLine("     ┏   ┓            ◆ ;");
+            Console.WriteLine("     ┏   ┓             ◆ ;");
             Console.WriteLine("    |      |          └┼┐ == ");
             Console.WriteLine("   |        |         ┌│  ==");
             Console.WriteLine("   ==================================================\n\n");
