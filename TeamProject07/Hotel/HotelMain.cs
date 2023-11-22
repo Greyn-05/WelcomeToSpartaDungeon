@@ -18,17 +18,19 @@ namespace TeamProject07.Hotel
             {
                 bool Kill_hotel = false;
                 Console.Clear();
-                Console.WriteLine("호텔 아트 추가?");
-                Console.WriteLine("호텔입니다.");
-                Console.WriteLine("여기서는 휴식과 카지노를 할 수 있습니다.\n");
+                Console.WriteLine("      \n\n      호텔입니다.");
+                Console.WriteLine("      여기서는 휴식과 카지노를 할 수 있습니다.\n");
 
-                Console.WriteLine("1. 휴식하기 (체력을 50% 회복합니다.)");
-                Console.WriteLine("2. 카지노 입장 (미니게임을 통해 골드를 벌 수 있습니다.)");
-                Console.WriteLine("3. 숙박하기 (저장합니다.)");
+                Console.WriteLine("      1. 휴식하기 (체력을 50% 회복합니다.)");
+                Console.WriteLine("      2. 카지노 입장 (미니게임을 통해 골드를 벌 수 있습니다.)");
+                Console.WriteLine("      3. 숙박하기 (저장합니다.)");
 
-                Console.WriteLine("0. 메인화면으로 돌아가기");
-                Console.WriteLine("\n원하시는 행동을 입력해주세요\n>>");
-
+                Console.WriteLine("      0. 메인화면으로 돌아가기");
+                
+                Textbox();
+                Console.Write("      \n      원하시는 행동을 입력해주세요. ");
+                DrawWindowHigh();
+                DrawWindowLow();
                 int input = CheckValidInput(0, 4);
                 switch (input)
                 {
@@ -138,6 +140,60 @@ namespace TeamProject07.Hotel
                 }
 
                 Console.WriteLine("잘못된 입력입니다.");
+            }
+        }
+
+        public static void DrawWindowHigh()
+        {
+            Console.SetCursorPosition(0, 0);
+            Console.Write("┌");
+            for (int i = 0; i < 116; i++)
+            {
+                Console.Write("─");
+            }
+            Console.Write("┐");
+
+            for (int cnt = 1; cnt <= 20; cnt++)
+            {
+                Console.SetCursorPosition(0, cnt);
+                Console.Write("│");
+            }
+            for (int cnt = 1; cnt <= 20; cnt++)
+            {
+                Console.SetCursorPosition(117, cnt);
+                Console.Write("│");
+            }
+        }
+        public static void DrawWindowLow()
+        {
+
+            for (int cnt = 21; cnt <= 37; cnt++)
+            {
+                Console.SetCursorPosition(0, cnt);
+                Console.Write("│");
+            }
+            for (int cnt = 21; cnt <= 37; cnt++)
+            {
+                Console.SetCursorPosition(117, cnt);
+                Console.Write("│");
+            }
+
+            Console.Write("\n└");
+            for (int i = 0; i < 116; i++)
+            {
+                Console.Write("─");
+            }
+            Console.Write("┘");
+            Console.SetCursorPosition(3, 29);
+        }
+
+        public static void Textbox()
+        {
+            Console.SetCursorPosition(0, 27);
+            for (int i = 2; i < 117; i++)
+            {
+                Console.SetCursorPosition(i, 27);
+                Console.Write("=");
             }
         }
     }

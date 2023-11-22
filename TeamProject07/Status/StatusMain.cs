@@ -35,7 +35,9 @@ namespace TeamProject07.Status
             Console.WriteLine($"   체력 : {player.Hp} / {player.MaxHp} + {player.EquipStats.AddHp} ");
             Console.WriteLine($"   마나 : {player.Mp} / {player.MaxMp} + {player.EquipStats.AddMp} ");
             Console.WriteLine();
-            Console.WriteLine($"   골  드 : {player.Gold} G");
+            Console.WriteLine($"   골  드 : {player.Gold} G\n");
+
+            Console.WriteLine("    0. 메인화면");
             Console.WriteLine();
             if (player.set != Define.SetEquip.세트능력없음)
             {
@@ -46,7 +48,7 @@ namespace TeamProject07.Status
             Console.WriteLine();
 
             MainLogic.Textbox();
-            Console.WriteLine("      원하시는 행동을 입력해주세요.      0. 메인화면");
+            Console.WriteLine("      원하시는 행동을 입력해주세요.");
 
             MainLogic.DrawWindowHigh();
             MainLogic.DrawWindowLow();
