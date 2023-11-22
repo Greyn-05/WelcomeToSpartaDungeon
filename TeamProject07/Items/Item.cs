@@ -14,6 +14,7 @@ namespace TeamProject07
         public string Info { get; set; }
         public int ItemPrice { get; set; }
         public bool IsEquipped { get; set; } = false;
+        public bool IsUsed { get; set; } = false;
 
 
         public void Setting(string myId, string myName, string myComment, string myPrice)
