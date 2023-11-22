@@ -44,7 +44,7 @@ namespace TeamProject07.Dungeon
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
                 
-            int input = CheckValidInput(0, 2);
+            int input = CheckValidInput(0, 1);
             
             switch (input)
             {
@@ -65,11 +65,6 @@ namespace TeamProject07.Dungeon
                     Dungeon.PlayerPhase(player);
                     Console.WriteLine();
                     //Thread.Sleep(1000);  
-                    break;
-
-                case 2:
-                    //포션사용
-                    choicePhase = Define.MainGamePhase.Main;
                     break;
             }
             
@@ -153,11 +148,9 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("  ┏   ┓             ◆ ;");
             Console.WriteLine(" |      |          └┼┐ == ");
             Console.WriteLine("|        |         ┌│  ==");
-            Console.WriteLine("==================================================");
-            Console.WriteLine("======== 던전에 가기 전 준비를 해주세요. =========\n\n");
+            Console.WriteLine("==================================================\n\n");
             Console.WriteLine("==================");
             Console.WriteLine("= 1. 던전 입장   =");
-            Console.WriteLine("= 2. 소모품 사용 =");
             Console.WriteLine("= 0. 나가기      =");
             Console.WriteLine("==================");
         }
@@ -171,15 +164,14 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("  ┏   ┓             ◆ ;");
             Console.WriteLine(" |      |          └┼┐ == ");
             Console.WriteLine("|        |         ┌│  ==");
-            Console.WriteLine("==================================================");
-            Console.WriteLine("======== 던전에 가기 전 준비를 해주세요. =========\n\n");
-            Console.WriteLine("======================");
-            Console.WriteLine("= 1. 던전 1 (하)     =");
-            Console.WriteLine("= 2. 던전 2 (중)     =");
-            Console.WriteLine("= 3. 던전 3 (상)     =");
-            Console.WriteLine("= 4. 보스방 (드래곤) =");
-            Console.WriteLine("= 0. 나가기          =");
-            Console.WriteLine("=======================");
+            Console.WriteLine("==================================================\n\n");
+            Console.WriteLine("==================");
+            Console.WriteLine("= 1. 초원 필드   =");
+            Console.WriteLine("= 2. 묘지 필드   =");
+            Console.WriteLine("= 3. 용의 둥지   =");
+            Console.WriteLine("= 4. 용의 은신처 =");
+            Console.WriteLine("= 0. 나가기      =");
+            Console.WriteLine("==================");
         }
     }
 }
