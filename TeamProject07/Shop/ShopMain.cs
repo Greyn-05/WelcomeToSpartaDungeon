@@ -19,15 +19,32 @@ namespace TeamProject07.Shop
         public static float nego = 1; // 가격조정
 
 
+        static void OutLine()
+        {
+            MainLogic.Textbox();
+            Console.WriteLine("       원하시는 행동을 입력해주세요.");
+            MainLogic.DrawWindowHigh();
+            MainLogic.DrawWindowLow();
+
+        }
+
+        static void ScreenDown()
+        {
+            for (int i = 0; i < 4; i++)
+                Console.WriteLine();
+
+        }
+
+
         public Define.MainGamePhase test()
         {
             while (true)
             {
                 Console.Clear();
-                for (int i = 0; i < 7; i++)
-                {
-                    Console.WriteLine();
-                }
+                
+                ScreenDown();
+
+
                 Console.WriteLine("   상점입니다.");
                 Console.WriteLine();
                 Console.WriteLine();
@@ -43,10 +60,10 @@ namespace TeamProject07.Shop
                 Console.WriteLine("   0. 메인화면");
                 Console.WriteLine();
                 Console.WriteLine();
-                MainLogic.Textbox();
-                Console.WriteLine("       원하시는 행동을 입력해주세요.");
-                MainLogic.DrawWindowHigh();
-                MainLogic.DrawWindowLow();  
+
+                OutLine();
+
+
                 switch (CheckValidInput(0, 3))
                 {
                     case 1:
@@ -95,10 +112,10 @@ namespace TeamProject07.Shop
                 check = 100000000;
 
                 Console.Clear();
-                for (int i = 0; i < 7; i++)
-                {
-                    Console.WriteLine();
-                }
+
+                ScreenDown();
+
+
                 Console.WriteLine($"   -------------{catalog.name}-------------");
                 Console.WriteLine();
                 Console.WriteLine();
@@ -113,10 +130,8 @@ namespace TeamProject07.Shop
                 Console.WriteLine();
                 Console.WriteLine("   0.나가기");
                 Console.WriteLine();
-                MainLogic.Textbox();
-                Console.WriteLine("       원하시는 행동을 입력해주세요.");
-                MainLogic.DrawWindowHigh();
-                MainLogic.DrawWindowLow();
+
+                OutLine();
 
                 switch (CheckValidInput(0, 3))
                 {
@@ -140,11 +155,9 @@ namespace TeamProject07.Shop
             while (true)
             {
                 Console.Clear();
-                Console.Clear();
-                for (int i = 0; i < 7; i++)
-                {
-                    Console.WriteLine();
-                }
+
+                ScreenDown();
+
                 Console.WriteLine($"   -------------{catalog.name}-------------");
                 Console.WriteLine();
                 Console.WriteLine();
@@ -153,10 +166,10 @@ namespace TeamProject07.Shop
                 Console.WriteLine();
                 Console.WriteLine("   0.나가기");
                 Console.WriteLine();
-                MainLogic.Textbox();
-                Console.WriteLine("       원하시는 행동을 입력해주세요.");
-                MainLogic.DrawWindowHigh();
-                MainLogic.DrawWindowLow();
+
+                OutLine();
+
+
                 switch (CheckValidInput(0, 0))
                 {
                     case 0:
@@ -172,10 +185,9 @@ namespace TeamProject07.Shop
             while (true)
             {
                 nego = (catalog.name == ShopName.고물상.ToString()) ? 2f : 1;
-                for (int i = 0; i < 7; i++)
-                {
-                    Console.WriteLine();
-                }
+
+                ScreenDown();
+
                 Buy_Screen(LinePick.방문인사);
                 Console.WriteLine();
                 Console.WriteLine();
@@ -183,10 +195,8 @@ namespace TeamProject07.Shop
                 Console.WriteLine();
                 Console.WriteLine("   0.나가기");
                 Console.WriteLine();
-                MainLogic.Textbox();
-                Console.WriteLine("       원하시는 행동을 입력해주세요.");
-                MainLogic.DrawWindowHigh();
-                MainLogic.DrawWindowLow();
+
+                OutLine();
 
                 switch (CheckValidInput(0, 1))
                 {
@@ -214,10 +224,9 @@ namespace TeamProject07.Shop
                 Console.WriteLine("   0. 나가기");
                 Console.WriteLine();
                 Console.Write("   구매할 아이템의 숫자를 적고 엔터를 눌러주세요");
-                MainLogic.Textbox();
-                Console.WriteLine("       원하시는 행동을 입력해주세요.");
-                MainLogic.DrawWindowHigh();
-                MainLogic.DrawWindowLow();
+
+
+                OutLine();
 
                 if (int.TryParse(Console.ReadLine(), out int num))
                 {
@@ -249,17 +258,19 @@ namespace TeamProject07.Shop
                                     Console.WriteLine();
                                     Console.WriteLine();
                                     Buy_Screen(LinePick.구매했을때);
-                                    Console.WriteLine($"소지금 : {MainLogic.player.Gold}");
+                                    Console.WriteLine($"   소지금 : {MainLogic.player.Gold}");
                                     Console.WriteLine();
-                                    Console.WriteLine($"※ {items[i].Name}이 인벤토리에 추가되었습니다.");
+                                    Console.WriteLine($"   ※ {items[i].Name}이 인벤토리에 추가되었습니다.");
                                     Console.WriteLine();
 
-                                    Console.WriteLine("1. 더 둘러보기");
-                                    Console.WriteLine("0. 나가기");
+                                    Console.WriteLine("   1. 더 둘러보기");
+                                    Console.WriteLine("   0. 나가기");
                                     Console.WriteLine();
-                                    Console.Write(">> ");
-                                    MainLogic.DrawWindowHigh();
-                                    MainLogic.DrawWindowLow();
+                                    Console.Write("   >> ");
+
+
+                                    OutLine();
+
 
                                     switch (CheckValidInput(0, 1))
                                     {
@@ -274,13 +285,15 @@ namespace TeamProject07.Shop
                                     check = 100000000;
                                     Buy_Screen(LinePick.안샀을때);
 
-                                    Console.WriteLine($"소지금 : {MainLogic.player.Gold} ");
+                                    Console.WriteLine($"   소지금 : {MainLogic.player.Gold} ");
                                     Console.WriteLine();
 
-                                    Console.WriteLine("1. 다른거 살래요");
-                                    Console.WriteLine("0. 나가기");
+                                    Console.WriteLine("   1. 다른거 살래요");
+                                    Console.WriteLine("   0. 나가기");
                                     Console.WriteLine();
                                     Console.Write(">> ");
+
+                                    OutLine();
 
                                     switch (CheckValidInput(0, 1))
                                     {
@@ -296,13 +309,15 @@ namespace TeamProject07.Shop
                                 check = 100000000;
                                 Buy_Screen(LinePick.돈이부족해);
 
-                                Console.WriteLine($"소지금 : {MainLogic.player.Gold} ");
+                                Console.WriteLine($"   소지금 : {MainLogic.player.Gold} ");
                                 Console.WriteLine();
 
                                 Console.WriteLine();
-                                Console.WriteLine("0. 나가기");
+                                Console.WriteLine("   0. 나가기");
                                 Console.WriteLine();
                                 Console.Write(">> ");
+
+                                OutLine();
 
                                 switch (CheckValidInput(0, 0))
                                 {
@@ -313,17 +328,17 @@ namespace TeamProject07.Shop
                         }
                         else
                         {
-                            Console.WriteLine("품절된 상품입니다.");
+                            Console.WriteLine("   품절된 상품입니다.");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.WriteLine("   잘못된 입력입니다.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("   잘못된 입력입니다.");
                 }
             }
         }
@@ -337,14 +352,16 @@ namespace TeamProject07.Shop
             // 장비 골랐을때 올라간 능력치 떠야함. 장비상점에서만
             // 산 장비를 착용하시겠습니까?
 
-            Console.WriteLine($"소지금 : {MainLogic.player.Gold} ( -{(int)(catalog.slots[num].item.ItemPrice * nego)}원 )");
+            Console.WriteLine($"   소지금 : {MainLogic.player.Gold} ( -{(int)(catalog.slots[num].item.ItemPrice * nego)}원 )");
             Console.WriteLine();
-            Console.WriteLine($"{catalog.slots[num].item.Name}을 구매하시겠습니까?");
+            Console.WriteLine($"   {catalog.slots[num].item.Name}을 구매하시겠습니까?");
             Console.WriteLine();
-            Console.WriteLine("1. 사겠습니다.");
-            Console.WriteLine("0. 안살래요");
+            Console.WriteLine("   1. 사겠습니다.");
+            Console.WriteLine("   0. 안살래요");
             Console.WriteLine();
             Console.Write(">> ");
+
+            OutLine();
 
             switch (CheckValidInput(0, 1))
             {
@@ -383,10 +400,9 @@ namespace TeamProject07.Shop
             Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.Clear();
-            for (int i = 0; i < 7; i++)
-            {
-                Console.WriteLine();
-            }
+
+            ScreenDown();
+
             Console.WriteLine($"  -------------{catalog.name}-------------");
             Console.WriteLine();
             Console.WriteLine($"  {shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][state.ToString()]}");
@@ -413,18 +429,18 @@ namespace TeamProject07.Shop
 
 
                         Console.WriteLine((isSelected ? $"  {i + 1}. " : "") +
-                            ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"  {catalog.slots[i].item.Part} | " : "") +
+                            ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"  {catalog.slots[i].item.Part,-10} | " : $"  {(catalog.slots[i].item.buff.ToString()).ToUpper(),-3} | ") +
                             ($"  {catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf}") +
                             (isSelected && (catalog.slots[i].count > 1) ? ($" | {catalog.slots[i].count}개") : ""));
 
-                       
 
 
-                        Console.ForegroundColor = ConsoleColor.Gray;
+
+                      Console.ForegroundColor = ConsoleColor.Gray;
                     }
                     else
                     {
-                        Console.WriteLine((isSelected ? $"{i + 1}. " : "") + "-----------------------------  품절  -----------------------------");
+                        Console.WriteLine((isSelected ? $"   {i + 1}. " : "") + "   -----------------------------  품절  -----------------------------");
                     }
                 }
             }
@@ -479,8 +495,8 @@ namespace TeamProject07.Shop
                 Console.WriteLine("   0. 나가기");
                 Console.WriteLine();
                 Console.Write("   >> ");
-                MainLogic.DrawWindowHigh();
-                MainLogic.DrawWindowLow();
+
+                OutLine();
 
                 if (int.TryParse(Console.ReadLine(), out int num))
                 {
@@ -506,16 +522,16 @@ namespace TeamProject07.Shop
 
                             Sell_Screen(LinePick.팔겠습니다);
 
-                            Console.WriteLine($"소지금 : {MainLogic.player.Gold}");
+                            Console.WriteLine($"   소지금 : {MainLogic.player.Gold}");
                             Console.WriteLine();
-                            Console.WriteLine($"※ {items[i].Name}를 판매하였습니다.");
+                            Console.WriteLine($"   ※ {items[i].Name}를 판매하였습니다.");
                             Console.WriteLine();
 
                             if (MainLogic.player.Inven.Count <= 0)
                             {
-                                Console.WriteLine("0. 나가기");
+                                Console.WriteLine("   0. 나가기");
                                 Console.WriteLine();
-                                Console.Write(">> ");
+                                Console.Write("   >> ");
 
                                 switch (CheckValidInput(0, 0))
                                 {
@@ -525,8 +541,8 @@ namespace TeamProject07.Shop
                             }
                             else
                             {
-                                Console.WriteLine("1. 더 팔기");
-                                Console.WriteLine("0. 나가기");
+                                Console.WriteLine("   1. 더 팔기");
+                                Console.WriteLine("   0. 나가기");
                                 Console.WriteLine();
                                 Console.Write(">> ");
 
@@ -544,13 +560,13 @@ namespace TeamProject07.Shop
                             check = 100000000;
                             Sell_Screen(LinePick.안팔래);
 
-                            Console.WriteLine($"소지금 : {MainLogic.player.Gold} ");
+                            Console.WriteLine($"   소지금 : {MainLogic.player.Gold} ");
                             Console.WriteLine();
 
-                            Console.WriteLine("1. 다른걸 팔게요");
-                            Console.WriteLine("0. 나가기");
+                            Console.WriteLine("   1. 다른걸 팔게요");
+                            Console.WriteLine("   0. 나가기");
                             Console.WriteLine();
-                            Console.Write(">> ");
+                            Console.Write("   >> ");
 
                             switch (CheckValidInput(0, 1))
                             {
@@ -563,12 +579,12 @@ namespace TeamProject07.Shop
                     }
                     else
                     {
-                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.WriteLine("   잘못된 입력입니다.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("   잘못된 입력입니다.");
                 }
 
             }
@@ -580,14 +596,14 @@ namespace TeamProject07.Shop
 
             Sell_Screen(LinePick.이거팔까);
 
-            Console.WriteLine($"소지금 : {MainLogic.player.Gold} ( +{(int)(MainLogic.player.Inven[num].ItemPrice * nego)}원 )");
+            Console.WriteLine($"   소지금 : {MainLogic.player.Gold} ( +{(int)(MainLogic.player.Inven[num].ItemPrice * nego)}원 )");
             Console.WriteLine();
-            Console.WriteLine($"{MainLogic.player.Inven[num].Name}을 판매 하시겠습니까?");
+            Console.WriteLine($"   {MainLogic.player.Inven[num].Name}을 판매 하시겠습니까?");
             Console.WriteLine();
-            Console.WriteLine("1. 팝니다.");
-            Console.WriteLine("0. 마음이바뀌었어요");
+            Console.WriteLine("   1. 팝니다.");
+            Console.WriteLine("   0. 마음이바뀌었어요");
             Console.WriteLine();
-            Console.Write(">> ");
+            Console.Write("   >> ");
 
             switch (CheckValidInput(0, 1))
             {
@@ -624,6 +640,10 @@ namespace TeamProject07.Shop
             Console.ForegroundColor = ConsoleColor.Gray;
 
             Console.Clear();
+
+
+            ScreenDown();
+
             Console.WriteLine($"   -------------{catalog.name}-------------");
             Console.WriteLine();
             Console.WriteLine($"   {shopDialogue[catalog.name]["주인이름"]} : {shopDialogue[catalog.name][state.ToString()]}");
@@ -644,7 +664,7 @@ namespace TeamProject07.Shop
                     if (i == check)
                         Console.ForegroundColor = ConsoleColor.Green;
 
-                    Console.WriteLine((isSelected ? $"{i + 1}." : "") +
+                    Console.WriteLine((isSelected ? $"   {i + 1}." : "   ") +
                           ((MainLogic.player.Inven[i].Type == Utils.Define.ItemType.Equip) ? $" {MainLogic.player.Inven[i].Part, -10} | " : $" {(MainLogic.player.Inven[i].buff.ToString()).ToUpper(),-3} | ") +
                         ($"{MainLogic.player.Inven[i].Name} | {MainLogic.player.Inven[i].Info} | {(int)(MainLogic.player.Inven[i].ItemPrice * nego)}원"));
 
@@ -671,7 +691,7 @@ namespace TeamProject07.Shop
                         return ret;
                 }
 
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.WriteLine("   잘못된 입력입니다.");
             }
         }
     }
