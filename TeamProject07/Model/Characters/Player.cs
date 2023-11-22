@@ -90,7 +90,7 @@ namespace TeamProject07.Characters
                 }
                 else if (item.IsUsed)
                 {
-                    switch(item.buff)
+                    switch (item.buff)
                     {
                         case Define.Buff.hp:
                             ConsumStats.BuffHp += item.buffValue;
@@ -104,11 +104,7 @@ namespace TeamProject07.Characters
                 }
             }
 
-
-           // if (SetItemCheck()) // 세트효고ㅡㅏ있으면 세트 추가
-           
-            }
-
+            // if (SetItemCheck()) // 세트효고ㅡㅏ있으면 세트 추가
 
         }
 
@@ -166,4 +162,5 @@ namespace TeamProject07.Characters
 
         //}
     }
+
 }
