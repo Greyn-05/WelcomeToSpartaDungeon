@@ -18,23 +18,23 @@ namespace TeamProject07.Inventroy
         static void InvenDraw()
         {
             Console.SetCursorPosition(1, 1);
-            Console.WriteLine("보유 중인 아이템을 확인하고 관리할 수 있습니다."); // (1, 1)
+            Console.WriteLine("  보유 중인 아이템을 확인하고 관리할 수 있습니다."); // (1, 1)
 
             Console.SetCursorPosition(1, 2);
-            Console.WriteLine("상세 정보를 보고 싶은 아이템을 선택해주세요."); // (1, 2)
+            Console.WriteLine("  상세 정보를 보고 싶은 아이템을 선택해주세요."); // (1, 2)
 
             for (int i = 5; i < 30; i++)  // (3, 50++)로 가운데 분리선 그림
             {
                 Console.SetCursorPosition(50, i);
-                Console.Write("|");
+                Console.Write("  |");
             }
 
             // Console.SetCursorPosition(1, 3);
             // Console.Write("0. 돌아가기"); // 돌아가기 - (1, 3)
             Console.SetCursorPosition(15, 4);
-            Console.WriteLine("[아이템 목록]"); // [아이템 목록] - (15, 4)
+            Console.WriteLine("  [아이템 목록]"); // [아이템 목록] - (15, 4)
             Console.SetCursorPosition(75, 4);
-            Console.WriteLine("[아이템 정보]"); // [아이템 정보] - (75, 4)
+            Console.WriteLine("  [아이템 정보]"); // [아이템 정보] - (75, 4)
         }
 
         public Define.MainGamePhase test(Player player)

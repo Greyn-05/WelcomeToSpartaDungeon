@@ -153,7 +153,7 @@ namespace TeamProject07.Controller
                 Console.Clear();
                 if(player.Mp <player.Skills[skillChoice].Mp) 
                 {
-                    Console.WriteLine("MP가 부족합니다. 평타로 공격합니다.");
+                    Console.WriteLine("  MP가 부족합니다. 평타로 공격합니다.");
                     Thread.Sleep(1500);
                     skillChoice = 1;
                 }
@@ -321,15 +321,15 @@ namespace TeamProject07.Controller
             }
             player.Gold += rewardGold;
             player.LevelUpExp += rewardExp;
-            Console.WriteLine($"\n\t\t{player.Name}님 승리하셨습니다!\n");
+            Console.WriteLine($"   \n\t\t{player.Name}님 승리하셨습니다!\n");
             
-            Console.Write($"\t획득한 골드 : "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write($"{rewardGold}\n"); Console.ResetColor();
-            Console.Write($"\t획득한 EXP  : "); Console.ForegroundColor = ConsoleColor.Blue; Console.Write($"{rewardExp}\n\n"); Console.ResetColor();
+            Console.Write($"   \t획득한 골드 : "); Console.ForegroundColor = ConsoleColor.Yellow; Console.Write($"{rewardGold}\n"); Console.ResetColor();
+            Console.Write($"   \t획득한 EXP  : "); Console.ForegroundColor = ConsoleColor.Blue; Console.Write($"{rewardExp}\n\n"); Console.ResetColor();
             LevelUp(player);
-            Console.WriteLine($"\n\t{player.Name} 정보");
-            Console.WriteLine($"\tGold  : {player.Gold}");
-            Console.WriteLine($"\tLevel : {player.Level} , EXP : {player.LevelUpExp}");
-            Console.WriteLine("\n\n\t\t0.돌아가기");
+            Console.WriteLine($"   \n\t{player.Name} 정보");
+            Console.WriteLine($"   \tGold  : {player.Gold}");
+            Console.WriteLine($"   \tLevel : {player.Level} , EXP : {player.LevelUpExp}");
+            Console.WriteLine("   \n\n\t\t0.돌아가기");
             switch (CheckValidInput(0, 0))
             {
                 case 0
@@ -359,8 +359,8 @@ namespace TeamProject07.Controller
                 player.Attack += UpAttack;
 
                 player.LevelUpExp -= levelUpPoint;
-                Console.WriteLine($"레벨업! Level : {player.Level} 가 되었습니다.");
-                Console.WriteLine($"체력 + {UpHp}  공격력 + {UpAttack} 방어력 + {UpDefence}");
+                Console.WriteLine($"   레벨업! Level : {player.Level} 가 되었습니다.");
+                Console.WriteLine($"   체력 + {UpHp}  공격력 + {UpAttack} 방어력 + {UpDefence}");
                 Thread.Sleep(400);
                 levelUpPoint = player.Level * player.Level * 100;
             }
