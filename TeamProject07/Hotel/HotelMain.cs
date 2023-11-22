@@ -13,6 +13,7 @@ namespace TeamProject07.Hotel
         private BlackJack BJ = new BlackJack();
         public Define.MainGamePhase Entrance(Player player)
         {
+            
             while(true)
             {
                 bool Kill_hotel = false;
@@ -35,6 +36,7 @@ namespace TeamProject07.Hotel
                         rest(player);
                         break;
                     case 2:
+                        BJ.BlackJackMain(player);
                         break;
                     case 3:
                         JsonSave.Save();
