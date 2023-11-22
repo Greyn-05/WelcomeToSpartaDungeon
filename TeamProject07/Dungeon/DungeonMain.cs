@@ -42,14 +42,10 @@ namespace TeamProject07.Dungeon
                 return choicePhase;
             }
             DungeonEntranceView();
-            Console.WriteLine();
-            Console.WriteLine("   던전에 들어가시겠습니까?");
-
+            MainLogic.Textbox();
+            Console.WriteLine("     던전에 들어가시겠습니까?");
             MainLogic.DrawWindowHigh();
             MainLogic.DrawWindowLow();
-
-
-
             int input = CheckValidInput(0, 1);
             
             switch (input)
@@ -82,9 +78,9 @@ namespace TeamProject07.Dungeon
         public Define.MainGamePhase DungeonDifSelect(Player player)
         {
             DungeonSelectView();
-            Console.WriteLine();
-            Console.WriteLine("   입장할 던전을 선택하세요.");
 
+            MainLogic.Textbox();
+            Console.WriteLine("     입장할 던전을 선택하세요.");
             MainLogic.DrawWindowHigh();
             MainLogic.DrawWindowLow();
 
@@ -96,6 +92,8 @@ namespace TeamProject07.Dungeon
                 case 0:
                     choicePhase = Define.MainGamePhase.Main;
                     Dungeon.Run();
+                    MainLogic.DrawWindowHigh();
+                    MainLogic.DrawWindowLow();
                     Thread.Sleep(700);
                     Console.Clear();
                     break;
@@ -168,8 +166,8 @@ namespace TeamProject07.Dungeon
             Console.WriteLine("   ==================");
             Console.WriteLine("   = 1. 초원 필드   =");
             Console.WriteLine("   = 2. 묘지 필드   =");
-            Console.WriteLine("   = 3. 용의 둥지   =");
-            Console.WriteLine("   = 4. 용의 은신처 =");
+            Console.WriteLine("   = 3. 사원 필드   =");
+            Dungeon.RedText("   = 4. 용의 은신처 =");
             Console.WriteLine("   = 0. 나가기      =");
             Console.WriteLine("   ==================");
 

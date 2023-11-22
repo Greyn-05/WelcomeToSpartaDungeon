@@ -45,7 +45,7 @@ namespace TeamProject07.Status
             Console.WriteLine();
             Console.WriteLine();
             MainLogic.Textbox();
-            Console.WriteLine("       원하시는 행동을 입력해주세요.");
+            Console.WriteLine("      원하시는 행동을 입력해주세요.");
             MainLogic.DrawWindowHigh();
             MainLogic.DrawWindowLow();
 

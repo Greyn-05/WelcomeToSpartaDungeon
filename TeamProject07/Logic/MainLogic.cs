@@ -118,7 +118,7 @@ namespace TeamProject07.Logic
                 Console.WriteLine("   16. 플레이어 체력을 1로");
                 Console.WriteLine();
                 Textbox();
-                Console.WriteLine("       원하시는 행동을 입력해주세요.");
+                Console.WriteLine("      원하시는 행동을 입력해주세요.");
                 DrawWindowHigh();
                 DrawWindowLow();
                 int input = CheckValidInput(0, 16);
