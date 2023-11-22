@@ -94,14 +94,22 @@ namespace TeamProject07.Logic
             while (true)
             {
                 Console.Clear();
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.WriteLine();
+                }
                 Console.WriteLine("   게임 진행부 입니다.");
+                Console.WriteLine();
                 Console.WriteLine("   1. 상태창");
                 Console.WriteLine("   2. 인벤토리");
                 Console.WriteLine("   3. 상점");
                 Console.WriteLine("   4. 던전");
                 Console.WriteLine("   5. 호텔");
                 Console.WriteLine("   0. 게임종료");
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("\n   개발자 도구");
+                Console.WriteLine();
                 Console.WriteLine("   11. 스킬정보 확인");
                 Console.WriteLine("   12. 모든 아이템 사기");
                 Console.WriteLine("   13. 플레이어 공격력 1000000");
@@ -109,7 +117,8 @@ namespace TeamProject07.Logic
                 Console.WriteLine("   15. 플레이어 회피 확률 100%");
                 Console.WriteLine("   16. 플레이어 체력을 1로");
                 Console.WriteLine();
-                Console.WriteLine("   원하시는 행동을 입력해주세요.");
+                Textbox();
+                Console.WriteLine("       원하시는 행동을 입력해주세요.");
                 DrawWindowHigh();
                 DrawWindowLow();
                 int input = CheckValidInput(0, 16);
@@ -418,6 +427,20 @@ namespace TeamProject07.Logic
                 Console.Write("─");
             }
             Console.Write("┘");
+            Console.SetCursorPosition(3, 29);
+        }
+        public static void Textbox()
+        {
+
+
+            Console.SetCursorPosition(0, 27);
+            for (int i = 2; i < 117; i++)
+            {
+                Console.SetCursorPosition(i, 27);
+                Console.Write("=");
+            }
+
+
 
         }
     }
