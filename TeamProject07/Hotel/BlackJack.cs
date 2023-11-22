@@ -12,7 +12,7 @@ namespace TeamProject07.Hotel
 {
     internal class BlackJack
     {
-        public void BlackJackMain()
+        public void BlackJackMain(Player MainPlayer)
         {
             BJPlayer player = new BJPlayer();
             Dealer dealer = new Dealer();
@@ -37,6 +37,7 @@ namespace TeamProject07.Hotel
 
                     PrintGameState(player, dealer);
 
+                    Console.Write("'hit' : 카드 한장 더 받기, 'stand' :  ");
                     Console.Write("\nNext Move : ");
                     input = Console.ReadLine();
                     blackjack.NextMove(input, player, dealer, deck);

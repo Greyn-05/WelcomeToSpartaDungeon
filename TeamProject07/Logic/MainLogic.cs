@@ -228,24 +228,32 @@ namespace TeamProject07.Logic
         private string ChooseSaveFile()
         {
             string choosenPath = "";
-            int cnt = 1;
+            int cnt = 0;
             int cnt2 = 1;
             Console.Clear();
             String FolderName = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\";
 
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(FolderName);
+            
             foreach (System.IO.FileInfo File in di.GetFiles())
             {
                 if (File.Extension.ToLower().CompareTo(".json") == 0)
                 {
+                    cnt++;
                     String FileNameOnly = File.Name.Substring(0, File.Name.Length - 4);
                     String FullFileName = File.FullName;
                     DateTime FileSaveTime = File.CreationTime;
+                    
 
                     Console.Write($"{cnt}. {FileNameOnly}    \t Save time : ");
                     Console.WriteLine($"{FileSaveTime} \n ");
-                    cnt++;
+                    
                 }
+            }
+            if(cnt==0)
+            {
+                Console.WriteLine("세이브 파일이 없습니다!");
+                Environment.Exit(0);
             }
             int input = CheckValidInput(1, cnt);
 
