@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Characters;
+using TeamProject07.Items;
 using TeamProject07.Utils;
 
 namespace TeamProject07.Status
@@ -14,15 +15,16 @@ namespace TeamProject07.Status
         {  
             Define.MainGamePhase choicePhase;
             Console.Clear();
+            player.TotalStats();
             Console.WriteLine("플레이어의 정보를 표시합니다");
             Console.WriteLine("\n");
             Console.WriteLine($"LEVEL {player.Level} \t {player.Class}");
-            Console.WriteLine($"공격력 : {player.Attack} + ");
-            Console.WriteLine($"방어력 : {player.Defence} + ");
-            Console.WriteLine($"치명타 확률 : {player.CritRate} +  %");
-            Console.WriteLine($"회피 확률 : {player.MissRate} +  %");
-            Console.WriteLine($"체력 : {player.Hp} / {player.MaxHp} + ");
-            Console.WriteLine($"마나 : {player.Mp} / {player.MaxMp} + ");
+            Console.WriteLine($"공격력 : {player.Attack} + {player.EquipStats.AddAttack}");
+            Console.WriteLine($"방어력 : {player.Defence} + {player.EquipStats.AddDefence}");
+            Console.WriteLine($"치명타 확률 : {player.CritRate} + {player.EquipStats.AddCritRate} %");
+            Console.WriteLine($"회피 확률 : {player.MissRate} + {player.EquipStats.AddMissRate} %");
+            Console.WriteLine($"체력 : {player.Hp} / {player.MaxHp} + {player.EquipStats.AddHp} ");
+            Console.WriteLine($"마나 : {player.Mp} / {player.MaxMp} + {player.EquipStats.AddMp} ");
             Console.WriteLine($"골  드 : {player.Gold} G");
             Console.WriteLine("\n");
             Console.WriteLine("\n");
