@@ -17,7 +17,7 @@ using TeamProject07.Hotel;
 
 namespace TeamProject07.Logic
 {
-    
+
 
     internal class MainLogic
     {
@@ -41,11 +41,12 @@ namespace TeamProject07.Logic
 
         //게임에 필요한 데이터 모음
         public static Dictionary<int, Skill> skillData;
-        
-        
+
+
         public void Start()
         {
             GameTitle();
+           
             //Console.WriteLine("게임 시작부 입니다.");
             //Console.WriteLine("1. 타이틀 화면을 출력합니다.");
             //Console.WriteLine("2. 여기서 이름, 클래스를 입력받습니다.");
@@ -69,27 +70,29 @@ namespace TeamProject07.Logic
 
         public void Game()
         {
-            while(true)
+            while (true)
             {
                 Console.Clear();
-                Console.WriteLine("게임 진행부 입니다.");
-                Console.WriteLine("1. 상태창");
-                Console.WriteLine("2. 인벤토리");
-                Console.WriteLine("3. 상점");
-                Console.WriteLine("4. 던전");
-                Console.WriteLine("5. 호텔");
-                Console.WriteLine("0. 게임종료");
-                Console.WriteLine("\n개발자 도구");
-                Console.WriteLine("11. 스킬정보 확인");
-                Console.WriteLine("12. 모든 아이템 사기");
-                Console.WriteLine("13. 플레이어 공격력 1000000");
-                Console.WriteLine("14. 플레이어 치명차 확률 100%");
-                Console.WriteLine("15. 플레이어 회피 확률 100%");
-                Console.WriteLine("16. 플레이어 체력을 1로");
+                Console.WriteLine("   게임 진행부 입니다.");
+                Console.WriteLine("   1. 상태창");
+                Console.WriteLine("   2. 인벤토리");
+                Console.WriteLine("   3. 상점");
+                Console.WriteLine("   4. 던전");
+                Console.WriteLine("   5. 호텔");
+                Console.WriteLine("   0. 게임종료");
+                Console.WriteLine("\n   개발자 도구");
+                Console.WriteLine("   11. 스킬정보 확인");
+                Console.WriteLine("   12. 모든 아이템 사기");
+                Console.WriteLine("   13. 플레이어 공격력 1000000");
+                Console.WriteLine("   14. 플레이어 치명차 확률 100%");
+                Console.WriteLine("   15. 플레이어 회피 확률 100%");
+                Console.WriteLine("   16. 플레이어 체력을 1로");
                 Console.WriteLine();
-                Console.WriteLine("원하시는 행동을 입력해주세요.");
-
+                Console.WriteLine("   원하시는 행동을 입력해주세요.");
+                DrawWindowHigh();
+                DrawWindowLow();
                 int input = CheckValidInput(0, 16);
+               
                 switch (input)
                 {
                     case (int)MainGamePhase.Exit:
@@ -129,11 +132,15 @@ namespace TeamProject07.Logic
                         PlayerHPto1();
                         break;
                 }
+               
+
 
                 if (gameEndTrigger == true)
                 {
                     break;
                 }
+               
+
             }
 
         }
@@ -165,22 +172,36 @@ namespace TeamProject07.Logic
 
         private void GameTitle()
         {
-            Console.WriteLine("                       __      __       .__                                ___________          ");
-            Console.WriteLine("                      /  \\    /  \\ ____ |  |   ____  ____   _____   ____   \\__    ___/___   ");
-            Console.WriteLine("                      \\   \\/\\/   // __ \\|  | _/ ___\\/  _ \\ /     \\_/ __ \\    |    | /  _ \\");
-            Console.WriteLine("                       \\        /\\  ___/|  |_\\  \\__(  <_> )  Y Y  \\  ___/    |    |(  <_> )");
-            Console.WriteLine("                        \\__/\\  /  \\___  >____/\\___  >____/|__|_|  /\\___  >   |____| \\____/");
-            Console.WriteLine("                             \\/       \\/          \\/            \\/     \\/");
-            Console.WriteLine("  _________                    __           ________   ");
-            Console.WriteLine(" /   _____/__________ ________/  |______    \\______ \\  __ __  ____    ____   ____  ____   ____  ");
-            Console.WriteLine(" \\_____  \\\\____ \\__  \\\\_  __ \\   __\\__  \\    |    |  \\|  |  \\/    \\  / ___\\_/ __ \\/  _ \\ /    \\");
-            Console.WriteLine(" /        \\  |_> > __ \\|  | \\/|  |  / __ \\_  |    `   \\  |  /   |  \\/ /_/  >  ___(  <_> )   |  \\");
-            Console.WriteLine("/_______  /   __(____  /__|   |__| (____  / /_______  /____/|___|  /\\___  / \\___  >____/|___|  /");
-            Console.WriteLine("        \\/|__|       \\/                 \\/          \\/           \\//_____/      \\/           \\/");
-
-            Console.WriteLine("Press Anykey to Start");
+           
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("                          __      __       .__                                ___________          ");
+            Console.WriteLine("                         /  \\    /  \\ ____ |  |   ____  ____   _____   ____   \\__    ___/___   ");
+            Console.WriteLine("                         \\   \\/\\/   // __ \\|  | _/ ___\\/  _ \\ /     \\_/ __ \\    |    | /  _ \\");
+            Console.WriteLine("                          \\        /\\  ___/|  |_\\  \\__(  <_> )  Y Y  \\  ___/    |    |(  <_> )");
+            Console.WriteLine("                           \\__/\\  /  \\___  >____/\\___  >____/|__|_|  /\\___  >   |____| \\____/");
+            Console.WriteLine("                                \\/       \\/          \\/            \\/     \\/");
+            Console.WriteLine("     _________                    __           ________   ");
+            Console.WriteLine("    /   _____/__________ ________/  |______    \\______ \\  __ __  ____    ____   ____  ____   ____  ");
+            Console.WriteLine("    \\_____  \\\\____ \\__  \\\\_  __ \\   __\\__  \\    |    |  \\|  |  \\/    \\  / ___\\_/ __ \\/  _ \\ /    \\");
+            Console.WriteLine("    /        \\  |_> > __ \\|  | \\/|  |  / __ \\_  |    `   \\  |  /   |  \\/ /_/  >  ___(  <_> )   |  \\");
+            Console.WriteLine("   /_______  /   __(____  /__|   |__| (____  / /_______  /____/|___|  /\\___  / \\___  >____/|___|  /");
+            Console.WriteLine("           \\/|__|       \\/                 \\/          \\/           \\//_____/      \\/           \\/");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            
+            Console.WriteLine("   Press Anykey to Start");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            DrawWindowHigh();
+            DrawWindowLow();
             Console.ReadLine();
-
+            
+       
         }
 
         private int SelectNewOrLoad()
@@ -272,6 +293,50 @@ namespace TeamProject07.Logic
             player.Hp = 1;
             Console.WriteLine("플레이어 체력 재조정 완료");
             Thread.Sleep(300);
+        }
+
+        public static void DrawWindowHigh()
+        {
+            Console.SetCursorPosition(0, 0);
+            Console.Write("┌");
+            for (int i = 0; i < 116; i++)
+            {
+                Console.Write("─");
+            }
+            Console.Write("┐");
+
+            for (int cnt = 1; cnt <= 20; cnt++)
+            {
+                Console.SetCursorPosition(0, cnt);
+                Console.Write("│");
+            }
+            for (int cnt = 1; cnt <= 20; cnt++)
+            {
+                Console.SetCursorPosition(117, cnt);
+                Console.Write("│");
+            }
+
+        }
+        public static void DrawWindowLow()
+        {
+
+            for (int cnt = 21; cnt <= 37; cnt++)
+            {
+                Console.SetCursorPosition(0, cnt);
+                Console.Write("│");
+            }
+            for (int cnt = 21; cnt <= 37; cnt ++)
+            {
+                Console.SetCursorPosition(117, cnt);
+                Console.Write("│");
+            }
+
+            Console.Write("\n└");
+            for (int i = 0; i < 116; i++)
+            {
+                Console.Write("─");
+            }
+            Console.Write("┘");
         }
     }
 }
