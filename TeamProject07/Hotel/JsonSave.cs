@@ -19,14 +19,25 @@ namespace TeamProject07.Hotel
         public static void Save()
         {
 
-            string inv = "";
+            string inv = ""; // 아이템목록
+
+            string eqi = ""; // 착용중인 목록
+
 
             for (int i = 0; i < MainLogic.player.Inven.Count; i++)
             {
                 if (i == MainLogic.player.Inven.Count - 1)
+                {
                     inv += $"{MainLogic.player.Inven[i].Id}";
+                    eqi += (MainLogic.player.Inven[i].IsEquipped) ? 1 : 0;
+
+                }
                 else
+                {
                     inv += $"{MainLogic.player.Inven[i].Id},";
+                    eqi += (MainLogic.player.Inven[i].IsEquipped) ? 1 + "," : 0 + ",";
+                }
+
             }
 
             JObject characterData = new JObject(
@@ -43,10 +54,8 @@ namespace TeamProject07.Hotel
                     new JProperty("CritRate", MainLogic.player.CritRate),
                     new JProperty("MissRate", MainLogic.player.MissRate),
                     new JProperty("LevelUpExp", MainLogic.player.LevelUpExp),
-                    new JProperty("Inven", inv)
-
-                // 장착중인템  저장
-
+                    new JProperty("Inven", inv),
+                    new JProperty("Equip", eqi)
 
                 );
 
@@ -82,15 +91,21 @@ namespace TeamProject07.Hotel
                         MainLogic.player.LevelUpExp = (int)json["LevelUpExp"];
 
 
+
+                        string[] equip = (json["Equip"].ToString()).Split(',');
                         string[] inven = (json["Inven"].ToString()).Split(',');
 
                         for (int i = 0; i < inven.Length; i++)
-                            MainLogic.player.Inven.Add(Utils.ItemData.items[int.Parse(inven[i])]);
+                        {
+                            Item itme = new Item();
+                            itme = (Utils.ItemData.items[int.Parse(inven[i])]);
+                            itme.IsEquipped = (equip[i] == "1") ? true : false;
 
-
-                        // 장착중인템 반영
+                            MainLogic.player.Inven.Add(itme);
+                        }
 
                     }
+
                 }
             }
         }
