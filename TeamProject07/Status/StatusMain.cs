@@ -38,7 +38,6 @@ namespace TeamProject07.Status
             {
                 Console.WriteLine($"   세트효과 발동중 : {player.set}");
             }
-            Console.WriteLine($"   골  드 : {player.Gold} G");
 
             int input = CheckValidInput(0, 0);
 

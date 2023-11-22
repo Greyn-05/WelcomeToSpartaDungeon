@@ -218,8 +218,8 @@ namespace TeamProject07.Inventroy
 
                         if (selectedItem.set != Define.SetEquip.세트능력없음)
                         {
-                            WriteLineInParts($"세트 : {selectedItem.set}", 75, ref startDescriptionY);
-                            WriteLineInParts($"세트효과 : 세트효과적는칸 ", 75, ref startDescriptionY);
+                            WriteLineInParts($"세트 : {selectedItem.set}", 68, ref startDescriptionY);
+                            WriteLineInParts($"세트효과 : 세트효과적는칸 ", 68, ref startDescriptionY);
                         }
 
 
