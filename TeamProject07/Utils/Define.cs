@@ -53,6 +53,7 @@
 
         public enum SetEquip
         {
+            세트능력없음,
             신문지세트,
             천세트,
             나무세트,

@@ -24,9 +24,6 @@ namespace TeamProject07.Items
 
 
         // 세트명
-        public Define.SetEquip set;
-        // 착용직업	
-
 
     }
 }

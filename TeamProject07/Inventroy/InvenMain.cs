@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Characters;
+using TeamProject07.Logic;
 using TeamProject07.Utils;
 
 namespace TeamProject07.Inventroy
@@ -37,6 +38,59 @@ namespace TeamProject07.Inventroy
             Console.WriteLine("[아이템 정보]"); // [아이템 정보] - (75, 5)
 
         }
+
+        static bool SetItemCheck() // 장비중인템 읽고 세트로 입었다면 세트효고ㅓㅏ
+        {
+
+            List<int> check = new List<int>();
+
+            for (int i = 0; i < MainLogic.player.Inven.Count; i++)
+            {
+                if (MainLogic.player.Inven[i].IsEquipped)
+                    check.Add((int)MainLogic.player.Inven[i].set);
+            }
+
+            for (int i = 0; i < check.Count; i++)
+            {
+                if (check[0] != check[i]) return false;
+            }
+
+            /*
+     atk,
+    def,
+    cri,
+    miss,
+    maxHp,
+    maxMp,
+             */
+            switch ((Define.SetEquip)(check[0]))
+            {
+                case Define.SetEquip.신문지세트:
+
+
+                    break;
+                case Define.SetEquip.천세트:
+
+
+                    break;
+                case Define.SetEquip.나무세트:
+
+
+                    break;
+                case Define.SetEquip.강철세트:
+
+                    // def + 2- 
+
+                    break;
+            }
+
+            return true;
+
+        }
+
+
+
+
 
         public Define.MainGamePhase test(Player player)
         {
@@ -176,9 +230,17 @@ namespace TeamProject07.Inventroy
                         WriteLineInParts($"부위 : {selectedItem.Name}", 68, ref startDescriptionY); //부위
                         WriteLineInParts($"설명 : {selectedItem.Info}", 68, ref startDescriptionY); //설명
                         WriteLineInParts($"능력치 정보 : {selectedItem.buff} + {selectedItem.buffValue}", 68, ref startDescriptionY); //올라가는 능력치
-                        WriteLineInParts("세트 효과 : ", 68, ref startDescriptionY); //세트 이름 // .set 없음 수정
-                        WriteLineInParts($"가격 : {selectedItem.ItemPrice}", 68, ref startDescriptionY); //가격
 
+
+                        if (selectedItem.set != Define.SetEquip.세트능력없음)
+                        {
+                            WriteLineInParts($"세트 : {selectedItem.set}", 75, ref startDescriptionY);
+                            WriteLineInParts($"세트효과 : 세트효과적는칸 ", 75, ref startDescriptionY);
+                        }
+
+
+                        WriteLineInParts($"가격 : {selectedItem.ItemPrice}", 68, ref startDescriptionY); //가격
+                      
                         while (true)
                         {
                             Console.SetCursorPosition(75, startDescriptionY + 3);

@@ -103,6 +103,13 @@ namespace TeamProject07.Characters
                     }
                 }
             }
+
+
+           // if (SetItemCheck()) // 세트효고ㅡㅏ있으면 세트 추가
+           
+            }
+
+
         }
 
         public void EquipItem(Item item)
