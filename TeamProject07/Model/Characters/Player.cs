@@ -87,59 +87,58 @@ namespace TeamProject07.Characters
             }
         }
 
-                public void EquipItem(Item item)
-                {
-                    item.IsEquipped = !item.IsEquipped;
-                    TotalStats();
-                }
+        public void EquipItem(Item item)
+        {
+            item.IsEquipped = !item.IsEquipped;
+            TotalStats();
+        }
 
-                public void LoadSkills()
-                {
-                    Skills = new Dictionary<int, Skill>();
-                    Skills.Clear();
+        public void LoadSkills()
+        {
+            Skills = new Dictionary<int, Skill>();
+            Skills.Clear();
 
-                    if (File.Exists(Define.SkillPath))
+            if (File.Exists(Define.SkillPath))
+            {
+                using (StreamReader sr = new StreamReader(new FileStream(Define.SkillPath, FileMode.Open)))
+                {
+                    sr.ReadLine();
+
+                    while (!sr.EndOfStream)
                     {
-                        using (StreamReader sr = new StreamReader(new FileStream(Define.SkillPath, FileMode.Open)))
-                        {
-                            sr.ReadLine();
+                        string line = sr.ReadLine();
+                        string[] data = line.Split(',');
 
-                            while (!sr.EndOfStream)
-                            {
-                                string line = sr.ReadLine();
-                                string[] data = line.Split(',');
+                        //Skill skill = new Skill(data[0], data[1], data[2], data[3]);
+                        Skill skill = new Skill();
+                        skill.Id = int.Parse(data[0]);
+                        skill.Name = data[1];
+                        skill.Damage = int.Parse(data[2]);
+                        skill.Mp = int.Parse(data[3]);
 
-                                //Skill skill = new Skill(data[0], data[1], data[2], data[3]);
-                                Skill skill = new Skill();
-                                skill.Id = int.Parse(data[0]);
-                                skill.Name = data[1];
-                                skill.Damage = int.Parse(data[2]);
-                                skill.Mp = int.Parse(data[3]);
-
-                                Skills.Add(skill.Id, skill);
-                            }
-                        }
+                        Skills.Add(skill.Id, skill);
                     }
                 }
-
-                public Define.MainGamePhase ShowSkillProto()
-                {
-                    Define.MainGamePhase choicePhase;
-                    Console.Clear();
-                    Console.WriteLine("Load된 스킬정보");
-                    foreach (KeyValuePair<int, Skill> s in Skills)
-                    {
-                        Console.WriteLine($"key : {s.Key}, ID : {s.Value.Id}, Name : {s.Value.Name}, Damage : {s.Value.Damage}, MP : {s.Value.Mp}");
-                    }
-                    Console.WriteLine("아무키나 입력");
-                    Console.ReadLine();
-                    return Define.MainGamePhase.Main;
-
-                }
-
-                //public void LevelUp()
-                //{
-
-                //}
             }
         }
+
+        public Define.MainGamePhase ShowSkillProto()
+        {
+            Define.MainGamePhase choicePhase;
+            Console.Clear();
+            Console.WriteLine("Load된 스킬정보");
+            foreach (KeyValuePair<int, Skill> s in Skills)
+            {
+                Console.WriteLine($"key : {s.Key}, ID : {s.Value.Id}, Name : {s.Value.Name}, Damage : {s.Value.Damage}, MP : {s.Value.Mp}");
+            }
+            Console.WriteLine("아무키나 입력");
+            Console.ReadLine();
+            return Define.MainGamePhase.Main;
+        }
+
+        //public void LevelUp()
+        //{
+
+        //}
+    }
+}
