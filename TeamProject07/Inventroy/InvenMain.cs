@@ -218,7 +218,7 @@ namespace TeamProject07.Inventroy
                     }
                 }
 
-                void ClearLine(int x, int y)
+                void ClearCurrentLine(int x, int y)
                 {
                     Console.SetCursorPosition(x, y);
                     Console.Write(new string(' ', Console.WindowWidth - x));
@@ -266,8 +266,8 @@ namespace TeamProject07.Inventroy
                                 Console.ForegroundColor= ConsoleColor.Green;
                                 Console.WriteLine($"{selectedItem.Name} {(selectedItem.IsEquipped ? "장착 완료!" : "")}");
                                 Console.ResetColor();
-                                System.Threading.Thread.Sleep( 1000 );
-                                ClearLine(75, startDescriptionY);
+                                Console.ReadKey();
+                                ClearCurrentLine(72, startDescriptionY + 3);
                             }
                             else if (selectedItem.Type == Define.ItemType.Consum)
                             {
@@ -276,9 +276,8 @@ namespace TeamProject07.Inventroy
                                 Console.ForegroundColor= ConsoleColor.Green;
                                 Console.WriteLine($"{selectedItem.buff} + {selectedItem.buffValue}");
                                 Console.ResetColor();
-                                System.Threading.Thread.Sleep(1000);
-                                Console.SetCursorPosition(75, startDescriptionY);
-                                Console.Write(new string(' ', Console.WindowWidth));
+                                Console.ReadKey();
+                                ClearCurrentLine(72, startDescriptionY + 3);
                             }
                             break;
                         case 1:
@@ -287,8 +286,8 @@ namespace TeamProject07.Inventroy
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine($"{selectedItem.Name} 해제 완료!");
                             Console.ResetColor();
-                            System.Threading.Thread.Sleep(1000);
-                            ClearLine(75, startDescriptionY);
+                            Console.ReadKey();
+                            ClearCurrentLine(72, startDescriptionY + 3);
                             break;
                         case 2:
                             isCancelled = true;
