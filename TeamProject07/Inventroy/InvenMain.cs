@@ -322,8 +322,10 @@ namespace TeamProject07.Inventroy
                             {
                                 selectedItem.IsUsed = !selectedItem.IsUsed;
                                 Console.SetCursorPosition(72, startDescriptionY + 3);
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine($"{selectedItem.buff} + {selectedItem.buffValue}");
+
+                                Console.ForegroundColor= ConsoleColor.Green;
+                                Console.WriteLine($"    {selectedItem.buff} + {selectedItem.buffValue}                ");
+                                UsePotion();
                                 Console.ResetColor();
                                 Console.ReadKey();
                                 ClearCurrentLine(72, startDescriptionY + 3);
@@ -342,8 +344,30 @@ namespace TeamProject07.Inventroy
                             isCancelled = true;
                             break;
                     }
+
+                    void UsePotion()
+                    {
+                        if (selectedItem.buff == Define.Buff.hp)
+                        {
+                            player.Hp += selectedItem.buffValue;
+                            if (player.MaxHp <= player.Hp)
+                            {
+                                player.Hp = player.MaxHp;
+                            }
+                        }
+                        else if (selectedItem.buff == Define.Buff.mp)
+                        {
+                            player.Mp += selectedItem.buffValue;
+                            if (player.MaxMp <= player.Mp)
+                            {
+                                player.Mp = player.MaxMp;
+                            }
+                        }
+                    }
                 }
             }
         }
+
+
     }
 }

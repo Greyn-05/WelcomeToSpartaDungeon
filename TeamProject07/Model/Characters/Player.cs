@@ -123,9 +123,22 @@ namespace TeamProject07.Characters
                 }
 
 
-
+            // if (SetItemCheck()) // 세트효고ㅡㅏ있으면 세트 추가
+        }
 
                 if (InvenMain.SetItemCheck()) // 세트효고ㅡㅏ있으면 세트 추가
+
+        
+
+        public void LoadSkills()
+        {
+            Skills = new Dictionary<int, Skill>();
+            Skills.Clear();
+
+            if (File.Exists(Define.SkillPath))
+            {
+                using (StreamReader sr = new StreamReader(new FileStream(Define.SkillPath, FileMode.Open)))
+
                 {
                     switch (set)
                     {
