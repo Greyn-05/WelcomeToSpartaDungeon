@@ -178,9 +178,14 @@ namespace TeamProject07.Logic
         public void End()
         {
             Console.Clear();
-            Console.WriteLine("게임 종료부 입니다.");
-            Console.WriteLine("아직 예정된 컨텐츠는 없습니다.");
-            Console.WriteLine("추가한다면 데이터 저장을 할 예정입니다.\n");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine();
+            }
+            Console.WriteLine("   게임을 종료합니다 !");
+            Console.WriteLine("    ________      ________      _____ ______       _______      \r\n|\\   ____\\    |\\   __  \\    |\\   _ \\  _   \\    |\\  ___ \\     \r\n\\ \\  \\___|    \\ \\  \\|\\  \\   \\ \\  \\\\\\__\\ \\  \\   \\ \\   __/|    \r\n \\ \\  \\  ___   \\ \\   __  \\   \\ \\  \\\\|__| \\  \\   \\ \\  \\_|/__  \r\n  \\ \\  \\|\\  \\   \\ \\  \\ \\  \\   \\ \\  \\    \\ \\  \\   \\ \\  \\_|\\ \\ \r\n   \\ \\_______\\   \\ \\__\\ \\__\\   \\ \\__\\    \\ \\__\\   \\ \\_______\\\r\n    \\|_______|    \\|__|\\|__|    \\|__|     \\|__|    \\|_______|\r\n                                                             \r\n                                                             \r\n                                                             \r\n ________      ___      ___  _______       ________          \r\n|\\   __  \\    |\\  \\    /  /||\\  ___ \\     |\\   __  \\         \r\n\\ \\  \\|\\  \\   \\ \\  \\  /  / /\\ \\   __/|    \\ \\  \\|\\  \\        \r\n \\ \\  \\\\\\  \\   \\ \\  \\/  / /  \\ \\  \\_|/__   \\ \\   _  _\\       \r\n  \\ \\  \\\\\\  \\   \\ \\    / /    \\ \\  \\_|\\ \\   \\ \\  \\\\  \\|      \r\n   \\ \\_______\\   \\ \\__/ /      \\ \\_______\\   \\ \\__\\\\ _\\      \r\n    \\|_______|    \\|__|/        \\|_______|    \\|__|\\|__|     ");
+            DrawWindowHigh();
+            DrawWindowLow();
         }
 
         private int CheckValidInput(int min, int max)
@@ -283,8 +288,17 @@ namespace TeamProject07.Logic
         private int SelectNewOrLoad()
         {
             Console.Clear();
-            Console.WriteLine("1. NEW Game");
-            Console.WriteLine("2. Load Game");
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine();
+            }
+            Console.WriteLine("   1. NEW Game");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("   2. Load Game");
+            Textbox();
+            DrawWindowHigh();
+            DrawWindowLow();
 
             switch (CheckValidInput(1, 2))
             {
@@ -303,10 +317,15 @@ namespace TeamProject07.Logic
             while (true)
             {
                 Console.Clear();
-                Console.Write("플레이어 이름을 알려주세요.\n>> ");
-
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine();
+                }
+                Console.Write("   플레이어 이름을 알려주세요.\n>> ");
+                Textbox();
+                DrawWindowHigh();
+                DrawWindowLow();
                 playerName = Console.ReadLine();
-
                 if ((playerName != null) || (playerName != ""))
                 {
                     break;
@@ -318,12 +337,21 @@ namespace TeamProject07.Logic
         private string InputClass()
         {
             string playerClass = "";
-
             Console.Clear();
-            Console.WriteLine("플레이어 직업을 선택하세요.");
-            Console.WriteLine("1. Warrior");
-            Console.WriteLine("2. Sorcerer\n >> ");
-
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine();
+            }
+            Console.WriteLine("   플레이어 직업을 선택하세요.");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("   1. Warrior");
+            Console.WriteLine();
+            Console.WriteLine("   2. Sorcerer\n >> ");
+            Console.WriteLine();
+            Textbox();
+            DrawWindowHigh();
+            DrawWindowLow(); ;
             switch (CheckValidInput(1, 2))
             {
                 case 1:
