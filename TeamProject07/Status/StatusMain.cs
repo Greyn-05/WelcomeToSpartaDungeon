@@ -49,7 +49,7 @@ namespace TeamProject07.Status
             MainLogic.DrawWindowHigh();
             MainLogic.DrawWindowLow();
 
-            if (InvenMain.SetItemCheck())
+            if (player.set != Define.SetEquip.세트능력없음)
             {
                 Console.WriteLine($"   세트효과 발동중 : {player.set}");
             }

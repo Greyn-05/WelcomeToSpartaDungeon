@@ -7,12 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Characters;
 using TeamProject07.Logic;
+using TeamProject07.Status;
 using TeamProject07.Utils;
+using static TeamProject07.Utils.Define;
 
 namespace TeamProject07.Inventroy
 {
     internal class InvenMain
     {
+        static List<Item> equipItem = new List<Item>();
+
+
+
 
         // 인벤토리 전체 수정중
 
@@ -43,9 +49,8 @@ namespace TeamProject07.Inventroy
 
         static List<int> check = new List<int>();
 
-        static public bool SetItemCheck() // 장비중인템 읽고 세트로 입었다면 세트효고ㅓㅏ
+        static public void SetItemCheck() // 장비중인템 읽고 세트로 입었다면 세트효고ㅓㅏ
         {
-
             check.Clear();
 
             for (int i = 0; i < MainLogic.player.Inven.Count; i++)
@@ -56,23 +61,15 @@ namespace TeamProject07.Inventroy
                 }
             }
 
-            for (int i = 0; i < check.Count; i++)
-                if (check[0] != check[i]) 
-                    return false;
 
+            if (check.Count == Enum.GetNames(typeof(Define.Parts)).Length)
 
-            if (check.Count == 0)
-            {
-                MainLogic.player.set = 0;
-                return false;
-            }
-            else
-            {
                 MainLogic.player.set = (Define.SetEquip)(check[0]);
-                return true;
-            }
+            else
+                MainLogic.player.set = 0;
 
         }
+
 
 
 
@@ -219,7 +216,6 @@ namespace TeamProject07.Inventroy
                         if (selectedItem.set != Define.SetEquip.세트능력없음)
                         {
                             WriteLineInParts($"세트 : {selectedItem.set}", 68, ref startDescriptionY);
-                            WriteLineInParts($"세트효과 : 세트효과적는칸 ", 68, ref startDescriptionY);
                         }
 
 
@@ -308,8 +304,24 @@ namespace TeamProject07.Inventroy
                     switch (option)
                     {
                         case 0:
+
                             if (selectedItem.Type == Define.ItemType.Equip)
                             {
+
+                                for (int i = 0; i < equipItem.Count; i++) // 같은부위 장비 해제
+                                {
+                                    if (equipItem[i].Part == selectedItem.Part)
+                                    {
+                                        equipItem[i].IsEquipped = false;
+                                        equipItem.RemoveAt(i);
+
+                                        break;
+                                    }
+
+                                }
+
+
+
                                 selectedItem.IsEquipped = !selectedItem.IsEquipped;
                                 Console.SetCursorPosition(72, startDescriptionY + 3);
                                 Console.ForegroundColor = ConsoleColor.Green;
@@ -317,19 +329,26 @@ namespace TeamProject07.Inventroy
                                 Console.ResetColor();
                                 Console.ReadKey();
                                 ClearCurrentLine(72, startDescriptionY + 3);
+
+                                equipItem.Add(selectedItem);
+
+
                             }
                             else if (selectedItem.Type == Define.ItemType.Consum)
                             {
                                 selectedItem.IsUsed = !selectedItem.IsUsed;
                                 Console.SetCursorPosition(72, startDescriptionY + 3);
 
-                                Console.ForegroundColor= ConsoleColor.Green;
+                                Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine($"    {selectedItem.buff} + {selectedItem.buffValue}                ");
                                 UsePotion();
                                 Console.ResetColor();
                                 Console.ReadKey();
                                 ClearCurrentLine(72, startDescriptionY + 3);
                             }
+
+                            player.TotalStats();
+
                             break;
                         case 1:
                             selectedItem.IsEquipped = false;
