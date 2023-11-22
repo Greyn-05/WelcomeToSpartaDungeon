@@ -46,8 +46,7 @@ namespace TeamProject07.Status
             Console.WriteLine();
 
             MainLogic.Textbox();
-            Console.WriteLine("      0. 메인화면");
-            Console.WriteLine("      원하시는 행동을 입력해주세요.");
+            Console.WriteLine("      원하시는 행동을 입력해주세요.      0. 메인화면");
 
             MainLogic.DrawWindowHigh();
             MainLogic.DrawWindowLow();
