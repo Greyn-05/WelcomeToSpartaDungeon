@@ -11,10 +11,7 @@ namespace TeamProject07.Hotel
     {
 
 
-
-        public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\SaveData.json";
-
-        // public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + MainLogic.player.Name + ".json";
+        public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + MainLogic.player.Name + ".json";
 
         public static void Save()
         {
@@ -66,6 +63,15 @@ namespace TeamProject07.Hotel
 
         public static void Load()
         {
+
+
+            string nameTest = "ddd";
+
+
+            path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + nameTest + ".json";
+
+
+
             if (File.Exists(path))
             {
                 using (StreamReader file = File.OpenText(path))
