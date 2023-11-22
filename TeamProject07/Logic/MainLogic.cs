@@ -30,7 +30,7 @@ namespace TeamProject07.Logic
         HotelMain hotel = new HotelMain();
         Skill skill = new Skill();
 
-        static public Player player = new Player("KIm", 1, 5, 5, 100, 100, 10000, 50, 50);
+        static public Player player;
 
 
         //static public Player player;
@@ -46,7 +46,7 @@ namespace TeamProject07.Logic
         public void Start()
         {
             GameTitle();
-           
+
             //Console.WriteLine("게임 시작부 입니다.");
             //Console.WriteLine("1. 타이틀 화면을 출력합니다.");
             //Console.WriteLine("2. 여기서 이름, 클래스를 입력받습니다.");
@@ -55,17 +55,34 @@ namespace TeamProject07.Logic
 
             Shop_Init();    // 상점 초기화 + 아이템 정보 load
 
-            /*int selectNorL = SelectNewOrLoad();   // New로 할 것인지 Load로 할 것인지 선택
+            int selectNorL = SelectNewOrLoad();   // New로 할 것인지 Load로 할 것인지 선택
 
             if (selectNorL == 1) // New > 새로운 플레이어를 생성
             {
+                string TplayerName = InputName();
+                string TplayerClass = InputClass();
 
+                if (TplayerClass == "Warrior")
+                {
+                    player = new Player(TplayerName, TplayerClass, 1, 15, 15, 150, 100, 1000, 20, 20);
+                    player.LoadSkills(Define.SkillPathW); // 플레이어 스킬 정보 load
+                }
+                else if (TplayerClass == "Sorcerer")
+                {
+                    player = new Player(TplayerName, TplayerClass, 1, 10, 5, 100, 200, 1000, 20, 20);
+                    player.LoadSkills(Define.SkillPathS); // 플레이어 스킬 정보 load
+                }
             }
             else if (selectNorL == 2)    // Load > 기존의 플레이어 정보를 가져온다.
             {
+                player = new Player("", "", 1, 10, 5, 100, 200, 1000, 20, 20);
+                string choosenPath = ChooseSaveFile();
 
-            }*/
-            player.LoadSkills(); // 플레이어 스킬 정보 load
+                //Console.WriteLine(choosenPath);
+
+                JsonSave.Load(choosenPath);
+            }
+
         }
 
         public void Game()
@@ -92,7 +109,7 @@ namespace TeamProject07.Logic
                 DrawWindowHigh();
                 DrawWindowLow();
                 int input = CheckValidInput(0, 16);
-               
+
                 switch (input)
                 {
                     case (int)MainGamePhase.Exit:
@@ -132,14 +149,14 @@ namespace TeamProject07.Logic
                         PlayerHPto1();
                         break;
                 }
-               
+
 
 
                 if (gameEndTrigger == true)
                 {
                     break;
                 }
-               
+
 
             }
 
@@ -172,7 +189,7 @@ namespace TeamProject07.Logic
 
         private void GameTitle()
         {
-           
+
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
@@ -192,7 +209,7 @@ namespace TeamProject07.Logic
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
-            
+
             Console.WriteLine("   Press Anykey to Start");
             Console.WriteLine("");
             Console.WriteLine("");
@@ -200,10 +217,48 @@ namespace TeamProject07.Logic
             DrawWindowHigh();
             DrawWindowLow();
             Console.ReadLine();
-            
-       
+
+
         }
 
+        private string ChooseSaveFile()
+        {
+            string choosenPath = "";
+            int cnt = 1;
+            int cnt2 = 1;
+            Console.Clear();
+            String FolderName = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\";
+
+            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(FolderName);
+            foreach (System.IO.FileInfo File in di.GetFiles())
+            {
+                if (File.Extension.ToLower().CompareTo(".json") == 0)
+                {
+                    String FileNameOnly = File.Name.Substring(0, File.Name.Length - 4);
+                    String FullFileName = File.FullName;
+                    DateTime FileSaveTime = File.CreationTime;
+
+                    Console.Write($"{cnt}. {FileNameOnly}    \t Save time : ");
+                    Console.WriteLine($"{FileSaveTime} \n ");
+                    cnt++;
+                }
+            }
+            int input = CheckValidInput(1, cnt);
+
+            foreach (System.IO.FileInfo File in di.GetFiles())
+            {
+                if (File.Extension.ToLower().CompareTo(".json") == 0)
+                {
+                    if (cnt2 == input)
+                    {
+                        String FileNameOnlyC = File.Name.Substring(0, File.Name.Length - 4);
+                        choosenPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + FileNameOnlyC + "json";
+                    }
+                    cnt2++;
+                }
+            }
+            return choosenPath;
+        }
         private int SelectNewOrLoad()
         {
             Console.Clear();
@@ -231,19 +286,33 @@ namespace TeamProject07.Logic
 
                 playerName = Console.ReadLine();
 
-                if (playerName != null)
+                if ((playerName != null) || (playerName != ""))
                 {
                     break;
                 }
             }
-
-
             return playerName;
         }
 
-        private void InputClass()
+        private string InputClass()
         {
+            string playerClass = "";
 
+            Console.Clear();
+            Console.WriteLine("플레이어 직업을 선택하세요.");
+            Console.WriteLine("1. Warrior");
+            Console.WriteLine("2. Sorcerer\n >> ");
+
+            switch (CheckValidInput(1, 2))
+            {
+                case 1:
+                    playerClass = "Warrior";
+                    break;
+                case 2:
+                    playerClass = "Sorcerer";
+                    break;
+            }
+            return playerClass;
         }
 
         static void Shop_Init()
@@ -325,7 +394,7 @@ namespace TeamProject07.Logic
                 Console.SetCursorPosition(0, cnt);
                 Console.Write("│");
             }
-            for (int cnt = 21; cnt <= 37; cnt ++)
+            for (int cnt = 21; cnt <= 37; cnt++)
             {
                 Console.SetCursorPosition(117, cnt);
                 Console.Write("│");
@@ -338,7 +407,6 @@ namespace TeamProject07.Logic
             }
             Console.Write("┘");
 
-            Console.SetCursorPosition(3, 25);
         }
     }
 }

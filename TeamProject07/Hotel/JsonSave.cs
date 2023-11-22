@@ -9,8 +9,6 @@ namespace TeamProject07.Hotel
 {
     internal class JsonSave
     {
-
-
         public static string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + MainLogic.player.Name + ".json";
 
         public static void Save()
@@ -63,20 +61,16 @@ namespace TeamProject07.Hotel
         }
 
 
-        public static void Load()
+        public static void Load(string Cpath)
         {
 
 
             string nameTest = "ddd";
+            //path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + nameTest + ".json";
 
-
-            path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + nameTest + ".json";
-
-
-
-            if (File.Exists(path))
+            if (File.Exists(Cpath))
             {
-                using (StreamReader file = File.OpenText(path))
+                using (StreamReader file = File.OpenText(Cpath))
                 {
                     using (JsonTextReader reader = new JsonTextReader(file))
                     {

@@ -1,8 +1,8 @@
 {
-  "Name": "KIm",
+  "Name": "KImHY",
   "Level": 1,
-  "Class": null,
-  "Attack": 5,
+  "Class": "Warrior",
+  "Attack": 100,
   "Defence": 5,
   "Hp": 100,
   "MaxHp": 100,

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TeamProject07.Inventroy;
 using TeamProject07.Items;
 using TeamProject07.Skills;
 using TeamProject07.Utils;
@@ -19,14 +18,16 @@ namespace TeamProject07.Characters
 
         public int MaxMp;
 
+        public Define.SetEquip set;
+
         public Dictionary<int, Skill> Skills;
 
         public Equipment EquipStats { get; set; }
-        public ConsumableItem ConsumStats { get; set; }
 
-        public Player(string name, int level, int attack, int defence, int hp, int mp, int gold, int critRate, int missRate)
+        public Player(string name, string _class, int level, int attack, int defence, int hp, int mp, int gold, int critRate, int missRate)
         {
             Name = name;
+            Class = _class;
             Level = level;
             Attack = attack;
             Defence = defence;
@@ -40,7 +41,6 @@ namespace TeamProject07.Characters
 
             Inven = new List<Item>();
             EquipStats = new Equipment();
-            ConsumStats = new ConsumableItem();
         }
 
         public int TotalAttack => Attack + EquipStats.AddAttack;
@@ -50,9 +50,6 @@ namespace TeamProject07.Characters
         public float TotalCritRate => CritRate + EquipStats.AddCritRate;
         public float TotalMissRate => MissRate + EquipStats.AddMissRate;
 
-
-
-        public Define.SetEquip set;
         public void TotalStats()
         {
             EquipStats.AddAttack = 0;
@@ -61,8 +58,6 @@ namespace TeamProject07.Characters
             EquipStats.AddMp = 0;
             EquipStats.AddCritRate = 0;
             EquipStats.AddMissRate = 0;
-            ConsumStats.BuffHp = 0;
-            ConsumStats.BuffMp = 0;
 
             foreach (Item item in Inven)
             {
@@ -92,66 +87,8 @@ namespace TeamProject07.Characters
                             break;
                     }
                 }
-                else if (item.IsUsed)
-                {
-                    switch (item.buff)
-                    {
-                        case Define.Buff.hp:
-                            ConsumStats.BuffHp += item.buffValue;
-                            break;
-                        case Define.Buff.mp:
-                            ConsumStats.BuffMp += item.buffValue;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-
-            if (InvenMain.SetItemCheck()) // 세트효고ㅡㅏ있으면 세트 추가
-            {
-                switch (set)
-                {
-
-                    case Define.SetEquip.신문지세트:
-                        EquipStats.AddCritRate += 3;
-                        EquipStats.AddMissRate += 5;
-                        break;
-                    case Define.SetEquip.천세트:
-                        EquipStats.AddAttack += 4;
-                        EquipStats.AddDefence += 6;
-                        EquipStats.AddMissRate += 10;
-                        break;
-                    case Define.SetEquip.나무세트:
-                        EquipStats.AddAttack += 10;
-                        EquipStats.AddDefence += 2;
-                        EquipStats.AddMissRate += 6;
-                        EquipStats.AddHp += 20;
-                        EquipStats.AddMp += 20;
-                        break;
-                    case Define.SetEquip.강철세트:
-                        EquipStats.AddDefence += 30;
-                        EquipStats.AddCritRate += 5;
-                        EquipStats.AddMissRate += 3;
-                        EquipStats.AddHp += 30;
-                        EquipStats.AddMp += 30;
-                        break;
-
-                    case Define.SetEquip.세트능력없음:
-                    default:
-                        break;
-                }
-
             }
         }
-
-
-
-
-
-
-
-
 
         public void EquipItem(Item item)
         {
@@ -159,14 +96,14 @@ namespace TeamProject07.Characters
             TotalStats();
         }
 
-        public void LoadSkills()
+        public void LoadSkills(string SKpath)
         {
             Skills = new Dictionary<int, Skill>();
             Skills.Clear();
 
-            if (File.Exists(Define.SkillPath))
+            if (File.Exists(SKpath))
             {
-                using (StreamReader sr = new StreamReader(new FileStream(Define.SkillPath, FileMode.Open)))
+                using (StreamReader sr = new StreamReader(new FileStream(SKpath, FileMode.Open)))
                 {
                     sr.ReadLine();
 
@@ -207,5 +144,4 @@ namespace TeamProject07.Characters
 
         //}
     }
-
 }

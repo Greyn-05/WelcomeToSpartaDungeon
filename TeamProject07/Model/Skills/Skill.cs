@@ -24,7 +24,7 @@ namespace TeamProject07.Skills
             Mp = int.Parse(myMp);
         }*/
 
-        public void LoadSkills()
+        /*public void LoadSkills()
         {
             skillData = new Dictionary<int, Skill>();
             skillData.Clear();
@@ -51,7 +51,7 @@ namespace TeamProject07.Skills
                     }
                 }
             }
-        }
+        }*/
 
         public Define.MainGamePhase ShowSkillProto()
         {
