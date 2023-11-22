@@ -34,5 +34,8 @@ namespace TeamProject07
         public int buffValue;
         public Define.Buff debuff;
         public int debuffValue;
+
+        public Define.SetEquip set;
+
     }
 }
