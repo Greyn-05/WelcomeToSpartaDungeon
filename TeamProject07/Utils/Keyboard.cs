@@ -20,8 +20,10 @@ namespace TeamProject07.Utils
 
             while (running)
             {
-                Console.SetCursorPosition(1, 0); // 좌표 수정
+                Console.SetCursorPosition(45, 1); // 좌표 수정
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("ESC : 나가기");
+                Console.ResetColor();
                 KeyboardPointer(nowX, nowY);
 
                 var keyInfo = Console.ReadKey(true);

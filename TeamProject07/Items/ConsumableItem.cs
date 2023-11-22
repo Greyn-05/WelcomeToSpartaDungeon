@@ -12,6 +12,7 @@ namespace TeamProject07.Items
         public int BuffHp { get; set; }
         public int BuffAttack { get; set; }
         public int BuffDefence { get; set; }
+        public int BuffMp { get; set; }
         public int Stock { get; set; }
 
         

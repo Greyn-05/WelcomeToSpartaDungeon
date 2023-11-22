@@ -21,6 +21,7 @@ namespace TeamProject07.Characters
         public Dictionary<int, Skill> Skills;
 
         public Equipment EquipStats { get; set; }
+        public ConsumableItem ConsumStats { get; set; }
 
         public Player(string name, int level, int attack, int defence, int hp, int mp, int gold, int critRate, int missRate)
         {
@@ -38,6 +39,7 @@ namespace TeamProject07.Characters
 
             Inven = new List<Item>();
             EquipStats = new Equipment();
+            ConsumStats = new ConsumableItem();
         }
 
         public int TotalAttack => Attack + EquipStats.AddAttack;
@@ -79,6 +81,20 @@ namespace TeamProject07.Characters
                             break;
                         case Define.Buff.maxMp:
                             EquipStats.AddMp += item.buffValue;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else if (item.IsUsed)
+                {
+                    switch(item.buff)
+                    {
+                        case Define.Buff.hp:
+                            ConsumStats.BuffHp += item.buffValue;
+                            break;
+                        case Define.Buff.mp:
+                            ConsumStats.BuffMp += item.buffValue;
                             break;
                         default:
                             break;
