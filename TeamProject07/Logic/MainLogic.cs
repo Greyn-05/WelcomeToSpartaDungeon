@@ -337,6 +337,7 @@ namespace TeamProject07.Logic
                 Console.Write("─");
             }
             Console.Write("┘");
+           
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using TeamProject07.Characters;
+using TeamProject07.Logic;
 using static TeamProject07.Utils.Define;
 namespace TeamProject07.Controller
 {
@@ -82,25 +83,31 @@ namespace TeamProject07.Controller
             Console.Clear();
             
             StageMonsterView();
-            Console.WriteLine("\n\t전투가 시작됩니다!!");
+            Console.WriteLine("\n\t     전투가 시작됩니다!!");
 
             int killMonsterNum = 0;
             while (!player.IsDead)
-            {
-                Console.WriteLine($"\n\t   {player.Name} 체력 :{player.Hp}    공격력 : {player.Attack} \n");
+            {   
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine($"\n\t    {player.Name} 체력 :{player.Hp}    공격력 : {player.Attack} \n");
                 for (int i = 0; i < CreateMonsters.Count; i++)
                 {
                      
                     if (CreateMonsters[i].IsDead == true)
                     {
-                        RedText($"{CreateMonsters[i].Name} 사망");
+                        RedText($"   {CreateMonsters[i].Name} 사망");
                     }
                     else
-                        Console.WriteLine($"{i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                    Console.WriteLine();
+                    Console.WriteLine($"     {i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
                 }
-                Console.WriteLine("\n0.도망가기");
-                Console.WriteLine("공격할 몬스터를 선택하세요.");
-                
+                Console.WriteLine("\n    0.도망가기");
+                Console.WriteLine("     공격할 몬스터를 선택하세요.");
+                MainLogic.DrawWindowHigh();
+                MainLogic.DrawWindowLow();
+
                 int monsterChoice = CheckValidInput(0, MonsterNumber);
                 Console.Clear();
                 if (monsterChoice == 0) {
@@ -115,27 +122,33 @@ namespace TeamProject07.Controller
                 {
                     if (CreateMonsters[i].IsDead == true)
                     {
-                        RedText($"{i + 1}. {CreateMonsters[i].Name} 사망");
+                        RedText($"   {i + 1}. {CreateMonsters[i].Name} 사망");
                     }
                     else if (monsterChoice == i+1)
                     {
-                        Bluetext($"{i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                        Console.WriteLine();
+                        Bluetext($"   {i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
                     }
                     else
                     {
-                        Console.WriteLine($"{i+1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                        Console.WriteLine();
+                        Console.WriteLine($"   {i+1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
 
                     }
+                    
 
                 }
+
                 Console.WriteLine($"\n\n\t   {player.Name} 체력 :{player.Hp}    마나 : {player.Mp}");
-                Console.WriteLine("\n공격할 스킬을 선택하세요.\n");
-                Console.WriteLine($"번호 \t이름\t   + (스킬데미지)\t소모MP");
+                Console.WriteLine("\n   공격할 스킬을 선택하세요.\n");
+                Console.WriteLine($"   번호 \t이름\t   + (스킬데미지)\t소모MP");
                 for (int i = 1; i <= player.Skills.Count; i++) { 
                 
-                Console.WriteLine($"{i}. \t{player.Skills[i].Name} \t {player.Attack} + ({player.Skills[i].Damage})          \t{player.Skills[i].Mp}");
+                Console.WriteLine($"   {i}. \t{player.Skills[i].Name} \t {player.Attack} + ({player.Skills[i].Damage})          \t{player.Skills[i].Mp}");
 
                 }
+                MainLogic.DrawWindowHigh();
+                MainLogic.DrawWindowLow();
                 int skillChoice = CheckValidInput(1, player.Skills.Count);
                 Console.Clear();
                 if(player.Mp <player.Skills[skillChoice].Mp) 
@@ -148,13 +161,17 @@ namespace TeamProject07.Controller
                 if (CreateMonsters[monsterChoice-1].IsDead == false)
                 {
                     player.Mp -= player.Skills[skillChoice].Mp;
-                    BluetextNo($"\n{player.Name} "); Console.Write("가 공격합니다. ");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    BluetextNo($"\n│    {player.Name} "); Console.Write("가 공격합니다. ");
                     int damageValue =CreateMonsters[monsterChoice - 1].TakeDamage(player, player.Skills[skillChoice].Damage);
-                    RedTextNo($"\n{CreateMonsters[monsterChoice - 1].Name} "); Console.Write("가 ");
+                    RedTextNo($"\n│    {CreateMonsters[monsterChoice - 1].Name} "); Console.Write("가 ");
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write($" {damageValue} "); Console.ResetColor(); Console.Write($"의 피해를 받았습니다!\n");
-                    RedTextNo($"\n{CreateMonsters[monsterChoice - 1].Name} "); Console.Write($"남은Hp : {CreateMonsters[monsterChoice - 1].Hp}\n\n");
+                    Console.Write($"│    {damageValue} "); Console.ResetColor(); Console.Write($"의 피해를 받았습니다!\n");
+                    RedTextNo($"\n│    {CreateMonsters[monsterChoice - 1].Name} "); Console.Write($"남은Hp : {CreateMonsters[monsterChoice - 1].Hp}\n\n");
+                    MainLogic.DrawWindowHigh();
+                    MainLogic.DrawWindowLow();
                     Thread.Sleep(1700);
                     Console.Clear();
                     if (CreateMonsters[monsterChoice-1].IsDead==true)
@@ -353,27 +370,18 @@ namespace TeamProject07.Controller
         public void Run()
         {
             Console.Clear();
-            Console.WriteLine("===================== RUN ========================");
-            Console.WriteLine("==================================================");
-            Console.WriteLine("  ┏   ┓           ; ◆ ");
-            Console.WriteLine(" |      |        ==┌┼┘  ");
-            Console.WriteLine("|        |       == │┒  ");
-            Console.WriteLine("==================================================");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("   ===================== RUN ========================");
+            Console.WriteLine("   ==================================================");
+            Console.WriteLine("     ┏   ┓           ; ◆ ");
+            Console.WriteLine("    |      |        ==┌┼┘  ");
+            Console.WriteLine("   |        |       == │┒  ");
+            Console.WriteLine("   ==================================================");
+           
         }
-        public void DungeonEntranceView()
-        {
-            Console.WriteLine("==================================================");
-            Console.WriteLine("  ┏   ┓             ◆ ;");
-            Console.WriteLine(" |      |          └┼┐ == ");
-            Console.WriteLine("|        |         ┌│  ==");
-            Console.WriteLine("==================================================");
-            Console.WriteLine("======== 던전에 가기 전 준비를 해주세요. =========\n\n");
-            Console.WriteLine("==================");
-            Console.WriteLine("= 1. 던전 입장   =");
-            Console.WriteLine("= 2. 소모품 사용 =");
-            Console.WriteLine("= 0. 나가기      =");
-            Console.WriteLine("==================");
-        }
+        
         public int CheckValidInput(int min, int max)
         {
             while (true)

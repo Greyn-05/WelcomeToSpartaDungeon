@@ -43,7 +43,9 @@ namespace TeamProject07.Dungeon
             DungeonEntranceView();
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
-                
+            MainLogic.DrawWindowHigh();
+            MainLogic.DrawWindowLow();
+
             int input = CheckValidInput(0, 1);
             
             switch (input)
@@ -76,7 +78,10 @@ namespace TeamProject07.Dungeon
             DungeonSelectView();
             Console.WriteLine();
             Console.WriteLine("입장할 던전을 선택하세요.");
-            
+            MainLogic.DrawWindowHigh();
+            MainLogic.DrawWindowLow();
+
+
             int input = CheckValidInput(0, 4);
             Console.Clear();
             switch (input)
@@ -105,11 +110,15 @@ namespace TeamProject07.Dungeon
 
         private void UseItem(Player player)
         {
+            Console.WriteLine();
             Console.WriteLine("인벤토리 출력");
             Console.WriteLine("사용할 아이템 선택");
             Console.WriteLine("아이템 효과 보여주기??");
 
             Console.WriteLine("원하시는 행동을 입력해주세요.");
+            MainLogic.DrawWindowHigh();
+            MainLogic.DrawWindowLow();
+
 
             int input = CheckValidInput(0, 2);
             switch (input)
@@ -144,15 +153,20 @@ namespace TeamProject07.Dungeon
         private void DungeonEntranceView()
         {
             Console.Clear();
-            Console.WriteLine("==================================================");
-            Console.WriteLine("  ┏   ┓             ◆ ;");
-            Console.WriteLine(" |      |          └┼┐ == ");
-            Console.WriteLine("|        |         ┌│  ==");
-            Console.WriteLine("==================================================\n\n");
-            Console.WriteLine("==================");
-            Console.WriteLine("= 1. 던전 입장   =");
-            Console.WriteLine("= 0. 나가기      =");
-            Console.WriteLine("==================");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("   ==================================================");
+            Console.WriteLine("     ┏   ┓             ◆ ;");
+            Console.WriteLine("    |      |          └┼┐ == ");
+            Console.WriteLine("   |        |         ┌│  ==");
+            Console.WriteLine("   ==================================================\n\n");
+            Console.WriteLine("   ==================");
+            Console.WriteLine("   = 1. 던전 입장   =");
+            Console.WriteLine("   = 0. 나가기      =");
+            Console.WriteLine("   ==================");
+            MainLogic.DrawWindowHigh();
+            MainLogic.DrawWindowLow();
         }
 
         
@@ -160,18 +174,23 @@ namespace TeamProject07.Dungeon
         private void DungeonSelectView()
         {
             Console.Clear();
-            Console.WriteLine("==================================================");
-            Console.WriteLine("  ┏   ┓             ◆ ;");
-            Console.WriteLine(" |      |          └┼┐ == ");
-            Console.WriteLine("|        |         ┌│  ==");
-            Console.WriteLine("==================================================\n\n");
-            Console.WriteLine("==================");
-            Console.WriteLine("= 1. 초원 필드   =");
-            Console.WriteLine("= 2. 묘지 필드   =");
-            Console.WriteLine("= 3. 용의 둥지   =");
-            Console.WriteLine("= 4. 용의 은신처 =");
-            Console.WriteLine("= 0. 나가기      =");
-            Console.WriteLine("==================");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("   ==================================================");
+            Console.WriteLine("     ┏   ┓             ◆ ;");
+            Console.WriteLine("    |      |          └┼┐ == ");
+            Console.WriteLine("   |        |         ┌│  ==");
+            Console.WriteLine("   ==================================================\n\n");
+            Console.WriteLine("   ==================");
+            Console.WriteLine("   = 1. 초원 필드   =");
+            Console.WriteLine("   = 2. 묘지 필드   =");
+            Console.WriteLine("   = 3. 용의 둥지   =");
+            Console.WriteLine("   = 4. 용의 은신처 =");
+            Console.WriteLine("   = 0. 나가기      =");
+            Console.WriteLine("   ==================");
+            MainLogic.DrawWindowHigh();
+            MainLogic.DrawWindowLow();
         }
     }
 }
