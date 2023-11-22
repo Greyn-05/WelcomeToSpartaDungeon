@@ -354,18 +354,18 @@ namespace TeamProject07.Shop
                     if (catalog.slots[i].item != null)
                     {
                         if (catalog.slots[i].item.Type == Utils.Define.ItemType.Equip)
-                            bf = catalog.slots[i].item.buffValue != 0 ? $"{catalog.slots[i].item.buff} {catalog.slots[i].item.buffValue}↑" : "";
+                            bf = catalog.slots[i].item.buffValue != 0 ? $"{((catalog.slots[i].item.buff).ToString()).ToUpper()} {catalog.slots[i].item.buffValue}↑" : "";
                         else
-                            bf = catalog.slots[i].item.buffValue != 0 ? $"회복량 {catalog.slots[i].item.buffValue}" : "";
+                            bf = catalog.slots[i].item.buffValue != 0 ? $"{((catalog.slots[i].item.buff).ToString()).ToUpper()} {catalog.slots[i].item.buffValue} 회복" : "";
 
 
                         if (i == check)
                             Console.ForegroundColor = ConsoleColor.Green;
 
-                        Console.WriteLine((isSelected ? $"{i + 1}. " : "") +
-                            ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $"{catalog.slots[i].item.Part} | " : "") +
-                            ($"{catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf}") +
-                            (isSelected && (catalog.slots[i].count > 1) ? ($" | {catalog.slots[i].count}개") : ""));
+                        Console.WriteLine((isSelected ? $"{i + 1}." : "") +
+                            ((catalog.slots[i].item.Type == Utils.Define.ItemType.Equip) ? $" {catalog.slots[i].item.Part, -10} | " : $" {(catalog.slots[i].item.buff.ToString()).ToUpper(),-3} | ")
+                            + ($"{catalog.slots[i].item.Name} | {catalog.slots[i].item.Info} | {(int)(catalog.slots[i].item.ItemPrice * nego)}원 | {bf}") +
+                            (isSelected && (catalog.slots[i].count > 1) ? $" | {catalog.slots[i].count}개" : ""));
 
 
                         Console.ForegroundColor = ConsoleColor.Gray;
@@ -587,8 +587,8 @@ namespace TeamProject07.Shop
                     if (i == check)
                         Console.ForegroundColor = ConsoleColor.Green;
 
-                    Console.WriteLine((isSelected ? $"{i + 1}. " : "") +
-                          ((MainLogic.player.Inven[i].Type == Utils.Define.ItemType.Equip) ? $"{MainLogic.player.Inven[i].Part} | " : "") +
+                    Console.WriteLine((isSelected ? $"{i + 1}." : "") +
+                          ((MainLogic.player.Inven[i].Type == Utils.Define.ItemType.Equip) ? $" {MainLogic.player.Inven[i].Part, -10} | " : $" {(MainLogic.player.Inven[i].buff.ToString()).ToUpper(),-3} | ") +
                         ($"{MainLogic.player.Inven[i].Name} | {MainLogic.player.Inven[i].Info} | {(int)(MainLogic.player.Inven[i].ItemPrice * nego)}원"));
 
 
