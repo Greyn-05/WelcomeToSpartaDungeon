@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeamProject07.Characters;
+using TeamProject07.Inventroy;
 using TeamProject07.Items;
 using TeamProject07.Utils;
 
@@ -32,6 +33,12 @@ namespace TeamProject07.Status
             Console.WriteLine("0. 메인화면");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
+
+            if (InvenMain.SetItemCheck())
+            {
+                Console.WriteLine($"   세트효과 발동중 : {player.set}");
+            }
+            Console.WriteLine($"   골  드 : {player.Gold} G");
 
             int input = CheckValidInput(0, 0);
 
