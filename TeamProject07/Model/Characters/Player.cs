@@ -71,7 +71,7 @@ namespace TeamProject07.Characters
                         case Define.Buff.cri:
                             EquipStats.AddCritRate += item.buffValue;
                             break;
-                        case Define.Buff.dex:
+                        case Define.Buff.miss:
                             EquipStats.AddMissRate += item.buffValue;
                             break;
                         case Define.Buff.maxHp:
