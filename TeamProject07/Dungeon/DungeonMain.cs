@@ -42,7 +42,7 @@ namespace TeamProject07.Dungeon
             }
             DungeonEntranceView();
             Console.WriteLine();
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.WriteLine("던전에 들어가시겠습니까?");
                 
             int input = CheckValidInput(0, 1);
             

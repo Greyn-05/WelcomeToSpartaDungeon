@@ -130,7 +130,7 @@ namespace TeamProject07.Controller
                 }
                 Console.WriteLine($"\n\n\t   {player.Name} 체력 :{player.Hp}    마나 : {player.Mp}");
                 Console.WriteLine("\n공격할 스킬을 선택하세요.\n");
-                Console.WriteLine($"번호 \t이름\t   + (스킬데미지)\t소모MP");
+                Console.WriteLine($"번호 \t이름\t 공+ (스킬데미지)\t소모MP");
                 for (int i = 1; i <= player.Skills.Count; i++) { 
                 
                 Console.WriteLine($"{i}. \t{player.Skills[i].Name} \t {player.Attack} + ({player.Skills[i].Damage})          \t{player.Skills[i].Mp}");
