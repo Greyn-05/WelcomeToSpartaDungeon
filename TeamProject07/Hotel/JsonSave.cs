@@ -15,6 +15,8 @@ namespace TeamProject07.Hotel
 
         public static void Save()
         {
+            path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\" + MainLogic.player.Name + ".json";
+
 
             string inv = ""; // 아이템목록
 
