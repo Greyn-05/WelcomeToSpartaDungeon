@@ -28,15 +28,11 @@ namespace TeamProject07.Status
             Console.WriteLine($"   LEVEL {player.Level} \t {player.Class}");
             Console.WriteLine();
             Console.WriteLine($"   공격력 : {player.Attack} + {player.EquipStats.AddAttack}");
-            Console.WriteLine();
             Console.WriteLine($"   방어력 : {player.Defence} + {player.EquipStats.AddDefence}");
-            Console.WriteLine();
             Console.WriteLine($"   치명타 확률 : {player.CritRate} + {player.EquipStats.AddCritRate} %");
-            Console.WriteLine();
             Console.WriteLine($"   회피 확률 : {player.MissRate} + {player.EquipStats.AddMissRate} %");
             Console.WriteLine();
             Console.WriteLine($"   체력 : {player.Hp} / {player.MaxHp} + {player.EquipStats.AddHp} ");
-            Console.WriteLine();
             Console.WriteLine($"   마나 : {player.Mp} / {player.MaxMp} + {player.EquipStats.AddMp} ");
             Console.WriteLine();
             Console.WriteLine($"   골  드 : {player.Gold} G");
@@ -50,8 +46,10 @@ namespace TeamProject07.Status
             Console.WriteLine();
             Console.WriteLine();
             MainLogic.Textbox();
+
             Console.SetCursorPosition(2, 28);
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.WriteLine("      원하시는 행동을 입력해주세요.");
+
             MainLogic.DrawWindowHigh();
             MainLogic.DrawWindowLow();
 

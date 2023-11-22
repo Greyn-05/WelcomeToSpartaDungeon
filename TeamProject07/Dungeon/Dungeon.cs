@@ -56,7 +56,7 @@ namespace TeamProject07.Controller
             CreateMonsters = new List<Monster>();
             CreateMonsters.Clear();
             Random rand = new Random();
-            MonsterNumber = rand.Next(3, 5);    // 3마리~4마리
+            MonsterNumber = rand.Next(2, 5);    // 2마리~4마리
             int MonsterType;
             Monster m;
             for (int i = 0; i < MonsterNumber; i++)
@@ -91,7 +91,7 @@ namespace TeamProject07.Controller
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine($"\n\t    {player.Name} 체력 :{player.Hp}    공격력 : {player.Attack} \n");
+                Console.WriteLine($"\n\t    {player.Name} 체력 :{player.Hp}/{player.MaxHp}    공격력 : {player.Attack} \n");
                 for (int i = 0; i < CreateMonsters.Count; i++)
                 {
                      
@@ -105,9 +105,8 @@ namespace TeamProject07.Controller
                     Console.WriteLine($"     {i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
                     }
                 }
-                
-                Console.WriteLine("\n\n\n    0.도망가기");
-                Console.WriteLine("     공격할 몬스터를 선택하세요.");
+                MainLogic.Textbox();
+                Console.WriteLine("     공격할 몬스터를 선택하세요.     0.도망가기");
                 MainLogic.DrawWindowHigh();
                 MainLogic.DrawWindowLow();
 
@@ -130,7 +129,7 @@ namespace TeamProject07.Controller
                         Console.Write("\n│ ");
                         RedText($"  {i + 1}. {CreateMonsters[i].Name} 사망");
                     }
-                    else if (monsterChoice == i+1)
+                    else if (monsterChoice == i + 1)
                     {
                         Console.Write("\n│ ");
                         Bluetext($"  {i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
@@ -138,15 +137,15 @@ namespace TeamProject07.Controller
                     else
                     {
                         Console.WriteLine();
-                        Console.WriteLine($"│   {i+1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
+                        Console.WriteLine($"│   {i + 1}. LV.{CreateMonsters[i].Level} \t {CreateMonsters[i].Name} \t HP : {CreateMonsters[i].Hp} \t ATK : {CreateMonsters[i].Attack}");
 
                     }
-                    
+
 
                 }
 
-                Console.WriteLine($"\n\n\t   {player.Name} 체력 :{player.Hp}    마나 : {player.Mp}");
-                Console.WriteLine("\n   공격할 스킬을 선택하세요.\n");
+                Console.WriteLine($"\n\n\t   {player.Name} 체력 :{player.Hp}/{player.MaxHp}    마나 : {player.Mp}/{player.MaxMp}\n\n");
+                
                 Console.WriteLine($"   번호 \t이름\t 공+ (스킬데미지)\t소모MP");
 
                 for (int i = 1; i <= player.Skills.Count; i++) { 
@@ -154,18 +153,21 @@ namespace TeamProject07.Controller
                     Console.WriteLine($"   {i}.     \t{player.Skills[i].Name} \t {player.Attack} + ({player.Skills[i].Damage})          \t{player.Skills[i].Mp}");
 
                 }
-                    MainLogic.DrawWindowHigh();
-                    MainLogic.DrawWindowLow();
-                    int skillChoice = CheckValidInput(1, player.Skills.Count);
-                    Console.Clear();
+                
+                MainLogic.Textbox();
+                Console.WriteLine("     공격할 스킬을 선택하세요.");
+                MainLogic.DrawWindowHigh();
+                MainLogic.DrawWindowLow();
+                int skillChoice = CheckValidInput(1, player.Skills.Count);
+                
                 if (player.Mp < player.Skills[skillChoice].Mp)
                 {
 
-                    Console.WriteLine("   MP가 부족합니다. 평타로 공격합니다.");
+                    RedText("      MP가 부족합니다. 평타로 공격합니다.");
                     Thread.Sleep(1500);
                     skillChoice = 1;
                 }
-
+                Console.Clear();
                 if (CreateMonsters[monsterChoice-1].IsDead == false)
                 {
                     player.Mp -= player.Skills[skillChoice].Mp;
@@ -196,9 +198,11 @@ namespace TeamProject07.Controller
                 }
                 else
                 {
-                    Console.WriteLine("\n\n   잘못 입력하셨습니다. 턴이 소모됩니다.");
+                    Console.WriteLine("\n\n      잘못 공격하였습니다. 턴이 넘어갑니다.");
                     MainLogic.DrawWindowHigh();
                     MainLogic.DrawWindowLow();
+                    Thread.Sleep(1500);
+                    Console.Clear();
                 }
                 monsterPhase(player);
 
@@ -373,7 +377,8 @@ namespace TeamProject07.Controller
             Console.WriteLine($"   \t{player.Name} 정보");
             Console.WriteLine($"   \tGold  : {player.Gold}");
             Console.WriteLine($"   \tLevel : {player.Level} , EXP : {player.LevelUpExp}\n\n");
-            Console.WriteLine("   0.돌아가기");
+            MainLogic.Textbox();
+            Console.WriteLine("      0.돌아가기");
             MainLogic.DrawWindowHigh();
             MainLogic.DrawWindowLow();
 
@@ -407,7 +412,7 @@ namespace TeamProject07.Controller
 
                 player.LevelUpExp -= levelUpPoint;
                 Console.WriteLine($"   레벨업! Level : {player.Level} 가 되었습니다.");
-                Console.WriteLine($"   체력 + {UpHp}  공격력 + {UpAttack} 방어력 + {UpDefence}");
+                Console.WriteLine($"   최대체력 + {UpHp}  공격력 + {UpAttack} 방어력 + {UpDefence}");
 
                 Thread.Sleep(200);
                 levelUpPoint = player.Level * player.Level * 100;
@@ -444,7 +449,7 @@ namespace TeamProject07.Controller
                         return ret;
                 }
 
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.WriteLine("      잘못된 입력입니다.");
             }
         }
         public void RedText(String s)
