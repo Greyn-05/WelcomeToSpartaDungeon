@@ -347,7 +347,7 @@ namespace TeamProject07.Logic
             Console.WriteLine();
             Console.WriteLine("   1. Warrior");
             Console.WriteLine();
-            Console.WriteLine("   2. Sorcerer\n >> ");
+            Console.WriteLine("   2. Sorcerer");
             Console.WriteLine();
             Textbox();
             DrawWindowHigh();
