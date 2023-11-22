@@ -57,6 +57,8 @@ namespace TeamProject07.Characters
             EquipStats.AddMp = 0;
             EquipStats.AddCritRate = 0;
             EquipStats.AddMissRate = 0;
+            ConsumStats.BuffHp = 0;
+            ConsumStats.BuffMp = 0;
 
             foreach (Item item in Inven)
             {
