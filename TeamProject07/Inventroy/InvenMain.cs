@@ -248,15 +248,15 @@ namespace TeamProject07.Inventroy
                     switch (option)
                     {
                         case 0:
-                            selectedItem.IsEquipped = !selectedItem.IsUnequipped;
+                            selectedItem.IsEquipped = !selectedItem.IsEquipped;
                             Console.SetCursorPosition(75, startDescriptionY);
-                            Console.WriteLine($"{selectedItem.Name} {(selectedItem.IsEquipped ? "장착 완료!" : "")}"); // 사용하기 추가 예정
+                            Console.WriteLine($"{selectedItem.Name} {(selectedItem.IsEquipped ? "장착 완료!" : "")}");
                             Console.ReadKey();
                             break;
                         case 1:
-                            selectedItem.IsUnequipped = !selectedItem.IsEquipped;
+                            selectedItem.IsEquipped = false;
                             Console.SetCursorPosition(75, startDescriptionY);
-                            Console.WriteLine($"{selectedItem.Name} {(selectedItem.IsUnequipped ? "해제 완료!" : "")}"); // 해제 시 스탯만 변경되게 하면 됨 ..
+                            Console.WriteLine($"{selectedItem.Name} 해제 완료!");
                             Console.ReadKey();
                             break;
                         case 2:
