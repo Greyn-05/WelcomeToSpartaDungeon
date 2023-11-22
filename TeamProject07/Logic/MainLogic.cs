@@ -93,7 +93,9 @@ namespace TeamProject07.Logic
         {
             while (true)
             {
+
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Gray;
                 for (int i = 0; i < 5; i++)
                 {
                     Console.WriteLine();
@@ -116,12 +118,13 @@ namespace TeamProject07.Logic
                 Console.WriteLine("   14. 플레이어 치명차 확률 100%");
                 Console.WriteLine("   15. 플레이어 회피 확률 100%");
                 Console.WriteLine("   16. 플레이어 체력을 1로");
+                Console.WriteLine("   17. 1000만 골드 지급");
                 Console.WriteLine();
                 Textbox();
                 Console.WriteLine("      원하시는 행동을 입력해주세요.");
                 DrawWindowHigh();
                 DrawWindowLow();
-                int input = CheckValidInput(0, 16);
+                int input = CheckValidInput(0, 17);
 
                 switch (input)
                 {
@@ -160,6 +163,9 @@ namespace TeamProject07.Logic
                         break;
                     case 16:
                         PlayerHPto1();
+                        break;
+                    case 17:
+                        GoldCheat();
                         break;
                 }
 
@@ -202,13 +208,13 @@ namespace TeamProject07.Logic
                         return ret;
                 }
 
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.WriteLine("          잘못된 입력입니다.");
             }
         }
 
         private void GameTitle()
         {
-
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
@@ -229,7 +235,7 @@ namespace TeamProject07.Logic
             Console.WriteLine("");
             Console.WriteLine("");
 
-            Console.WriteLine("   Press Anykey to Start");
+            Console.WriteLine("\n\n                                               Press Anykey to Start");
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
@@ -249,7 +255,8 @@ namespace TeamProject07.Logic
             String FolderName = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent + "\\";
 
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(FolderName);
-            Console.WriteLine($" \n \n ");
+
+            Console.Write("\n\n\n");
             foreach (System.IO.FileInfo File in di.GetFiles())
             {
                 if (File.Extension.ToLower().CompareTo(".json") == 0)
@@ -258,22 +265,28 @@ namespace TeamProject07.Logic
                     String FileNameOnly = File.Name.Substring(0, File.Name.Length - 4);
                     String FullFileName = File.FullName;
                     DateTime FileSaveTime = File.CreationTime;
-
                     
-                    Console.Write($"      {cnt}. {FileNameOnly}    \t Save time : ");
-                    Console.WriteLine($"     {FileSaveTime} \n ");
+
+                    Console.Write($"            {cnt}. {FileNameOnly}    \t Save time : ");
+                    Console.WriteLine($"{FileSaveTime} \n ");
+                    Console.Write("\n");
                     
                 }
-            }
-            if(cnt==0)
-            {
-                Console.WriteLine("      세이브 파일이 없습니다!");
-                Environment.Exit(0);
             }
             Textbox();
             DrawWindowHigh();
             DrawWindowLow();
+            
+
+            if (cnt==0)
+            {
+                Console.WriteLine("세이브 파일이 없습니다!");
+                Environment.Exit(0);
+            }
+
+            Console.Write("      세이브 파일을 선택해주세요 ");
             int input = CheckValidInput(1, cnt);
+            
 
             foreach (System.IO.FileInfo File in di.GetFiles())
             {
@@ -325,7 +338,7 @@ namespace TeamProject07.Logic
                 {
                     Console.WriteLine();
                 }
-                Console.Write("   플레이어 이름을 알려주세요.\n>> ");
+                Console.Write("   플레이어 이름을 알려주세요.\n ");
                 Textbox();
                 DrawWindowHigh();
                 DrawWindowLow();
@@ -414,6 +427,13 @@ namespace TeamProject07.Logic
         {
             player.Hp = 1;
             Console.WriteLine("플레이어 체력 재조정 완료");
+            Thread.Sleep(300);
+        }
+
+        private void GoldCheat()
+        {
+            player.Gold += 10000000;
+            Console.WriteLine("1000만 골드 지급 완료");
             Thread.Sleep(300);
         }
 
