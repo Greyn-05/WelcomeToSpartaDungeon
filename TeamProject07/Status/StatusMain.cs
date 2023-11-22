@@ -41,18 +41,20 @@ namespace TeamProject07.Status
             Console.WriteLine();
             Console.WriteLine($"   골  드 : {player.Gold} G");
             Console.WriteLine();
-            Console.WriteLine("   0. 메인화면");
-            Console.WriteLine();
-            Console.WriteLine();
-            MainLogic.Textbox();
-            Console.WriteLine("       원하시는 행동을 입력해주세요.");
-            MainLogic.DrawWindowHigh();
-            MainLogic.DrawWindowLow();
-
             if (player.set != Define.SetEquip.세트능력없음)
             {
                 Console.WriteLine($"   세트효과 발동중 : {player.set}");
             }
+            Console.WriteLine();
+            Console.WriteLine("   0. 메인화면");
+            Console.WriteLine();
+            Console.WriteLine();
+            MainLogic.Textbox();
+            Console.SetCursorPosition(2, 28);
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            MainLogic.DrawWindowHigh();
+            MainLogic.DrawWindowLow();
+
 
             int input = CheckValidInput(0, 0);
 

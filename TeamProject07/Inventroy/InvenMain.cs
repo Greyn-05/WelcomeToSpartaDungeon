@@ -24,6 +24,10 @@ namespace TeamProject07.Inventroy
 
         static void InvenDraw()
         {
+
+            MainLogic.DrawWindowHigh();
+            MainLogic.DrawWindowLow();
+
             Console.SetCursorPosition(30, 2);
             Console.WriteLine("보유 중인 아이템을 확인하고 관리할 수 있습니다."); // (1, 2)
 

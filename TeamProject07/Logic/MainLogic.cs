@@ -405,7 +405,6 @@ namespace TeamProject07.Logic
                 Console.SetCursorPosition(117, cnt);
                 Console.Write("│");
             }
-
         }
         public static void DrawWindowLow()
         {
