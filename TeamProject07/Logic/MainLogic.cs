@@ -52,9 +52,18 @@ namespace TeamProject07.Logic
             //Console.WriteLine("3. 게임에 필요할 데이터를 로드 합니다. (Monster, Item)");
             //Console.WriteLine("4. 아무 키나 입력 받아서 메인화면으로 넘어가도록 합니다.");
 
-            
-            Console.ReadLine();
             Shop_Init();    // 상점 초기화 + 아이템 정보 load
+
+            /*int selectNorL = SelectNewOrLoad();   // New로 할 것인지 Load로 할 것인지 선택
+
+            if (selectNorL == 1) // New > 새로운 플레이어를 생성
+            {
+
+            }
+            else if (selectNorL == 2)    // Load > 기존의 플레이어 정보를 가져온다.
+            {
+
+            }*/
             player.LoadSkills(); // 플레이어 스킬 정보 load
         }
 
@@ -170,7 +179,50 @@ namespace TeamProject07.Logic
             Console.WriteLine("        \\/|__|       \\/                 \\/          \\/           \\//_____/      \\/           \\/");
 
             Console.WriteLine("Press Anykey to Start");
-        
+            Console.ReadLine();
+
+        }
+
+        private int SelectNewOrLoad()
+        {
+            Console.Clear();
+            Console.WriteLine("1. NEW Game");
+            Console.WriteLine("2. Load Game");
+
+            switch (CheckValidInput(1, 2))
+            {
+                case 1:
+                    return 1;
+                case 2:
+                    return 2;
+            }
+            return 1;
+        }
+
+        private string InputName()
+        {
+            string playerName;
+
+            while (true)
+            {
+                Console.Clear();
+                Console.Write("플레이어 이름을 알려주세요.\n>> ");
+
+                playerName = Console.ReadLine();
+
+                if (playerName != null)
+                {
+                    break;
+                }
+            }
+
+
+            return playerName;
+        }
+
+        private void InputClass()
+        {
+
         }
 
         static void Shop_Init()
@@ -180,6 +232,8 @@ namespace TeamProject07.Logic
             Shop_Normal.Init();
             Shop_Reseller.Init();
         }
+
+
 
         //치트, 나중에 삭제
         private void itemcheat()
