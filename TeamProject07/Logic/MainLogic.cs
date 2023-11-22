@@ -76,6 +76,15 @@ namespace TeamProject07.Logic
                 string choosenPath = ChooseSaveFile();
                 //Console.WriteLine(choosenPath);
                 JsonSave.Load(choosenPath);
+                if(player.Class == "Warrior")
+                {
+                    player.LoadSkills(Define.SkillPathW);
+                }
+                else if (player.Class == "Sorcerer")
+                {
+                    player.LoadSkills(Define.SkillPathS);
+                }
+
             }
 
         }
