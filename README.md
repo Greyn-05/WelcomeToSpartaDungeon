@@ -1,6 +1,7 @@
 <center><H1> 7조 팀 프로젝트 Text Rpg  </H1></center>
+<br><br><br><br>
 
-# 게임 내용 기능 추가
+# 기능 설명
 인벤, 상점, 호텔, 던전이 있는 Text Rpg 입니다
 
 ![image](https://github.com/levell1/levell1.github.io/assets/96651722/7800b926-a1d6-4651-8ad5-53586b7e63c1)
